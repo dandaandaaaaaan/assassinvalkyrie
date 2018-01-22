@@ -20,6 +20,7 @@ Enemy::Enemy() : Entity()
 	startFrame = trooperNS::START_FRAME;     // first frame of ship animation
 	endFrame = trooperNS::END_FRAME;     // last frame of ship animation
 	currentFrame = startFrame;
+	edge = RECT{ (long)(-trooperNS::WIDTH*trooperNS::SCALE / 2), (long)(-trooperNS::HEIGHT*trooperNS::SCALE / 2), (long)(trooperNS::WIDTH*trooperNS::SCALE / 2), (long)(trooperNS::HEIGHT*trooperNS::SCALE / 2) };
 	collisionType = entityNS::BOX;
 }
 

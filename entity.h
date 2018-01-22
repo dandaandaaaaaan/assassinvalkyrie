@@ -56,7 +56,7 @@ class Entity : public Image
     // Post: &collisionVector contains collision vector
     virtual bool collideBox(Entity &ent, VECTOR2 &collisionVector);
 
-	bool DetectPixelPerfect(Entity &ent, VECTOR2 &collisionVector);
+	bool DetectPixelPerfect(Entity &ent);
 
     // Separating axis collision detection between boxes
     // Pre: &ent = Other entity

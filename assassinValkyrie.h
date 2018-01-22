@@ -12,6 +12,7 @@
 #include "textureManager.h"
 #include "image.h"
 #include "enemy.h"
+#include "cursor.h"
 
 //Testing
 //=============================================================================
@@ -22,6 +23,8 @@ class AssassinValkyrie : public Game
 private:
     // game items
 	TextureManager enemyTextures;
+	TextureManager mouseTextures;
+	Cursor *mouse;
 	Enemy *trooper1;
 
 public:

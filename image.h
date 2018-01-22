@@ -51,7 +51,7 @@ class Image
     virtual float getX()        {return spriteData.x;}
 
     // Return Y position.
-    virtual float getY()        {return spriteData.y;}
+    virtual float getY()		{return spriteData.y;}
 
     // Return scale factor.
     virtual float getScale()    {return spriteData.scale;}

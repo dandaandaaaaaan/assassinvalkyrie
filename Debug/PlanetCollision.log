@@ -1,6 +1,12 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (AssTest.vcxproj, LetItRain.vcxproj, PlanetCollision.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  mainMenu.cpp
-d:\1 - school\year 3.2\gpp\assignment 2\assassinvalkyrie\enemy.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\1 - school\year 3.2\gpp\assignment 2\assassinvalkyrie\enemy.h(23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  entity.cpp
+d:\1 - school\year 3.2\gpp\assignment 2\assassinvalkyrie\entity.cpp(198): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+d:\1 - school\year 3.2\gpp\assignment 2\assassinvalkyrie\entity.cpp(199): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+d:\1 - school\year 3.2\gpp\assignment 2\assassinvalkyrie\entity.cpp(204): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+d:\1 - school\year 3.2\gpp\assignment 2\assassinvalkyrie\entity.cpp(205): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+d:\1 - school\year 3.2\gpp\assignment 2\assassinvalkyrie\entity.cpp(238): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\1 - school\year 3.2\gpp\assignment 2\assassinvalkyrie\entity.cpp(239): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\1 - school\year 3.2\gpp\assignment 2\assassinvalkyrie\entity.cpp(241): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\1 - school\year 3.2\gpp\assignment 2\assassinvalkyrie\entity.cpp(242): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   PlanetCollision.vcxproj -> D:\1 - School\Year 3.2\GPP\Assignment 2\AssassinValkyrie\Debug\AssassinValkyrie.exe
   PlanetCollision.vcxproj -> D:\1 - School\Year 3.2\GPP\Assignment 2\AssassinValkyrie\Debug\AssassinValkyrie.pdb (Full PDB)

@@ -8,7 +8,9 @@
 // Constructor
 AssassinValkyrie::AssassinValkyrie()
 { 
+	ShowCursor(false);
 	trooper1 = new Enemy();
+	mouse = new Cursor();
 }
 
 // Destructor
@@ -30,7 +32,15 @@ void AssassinValkyrie::initialize(Game &gamePtr, HWND *hwndM, HRESULT *hrM, LARG
 	timeEnd = *timeEndM;
 	timerFreq = *timerFreqM;
 	frameTime = *frameTimeM;
+
+	// Mouse
+	if (!mouseTextures.initialize(graphics, MOUSE_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Enemy Textures"));
+
+	if (!mouse->initialize(this, cursorNS::WIDTH, cursorNS::HEIGHT, cursorNS::TEXTURE_COLS, &mouseTextures))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing enemy trooper"));
 	
+	// Enemy
 	if (!enemyTextures.initialize(graphics, ENEMY_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Enemy Textures"));
 	
@@ -44,6 +54,7 @@ void AssassinValkyrie::initialize(Game &gamePtr, HWND *hwndM, HRESULT *hrM, LARG
 void AssassinValkyrie::update()
 {
 	trooper1->update(frameTime);
+	mouse->update();
 }
 
 
@@ -57,19 +68,23 @@ void AssassinValkyrie::ai()
 void AssassinValkyrie::collisions()
 {
     VECTOR2 collisionVector;
-	
+	mouse->collidesWith(*trooper1, collisionVector);
 }
 
 // Render game items
 void AssassinValkyrie::render()
 {
 	trooper1->draw();
+	mouse->draw();
 }
 
 // Release all reserved video memory so graphics device may be reset.
 void AssassinValkyrie::releaseAll()
 {
+	SAFE_DELETE(mouse);
+	SAFE_DELETE(trooper1);
 	enemyTextures.onLostDevice();
+	mouseTextures.onLostDevice();
     Game::releaseAll();
     return;
 }
@@ -78,6 +93,7 @@ void AssassinValkyrie::releaseAll()
 void AssassinValkyrie::resetAll()
 {
 	enemyTextures.onResetDevice();
+	mouseTextures.onLostDevice();
     Game::resetAll();
     return;
 }

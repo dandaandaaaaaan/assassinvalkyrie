@@ -164,7 +164,7 @@ bool Entity::collideBox(Entity &ent, VECTOR2 &collisionVector)
     }
 	// set collision vector
 	collisionVector = *ent.getCenter() - *getCenter();
-    return true;
+    return DetectPixelPerfect(ent);
 }
 
 //=============================================================================
@@ -190,21 +190,19 @@ bool Entity::collideRotatedBox(Entity &ent, VECTOR2 &collisionVector)
 }
 
 // Pixel Perfect collision, IN PROGRESS
-bool Entity::DetectPixelPerfect(Entity &ent, VECTOR2 &collisionVector)
+bool Entity::DetectPixelPerfect(Entity &ent)
 {
-	SpriteData test1 = spriteData;
-	SpriteData test2 = ent.spriteData;
-
 	RECT rect1;
-	rect1.left = (long)getX();
-	rect1.top = (long)getY();
-	rect1.right = (long)getX() + getWidth() * getScale();
-	rect1.bottom = (long)getY() + getHeight() * getScale();
+	rect1.left = (long)spriteData.x;
+	rect1.top = (long)spriteData.y;
+	rect1.right = (long)spriteData.x + spriteData.width * spriteData.scale;
+	rect1.bottom = (long)spriteData.y + spriteData.height * spriteData.scale;
+
 	RECT rect2;
-	rect2.left = (long)ent.getX();
-	rect2.top = (long)ent.getY();
-	rect2.right = (long)ent.getX() + ent.getWidth() * ent.getScale();
-	rect2.bottom = (long)ent.getY() + ent.getHeight() * ent.getScale();
+	rect2.left = (long)ent.spriteData.x;
+	rect2.top = (long)ent.spriteData.y;
+	rect2.right = (long)ent.spriteData.x + ent.spriteData.width * ent.spriteData.scale;
+	rect2.bottom = (long)ent.spriteData.y + ent.spriteData.height * ent.spriteData.scale;
 
 	RECT dest;
 	if (IntersectRect(&dest, &rect1, &rect2))
@@ -226,27 +224,23 @@ bool Entity::DetectPixelPerfect(Entity &ent, VECTOR2 &collisionVector)
 			return 0;
 		}
 		// Get the pointer to the color values
-		//BYTE *bytePointer1 = (BYTE*)rectS1.pBits;
-		//BYTE *bytePointer2 = (BYTE*)rectS2.pBits;
-
-		D3DCOLOR* pixelsS1 = (D3DCOLOR*)rectS1.pBits;
-		D3DCOLOR* pixelsS2 = (D3DCOLOR*)rectS2.pBits;
+		BYTE *bytePointer1 = (BYTE*)rectS1.pBits;
+		BYTE *bytePointer2 = (BYTE*)rectS2.pBits;
 
 		// A pixel from each texture collide
 		for (int rx = dest.left; rx < dest.right; rx++)
 		{
 			for (int ry = dest.top; ry < dest.bottom; ry++)
 			{
-				int s1x = rx - getX();
-				int s1y = ry - getY();
+				int s1x = rx - spriteData.x;
+				int s1y = ry - spriteData.y;
 
-				int s2x = rx - ent.getX();
-				int s2y = ry - ent.getY();
+				int s2x = rx - ent.spriteData.x;
+				int s2y = ry - ent.spriteData.y;
 
-				#define ExtractAlpha(x) ((x>>24) & 255)
 				// Check the alpha value of each texture pixel
-				BYTE a = ExtractAlpha(pixelsS1[s1y * 128 + s1x]);
-				BYTE b = ExtractAlpha(pixelsS2[s2y * 480 + s2x]);
+				BYTE a = bytePointer1[(s1x * 4 + (s1y*rectS1.Pitch)) + 3];
+				BYTE b = bytePointer2[(s2x * 4 + (s2y*rectS2.Pitch)) + 3];
 
 				// If both pixels are opaque, we found a collision
 				if (a == 255 && b == 255)
@@ -264,7 +258,6 @@ bool Entity::DetectPixelPerfect(Entity &ent, VECTOR2 &collisionVector)
 	}
 	return 0;
 }
-
 
 
 //=============================================================================
@@ -366,7 +359,7 @@ bool Entity::collideRotatedBoxCircle(Entity &ent, VECTOR2 &collisionVector)
     // circle not in voronoi region so it is colliding with edge of box
     // set collision vector, uses simple center of circle to center of box
     collisionVector = *ent.getCenter() - *getCenter();
-	return true;
+	return DetectPixelPerfect(ent);
 }
 
 //=============================================================================

@@ -38,6 +38,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="cursor.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h">
@@ -89,6 +92,9 @@
       <Filter>Component Files</Filter>
     </ClInclude>
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="cursor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
