@@ -101,26 +101,39 @@ void StageGenerator::update(float frametime, bool moveUp, int leftrightupdown, b
 	*/
 	for (floor = floorCollection.begin(); floor != floorCollection.end(); floor++)
 	{
+		int x = (*floor)->getX();
+		int y = (*floor)->getY();
 		if (leftrightupdown == 1)
+		{
 			(*floor)->setX((*floor)->getStartX() - 160);
+		}
 		else if (leftrightupdown == 2)
+		{
 			(*floor)->setX((*floor)->getStartX());
-
+		}
+		else if (leftrightupdown == 3)
+		{
+			(*floor)->setY((*floor)->getStartY());
+		}
+		else if (leftrightupdown == 4)
+		{
+			(*floor)->setY((*floor)->getStartY() - 720);
+		}
 		if (moveOn)
 			(*floor)->update(frametime, moveUp);
 	}
 	for (fill = fillCollection.begin(); fill != fillCollection.end(); fill++) {
+		int x = (*fill)->getX();
+		int y = (*fill)->getY();
 		if (leftrightupdown == 1)
 			(*fill)->setX((*fill)->getStartX() -160);
 		else if (leftrightupdown == 2)
 			((*fill)->setX((*fill)->getStartX()));
-		/*
 		else if (leftrightupdown == 3)
-			(*fill)->setY((*fill)->getStartY() - 720);
-		else if (leftrightupdown == 4)
 			(*fill)->setY((*fill)->getStartY());
-		*/
-		if (moveOn)
+		else if (leftrightupdown == 4)
+			(*fill)->setY((*fill)->getStartY()-720);
+		else if (moveOn)
 			(*fill)->update(frametime, moveUp);
 	}
 }

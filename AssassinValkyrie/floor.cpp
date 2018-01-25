@@ -12,7 +12,7 @@ Floor::Floor() : Entity()
 	spriteData.rect.bottom = floorNS::HEIGHT;    // rectangle to select parts of an image
 	spriteData.rect.right = floorNS::WIDTH;
 	velocity.x = 100;
-	velocity.y = 100;
+	velocity.y = 25;
 	currentFrame = startFrame;
 	edge = RECT{ (long)(-floorNS::WIDTH*floorNS::SCALE / 2), (long)(-floorNS::HEIGHT*floorNS::SCALE / 2), (long)(floorNS::WIDTH*floorNS::SCALE / 2), (long)(floorNS::HEIGHT*floorNS::SCALE / 2) };
 	collisionType = entityNS::BOX;
@@ -35,13 +35,13 @@ void Floor::update(float frameTime, bool moveOn)
 		spriteData.x += frameTime * velocity.x;         // move ship along X 
 	}
 
-	else if (input->isKeyDown(SHIP_RIGHT_KEY) && moveOn)
+	if (input->isKeyDown(SHIP_RIGHT_KEY) && moveOn)
 	{
 		spriteData.x += frameTime * (-velocity.x);         // move ship along X 
 	}
-	else if (input->isKeyDown(SHIP_UP_KEY) && !moveOn)
+	if (input->isKeyDown(SHIP_UP_KEY) && !moveOn)
 		spriteData.y += frameTime * velocity.y;
-	else if (input->isKeyDown(SHIP_DOWN_KEY) && !moveOn)
+	if (input->isKeyDown(SHIP_DOWN_KEY) && !moveOn)
 		spriteData.y += frameTime * (-velocity.y);
 	//move->update(frameTime);
 }

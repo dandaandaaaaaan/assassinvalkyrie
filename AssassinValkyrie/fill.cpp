@@ -33,13 +33,13 @@ void Fill::update(float frameTime, bool moveOn)
 		spriteData.x += frameTime * velocity.x;         // move ship along X 
 	}
 
-	else if (input->isKeyDown(SHIP_RIGHT_KEY) && moveOn)
+	if (input->isKeyDown(SHIP_RIGHT_KEY) && moveOn)
 	{
 		spriteData.x += frameTime * (-velocity.x);         // move ship along X 
 	}	
-	else if (input->isKeyDown(SHIP_UP_KEY) && !moveOn)
+	if (input->isKeyDown(SHIP_UP_KEY) && !moveOn)
 		spriteData.y += frameTime * velocity.y;
-	else if (input->isKeyDown(SHIP_DOWN_KEY) && !moveOn)
+	if (input->isKeyDown(SHIP_DOWN_KEY) && !moveOn)
 		spriteData.y += frameTime * (-velocity.y);
 	//move->update(frameTime);
 }
