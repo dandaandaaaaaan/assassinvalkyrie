@@ -32,7 +32,7 @@ public:
 
 	virtual PlayerState* handleInput(Player &player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *floorList);
 
-	void update(Player &player, float frameTime)
+	void update(Player &player, float frameTime, bool playerInput)
 	{
 
 	}

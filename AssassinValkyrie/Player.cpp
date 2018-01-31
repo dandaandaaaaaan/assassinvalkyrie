@@ -31,6 +31,7 @@ Player::Player() : Entity()
 	armorLevel = playerNS::START_LEVEL;
 	currentTotalLevel = 4;
 	skillPointAvailable = 0;
+	playerInput = true;
 }
 
 bool Player::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
@@ -48,9 +49,8 @@ void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, St
 		skillPointAvailable++;
 		totalXP = 0;
 	}
-	
 	handleInput(input,gamePtr,textureM,stagegenerator);
-	state_->update(*this, frameTime);
+	state_->update(*this, frameTime, playerInput);
 
 
 	
@@ -69,13 +69,13 @@ void Player::handleInput(Input* input, Game *gamePtr, TextureManager *textureM, 
 	}
 }
 
-void Player::collisions(EnemyManager *enemyList)
+void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGenerator)
 {
 	VECTOR2 collisionVector;
 	GUNNERLIST *gunnerCollection = enemyList->getGunners();
 	TROOPERLIST *trooperCollection = enemyList->getTroopers();
 	SERPANTLIST *serpantCollection = enemyList->getSerpants();
-
+	//FILLS *fillCollection = stageGenerator->getFills();
 	
 	for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
 	{
@@ -120,7 +120,13 @@ void Player::collisions(EnemyManager *enemyList)
 			}
 		}
 	}
-	
+	//for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
+	//{
+	//	if (collidesWith(**fill, collisionVector))
+	//	{
+	//		background->setVelocity(VECTOR2(0, 0));
+	//	}
+	//}
 }
 
 // To find closest ship vector position

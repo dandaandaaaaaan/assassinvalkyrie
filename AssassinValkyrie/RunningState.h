@@ -32,10 +32,12 @@ public:
 
 	virtual PlayerState* handleInput(Player &player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *floorList);
 	
-	void update(Player &player, float frameTime)
+	void update(Player &player, float frameTime, bool playerInput)
 	{
-		VECTOR2 velocity = player.getVelocity();
-		player.setX(player.getX() + (velocity.x) *frameTime);
+		if (playerInput) {
+			VECTOR2 velocity = player.getVelocity();
+			player.setX(player.getX() + (velocity.x) *frameTime);
+		}
 	}
 };
 #endif

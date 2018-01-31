@@ -10,7 +10,7 @@
 #include "entity.h"
 
 namespace MovementComponentNS {
-	const int cameraVelocity = 100;
+	const int cameraVelocity = 150;
 }
 class MovementComponent
 {

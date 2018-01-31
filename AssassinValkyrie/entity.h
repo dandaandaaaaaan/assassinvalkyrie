@@ -206,6 +206,7 @@ class Entity : public Image
 	float getVelocityX() { return velocity.x; }
 	float getVelocityY() { return velocity.y; }
 	void setVelocityY(float v) { velocity.y = v; }
+	void setVelocityX(float v) { velocity.x = v; }
 
 };
 

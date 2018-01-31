@@ -20,7 +20,7 @@ public:
 	PlayerState() {}
 	~PlayerState() {}
 	virtual PlayerState* handleInput(Player &player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator)=0;
-	virtual void update(Player &player, float frameTime)=0;
+	virtual void update(Player &player, float frameTime, bool playerInput)=0;
 
 	
 

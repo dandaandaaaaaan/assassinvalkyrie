@@ -142,11 +142,11 @@ void AssassinValkyrie::update()
 		}
 	}
 	pCollection = stageGenerator->getFillPlatforms();
-	background->update(frameTime, player, stageGenerator, &emList);
 	//stageGenerator->update(frameTime);
+	background->update(frameTime, player, stageGenerator, &emList);
+	player->update(frameTime, this, &playerTextures, stageGenerator);
 	mouse->update();
 	emBulletList.update(frameTime, this, &bulletTextures, player);
-	player->update(frameTime,this,&playerTextures,stageGenerator);
 	weaponManager.update(frameTime, input, this, arrowNS::WIDTH, arrowNS::HEIGHT, arrowNS::ARROW_TEXTURE_COLS,stoneNS::STONE_TEXTURE_COLS, &playerTextures, player->getX() + 20, player->getY(),*player);
 	emList.update(frameTime, pCollection);
 }
@@ -162,7 +162,8 @@ void AssassinValkyrie::collisions()
 {
     VECTOR2 collisionVector;
 	weaponManager.collisions(&emList, player, stageGenerator->getFloorPlatforms());
-	player->collisions(&emList);
+	player->collisions(&emList, stageGenerator);
+	//background->collisions(player, stageGenerator);
 	emList.collisions(mouse, stageGenerator->getFloorPlatforms(), pCollection);
 	emBulletList.collisions(mouse);
 }

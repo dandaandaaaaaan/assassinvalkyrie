@@ -14,7 +14,28 @@
 
 
 PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator)
-{
+{ 
+	//VECTOR2 collisionVector;
+	//FILLS *fillCollection = stagegenerator->getFills();
+
+	//for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
+	//{
+	//	if (player.collidesWith(**fill, collisionVector))
+	//	{
+	//		if (!player.isFlipHorizontal())
+	//		{
+	//			player.setX((*fill)->getX() - STANDING_STATE::WIDTH);
+
+	//		}
+
+	//		else
+	//		{
+	//			player.setX((*fill)->getX() + STANDING_STATE::WIDTH);
+	//		}
+
+
+	//	}
+	//}
 	if (input->isKeyDown(RUNNING_RIGHT_KEY))
 	{
 		player.initialize(gamePtr, RUNNING_STATE::WIDTH, RUNNING_STATE::HEIGHT, RUNNING_STATE::TEXTURE_COLS, textureM);
@@ -88,7 +109,7 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM,  StageGenerator *stagegenerator)
 {
 
-	VECTOR2 collisionVector;
+	/*VECTOR2 collisionVector;
 	FILLS *fillCollection = stagegenerator->getFills();
 
 	for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
@@ -98,6 +119,7 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 			if (!player.isFlipHorizontal())
 			{
 				player.setX((*fill)->getX() - RUNNING_STATE::WIDTH);
+
 			}
 
 			else
@@ -107,7 +129,7 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 			
 
 		}
-	}   
+	}   */
 
 	if (!input->isKeyDown(RUNNING_RIGHT_KEY)&& !input->isKeyDown(RUNNING_LEFT_KEY))
 	{

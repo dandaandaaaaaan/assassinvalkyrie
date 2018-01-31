@@ -51,6 +51,7 @@ protected:
 	int armorLevel;
 	PlayerState* state_;
 	int skillPointAvailable;
+	bool playerInput;
 public:
 	// constructor
 	Player();
@@ -61,7 +62,7 @@ public:
 	void update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator);
 	void handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator);
 	void ai(Entity &ship1, Entity &ship2);
-	void collisions(EnemyManager *enemyList);
+	void collisions(EnemyManager *enemyList, StageGenerator *stagegenerator);
 	void draw();
 	bool getJumpRight()
 	{
@@ -100,5 +101,9 @@ public:
 
 	int getTotalLevels() { return totalLevels; }
 	int getCurrentTotalLevel() { return currentTotalLevel; }
+
+	void setPlayerInput(bool i) { playerInput = i; }
+	bool getPlayerInput() { return playerInput; }
+
 };
 #endif

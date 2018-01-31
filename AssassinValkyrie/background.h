@@ -25,6 +25,7 @@ namespace backgroundNS
 	const int   TEXTURE_COLS = 1;
 	const int   START_FRAME = 0;
 	const int   END_FRAME = 0;
+	const int	CAMERA_VELOCITY = 100;
 
 }
 
@@ -35,6 +36,8 @@ private:
 	bool centre;
 	int centreX;
 	int centreY;
+	int cameraVelocity;
+	bool yes;
 public:
 	// constructor
 	Background();
@@ -43,5 +46,9 @@ public:
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void update(float frameTime, Player *player, StageGenerator *stageGen, EnemyManager *emList);
 	void draw();
+	void collisions(Player* player, StageGenerator *stageGen);
+
+	int getCameraVelocity() { return cameraVelocity; }
+	void setCameraVelocity(int i) { cameraVelocity = i; }
 };
 #endif

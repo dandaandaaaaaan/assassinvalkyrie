@@ -38,31 +38,31 @@ public:
 
 	virtual PlayerState* handleInput(Player &player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *floorList);
 
-	void update(Player &player, float frameTime)
+	void update(Player &player, float frameTime, bool playerInput)
 	{
+		if (playerInput) {
+			velocityY += gravity*t*frameTime;
 
-		velocityY += gravity*t*frameTime;
+			if (player.getJumpRight())
+			{
 
-		if (player.getJumpRight())
-		{
+				player.setX(player.getX() + velocityX*frameTime);
+				player.setY(player.getY() + velocityY*frameTime);
+				t += TimeInterval;
+				player.setVelocityY(velocityY);
 
-			player.setX(player.getX() + velocityX*frameTime);
-			player.setY(player.getY() + velocityY*frameTime);
-			t += TimeInterval;
-			player.setVelocityY(velocityY);
+			}
+
+			else if (player.getJumpLeft())
+			{
+				player.setX(player.getX() - velocityX*frameTime);
+				player.setY(player.getY() + velocityY*frameTime);
+				t += TimeInterval;
+				player.setVelocityY(velocityY);
+
+			}
 
 		}
-
-		else if (player.getJumpLeft())
-		{
-			player.setX(player.getX() - velocityX*frameTime);
-			player.setY(player.getY() + velocityY*frameTime);
-			t += TimeInterval;
-			player.setVelocityY(velocityY);
-
-		}
-
-
 
 	}
 
