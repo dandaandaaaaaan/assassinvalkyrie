@@ -120,7 +120,6 @@ void Player::collisions(EnemyManager *enemyList)
 			}
 		}
 	}
-	
 }
 
 // To find closest ship vector position

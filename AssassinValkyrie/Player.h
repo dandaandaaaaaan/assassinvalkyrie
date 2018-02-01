@@ -21,9 +21,10 @@ namespace playerNS
 	const int	HEIGHT = 96;
 	const double ROTATION = 0;
 	const float SCALE = 1.0f;
-	const int	X = GAME_WIDTH / 4 ;
+	//const int	X = GAME_WIDTH / 4 ;
+	const int	X = 1000;
 	//const int	Y = GAME_HEIGHT/2-100 ;
-	const int	Y = 500;
+	const int	Y = 100;
 	const float SPEED = 100;
 	const float MASS = 300.0f;
 	const int   TEXTURE_COLS = 1;
@@ -51,6 +52,8 @@ protected:
 	int armorLevel;
 	PlayerState* state_;
 	int skillPointAvailable;
+	bool leftMoveOn = true;
+	bool rightMoveOn = true;
 public:
 	// constructor
 	Player();
@@ -102,5 +105,11 @@ public:
 	int getCurrentTotalLevel() { return currentTotalLevel; }
 
 	float calcMultipler(int level) { return 1 + (level *0.33); }
+
+	bool getLeftMoveOn() { return leftMoveOn; }
+	void setLeftMoveOn(bool s) { leftMoveOn = s; }
+
+	bool getRightMoveOn() { return rightMoveOn;}
+	void setRightMoveOn(bool s) { rightMoveOn = s; }
 };
 #endif

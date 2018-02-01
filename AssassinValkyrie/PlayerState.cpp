@@ -15,7 +15,7 @@
 
 PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator)
 {
-	if (input->isKeyDown(RUNNING_RIGHT_KEY))
+	if (input->isKeyDown(RUNNING_RIGHT_KEY) && player.getRightMoveOn())
 	{
 		player.initialize(gamePtr, RUNNING_STATE::WIDTH, RUNNING_STATE::HEIGHT, RUNNING_STATE::TEXTURE_COLS, textureM);
 		player.setFrames(RUNNING_STATE::START_FRAME, RUNNING_STATE::END_FRAME);
@@ -27,7 +27,7 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 		return new RunningState();
 	}
 
-	else if (input->isKeyDown(RUNNING_LEFT_KEY))
+	else if (input->isKeyDown(RUNNING_LEFT_KEY) && player.getLeftMoveOn())
 	{
 		player.initialize(gamePtr, RUNNING_STATE::WIDTH, RUNNING_STATE::HEIGHT, RUNNING_STATE::TEXTURE_COLS, textureM);
 		player.flipHorizontal(true);
@@ -88,26 +88,26 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM,  StageGenerator *stagegenerator)
 {
 
-	VECTOR2 collisionVector;
-	FILLS *fillCollection = stagegenerator->getFills();
+	//VECTOR2 collisionVector;
+	//FILLS *fillCollection = stagegenerator->getFills();
 
-	for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
-	{
-		if (player.collidesWith(**fill, collisionVector))
-		{
-			if (!player.isFlipHorizontal())
-			{
-				player.setX((*fill)->getX() - RUNNING_STATE::WIDTH);
-			}
+	//for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
+	//{
+	//	if (player.collidesWith(**fill, collisionVector))
+	//	{
+	//		if (!player.isFlipHorizontal())
+	//		{
+	//			player.setX((*fill)->getX() - RUNNING_STATE::WIDTH);
+	//		}
 
-			else
-			{
-				player.setX((*fill)->getX() + RUNNING_STATE::WIDTH);
-			}
-			
+	//		else
+	//		{
+	//			player.setX((*fill)->getX() + RUNNING_STATE::WIDTH);
+	//		}
+	//		
 
-		}
-	}   
+	//	}
+	//}   
 
 	if (!input->isKeyDown(RUNNING_RIGHT_KEY)&& !input->isKeyDown(RUNNING_LEFT_KEY))
 	{
@@ -117,7 +117,7 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 		return new StandState();
 	}
 
-	else if (input->isKeyDown(JUMPING_KEY) && input->isKeyDown(RUNNING_RIGHT_KEY))
+	else if (input->isKeyDown(JUMPING_KEY) && input->isKeyDown(RUNNING_RIGHT_KEY) && player.getRightMoveOn())
 	{
 		player.initialize(gamePtr, JUMPING_STATE::WIDTH, JUMPING_STATE::HEIGHT, JUMPING_STATE::TEXTURE_COLS, textureM);
 		player.setFrames(JUMPING_STATE::START_FRAME, JUMPING_STATE::END_FRAME);
@@ -129,7 +129,7 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 		return new JumpingState();
 	}
 
-	else if (input->isKeyDown(JUMPING_KEY) && input->isKeyDown(RUNNING_LEFT_KEY))
+	else if (input->isKeyDown(JUMPING_KEY) && input->isKeyDown(RUNNING_LEFT_KEY) && player.getLeftMoveOn())
 	{
 		player.initialize(gamePtr, JUMPING_STATE::WIDTH, JUMPING_STATE::HEIGHT, JUMPING_STATE::TEXTURE_COLS, textureM);
 		player.setFrames(JUMPING_STATE::START_FRAME, JUMPING_STATE::END_FRAME);
@@ -140,7 +140,10 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 		player.setJumpLeft(true);
 		return new JumpingState();
 	}
-
+	else if (input->isKeyDown(RUNNING_RIGHT_KEY) && player.getRightMoveOn())
+		player.setVelocity(VECTOR2(RUNNING_STATE::RUNNING_SPEED*player.calcMultipler(player.getSpeedLevel()), RUNNING_STATE::RUNNING_SPEED*player.calcMultipler(player.getSpeedLevel())));
+	else if (input->isKeyDown(RUNNING_RIGHT_KEY) && player.getLeftMoveOn())
+		player.setVelocity(VECTOR2(-RUNNING_STATE::RUNNING_SPEED*player.calcMultipler(player.getSpeedLevel()), -RUNNING_STATE::RUNNING_SPEED*player.calcMultipler(player.getSpeedLevel())));
 
 
 
@@ -157,7 +160,7 @@ PlayerState* CrouchingState::handleInput(Player& player, Input* input, Game *gam
 		return new StandState();
 	}
 
-	else if (input->isKeyDown(RUNNING_RIGHT_KEY))
+	else if (input->isKeyDown(RUNNING_RIGHT_KEY) && player.getRightMoveOn())
 	{
 		player.initialize(gamePtr, CROUCH_WALKING_STATE::WIDTH, CROUCH_WALKING_STATE::HEIGHT, CROUCH_WALKING_STATE::TEXTURE_COLS, textureM);
 		player.setFrames(CROUCH_WALKING_STATE::START_FRAME, CROUCH_WALKING_STATE::END_FRAME);
@@ -169,7 +172,7 @@ PlayerState* CrouchingState::handleInput(Player& player, Input* input, Game *gam
 		return new CrouchWalkingState();
 	}
 
-	else if (input->isKeyDown(RUNNING_LEFT_KEY))
+	else if (input->isKeyDown(RUNNING_LEFT_KEY) && player.getLeftMoveOn())
 	{
 		player.initialize(gamePtr, CROUCH_WALKING_STATE::WIDTH, CROUCH_WALKING_STATE::HEIGHT, CROUCH_WALKING_STATE::TEXTURE_COLS, textureM);
 		player.setFrames(CROUCH_WALKING_STATE::START_FRAME, CROUCH_WALKING_STATE::END_FRAME);
@@ -233,28 +236,28 @@ PlayerState* ThrowingState::handleInput(Player& player, Input* input, Game *game
 
 PlayerState* CrouchWalkingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator)
 {
-	VECTOR2 collisionVector;
-	FILLS *fillCollection = stagegenerator->getFills();
+	//VECTOR2 collisionVector;
+	//FILLS *fillCollection = stagegenerator->getFills();
 
-	for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
-	{
-		if (player.collidesWith(**fill, collisionVector))
-		{
-			if (!player.isFlipHorizontal())
-			{
-				player.setX((*fill)->getX() - CROUCH_WALKING_STATE::WIDTH-30);
-			}
+	//for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
+	//{
+	//	if (player.collidesWith(**fill, collisionVector))
+	//	{
+	//		if (!player.isFlipHorizontal())
+	//		{
+	//			player.setX((*fill)->getX() - CROUCH_WALKING_STATE::WIDTH-30);
+	//		}
 
-			else
-			{
-				player.setX((*fill)->getX() + CROUCH_WALKING_STATE::WIDTH+30);
-			}
-			
+	//		else
+	//		{
+	//			player.setX((*fill)->getX() + CROUCH_WALKING_STATE::WIDTH+30);
+	//		}
+	//		
 
-		}
-	}
+	//	}
+	//}
 
-	if (!input->isKeyDown(RUNNING_RIGHT_KEY) && !input->isKeyDown(RUNNING_LEFT_KEY) || !input->isKeyDown(CROUCHING_KEY))
+	if (!input->isKeyDown(RUNNING_RIGHT_KEY) && !input->isKeyDown(RUNNING_LEFT_KEY) || !input->isKeyDown(CROUCHING_KEY) && player.getRightMoveOn())
 	{
 
 		player.initialize(gamePtr, STANDING_STATE::WIDTH, STANDING_STATE::HEIGHT, STANDING_STATE::TEXTURE_COLS, textureM);

@@ -165,6 +165,7 @@ void AssassinValkyrie::collisions()
 	player->collisions(&emList);
 	emList.collisions(mouse, stageGenerator->getFloorPlatforms(), pCollection);
 	emBulletList.collisions(mouse);
+	//background->collisions(player, stageGenerator);
 }
 
 // Render game items

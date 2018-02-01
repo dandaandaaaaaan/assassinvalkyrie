@@ -20,6 +20,7 @@ Background::Background() : Entity()
 	collisionType = entityNS::BOX;
 	centreX = 640;
 	centreY = 360;
+	cameraSpeed = 100;
 }
 
 bool Background::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
@@ -31,7 +32,28 @@ bool Background::initialize(Game *gamePtr, int width, int height, int ncols, Tex
 
 void Background::update(float frameTime, Player *player, StageGenerator *stageGen, EnemyManager *emList)
 {
+	VECTOR2 collisionVector;
+	FILLS *fillCollection = stageGen->getFills();
 
+	for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
+	{
+		if (player->collidesWith(**fill, collisionVector))
+		{
+			if (!player->isFlipHorizontal())
+			{
+				if (!player->getX() == ((*fill)->getX() - 100))
+					player->setX((*fill)->getX() - 100);
+			}
+
+			else
+			{
+				if (!player->getX() == ((*fill)->getX() + 100))
+					player->setX((*fill)->getX() + 100);
+			}
+			cameraSpeed = 0;
+			break;
+		}
+	}
 	bool left =false;
 	bool right = false;
 	if (spriteData.x >= 0) {
@@ -47,34 +69,56 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 	}
 	if ((player->getX() < centreX) && !left) {
 		if (input->isKeyDown(RUNNING_LEFT_KEY)) {
-			velocity.x = 100;
+			velocity.x = cameraSpeed;
 			spriteData.x += frameTime * (velocity.x);         // move ship along X
-			stageGen->update(frameTime, 1, 0, true);
-			emList->camera(frameTime, 1);
+			if (cameraSpeed == 0)
+				player->setLeftMoveOn(false);
+			else {
+				player->setLeftMoveOn(true);
+				stageGen->update(frameTime, 1, 0, true);
+				emList->camera(frameTime, 1);
+			}
 		}
 		if (input->isKeyDown(RUNNING_RIGHT_KEY)) {
-			velocity.x = 100;
+			velocity.x = cameraSpeed;
 			spriteData.x += frameTime * (-velocity.x);         // move ship along X
-			stageGen->update(frameTime, 2, 0, true);
-			emList->camera(frameTime, 2);
+			if (cameraSpeed == 0)
+				player->setRightMoveOn(false);
+			else {
+				player->setRightMoveOn(true);
+				stageGen->update(frameTime, 2, 0, true);
+				emList->camera(frameTime, 2);
+			}
 		}
-		player->setX(centreX);
+		if(cameraSpeed!= 0)
+			player->setX(centreX);
 	}
 
 	if ((player->getX() >= centreX) && !right) {
 		if (input->isKeyDown(RUNNING_LEFT_KEY)) {
-			velocity.x = 100;
+			velocity.x = cameraSpeed;
 			spriteData.x += frameTime * (velocity.x);         // move ship along X
-			stageGen->update(frameTime, 1, 0, true);
-			emList->camera(frameTime, 1);
+			if (cameraSpeed == 0)
+				player->setLeftMoveOn(false);
+			else {
+				player->setLeftMoveOn(true);
+				stageGen->update(frameTime, 1, 0, true);
+				emList->camera(frameTime, 1);
+			}
 		}
 		if (input->isKeyDown(RUNNING_RIGHT_KEY)) {
-			velocity.x = 100;
+			velocity.x = cameraSpeed;
 			spriteData.x += frameTime * (-velocity.x);         // move ship along X
-			stageGen->update(frameTime, 2, 0, true);
-			emList->camera(frameTime, 2);
+			if (cameraSpeed == 0)
+				player->setRightMoveOn(false);
+			else {
+				player->setRightMoveOn(true);
+				stageGen->update(frameTime, 2, 0, true);
+				emList->camera(frameTime, 2);
+			}
 		}
-		player->setX(centreX);
+		if (cameraSpeed != 0)
+			player->setX(centreX);
 	}
 
 	bool up = false;
@@ -128,6 +172,7 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 		}
 		player->setY(centreY);
 	}
+	cameraSpeed = 100;
 
 	/*	
 	bool leftSide = (player->getX() - spriteData.x) > (GAME_WIDTH / 2);
@@ -220,4 +265,33 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 void Background::draw()
 {
 	Image::draw();              // draw ship
+}
+
+//bool collisionDetection(int x, VECTOR2 v, )
+//{
+//	
+//}
+
+void Background::collisions(Player *player, StageGenerator *stageGen)
+{
+	VECTOR2 collisionVector;
+	FILLS *fillCollection = stageGen->getFills();
+
+	for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
+	{
+		if (player->collidesWith(**fill, collisionVector))
+		{
+			if (!player->isFlipHorizontal())
+			{
+				player->setX((*fill)->getX() - 80);
+			}
+
+			else
+			{
+				player->setX((*fill)->getX() + 80);
+			}
+			
+
+		}
+	}   
 }
