@@ -1,3 +1,7 @@
+// Module			: Gameplay Programming
+// Assignment2		: Assassin Valkyrie
+// Student Number	: Zhuang yuteng
+// Student Number	: S10163964C
 
 #include "stone.h"
 

@@ -1,3 +1,7 @@
+// Module			: Gameplay Programming
+// Assignment2		: Assassin Valkyrie
+// Student Number	: Zhuang yuteng
+// Student Number	: S10163964C
 
 #ifndef _STONE_H                 // Prevent multiple definitions if this 
 #define _STONE_H                 // file is included in more than one place
