@@ -129,7 +129,7 @@ public:
 	{
 		total_arrow = number;
 	}
-	bool getTotalArrow()
+	int getTotalArrow()
 	{
 		return total_arrow;
 	}
@@ -137,7 +137,7 @@ public:
 	{
 		total_stone = number;
 	}
-	bool getTotalStone()
+	int getTotalStone()
 	{
 		return total_stone;
 	}

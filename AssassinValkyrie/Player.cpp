@@ -35,6 +35,8 @@ Player::Player() : Entity()
 	// yuteng didn;t add this in
 	maxHealth = playerNS::HEALTH;
 	health = playerNS::HEALTH;
+	total_stone = 3;
+	total_arrow = 5;
 }
 
 bool Player::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
