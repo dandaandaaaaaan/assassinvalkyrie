@@ -134,8 +134,8 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 				ladderCollection.back()->setCurrentFrame(4);
 				ladderCollection.back()->setX(horizontalElement2.x);
 				ladderCollection.back()->setStartX(horizontalElement2.x);
-				ladderCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y);
-				ladderCollection.back()->setStartY(GAME_HEIGHT - horizontalElement2.y);
+				ladderCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
+				ladderCollection.back()->setStartY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
 				ladderCollection.back()->setEdge(RECT{ (long)(-ladderNS::WIDTH / 2), (long)(-ladderNS::HEIGHT / 2), (long)(ladderNS::WIDTH / 2), (long)(ladderNS::HEIGHT / 2) });
 				ladderCollection.back()->setCollisionType(entityNS::ROTATED_BOX);
 			}

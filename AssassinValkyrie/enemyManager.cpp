@@ -8,10 +8,11 @@
 #include "rightFill.h"
 #include "alertState.h"
 #include "returnState.h"
+#include "distractedState.h"
 
 EnemyManager::EnemyManager()
 {
-	alertRange = 300;
+	alertRange = 400;
 }
 
 EnemyManager::~EnemyManager()
@@ -74,7 +75,7 @@ void EnemyManager::update(float frameTime, PLATFORM p, Audio *a)
 	for (Enemy *t : worldCollection)
 		if (!t->outOfBounds())
 		{
-			t->update(frameTime, p);
+			t->update(frameTime, p, a);
 			if (AlertedState *state = dynamic_cast<AlertedState*>(t->getState()))
 			{
 				if (!t->triggerAlert)
@@ -165,6 +166,11 @@ void EnemyManager::unCollide(Enemy *t, PLATFORM floor, PLATFORM fill)
 	{
 		if (t->collidesWith(*e, VECTOR2{})) {
 			if (AlertedState *a = dynamic_cast<AlertedState*>(t->getState()))
+			{
+				collided = false;
+				break;
+			}
+			else if (DistractedState *a = dynamic_cast<DistractedState*>(t->getState()))
 			{
 				collided = false;
 				break;

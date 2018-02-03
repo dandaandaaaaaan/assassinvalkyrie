@@ -78,6 +78,8 @@ const char ALERT[] = "alert";
 const char FIREBALL[] = "fireball";
 const char BULLET[] = "laser";
 const char SWORD[] = "sword";
+const char DIE[] = "die";
+const char DIE2[] = "die2";
 
 // key mappings
 // In this game simple constants are used for key mappings. If variables were used

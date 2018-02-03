@@ -32,7 +32,7 @@ Player::Player() : Entity()
 	currentTotalLevel = 4;
 	skillPointAvailable = 0;
 
-	// yuteng didn;t add this in
+	// yuteng didn't add this in
 	maxHealth = playerNS::HEALTH;
 	health = playerNS::HEALTH;
 	total_stone = 3;
@@ -99,7 +99,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 
 			if (isAssassinating == true)
 			{
-				(*gunner)->getHealth()->damage(trooperNS::HEALTH);
+				(*gunner)->getHealth()->damage(gunnerNS::HEALTH);
 				isAssassinating = false;
 				if (!(*gunner)->isAlive() && (currentTotalLevel < totalLevels))
 					totalXP += 50;
@@ -144,7 +144,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 			}
 			if (isAssassinating == true)
 			{
-				(*serpant)->getHealth()->damage(trooperNS::HEALTH);
+				(*serpant)->getHealth()->damage(serpantNS::HEALTH);
 				isAssassinating = false;
 				if (!(*serpant)->isAlive() && (currentTotalLevel < totalLevels))
 					totalXP += 50;
