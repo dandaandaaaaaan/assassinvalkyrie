@@ -47,7 +47,7 @@ bool Player::initialize(Game *gamePtr, int width, int height, int ncols, Texture
 int returnXPToNextLevel(int i) {
 	return ((i - 3) * 50);
 }
-void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p)
+void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	if (totalXP >= returnXPToNextLevel(currentTotalLevel)) {
 		currentTotalLevel++;
@@ -55,7 +55,7 @@ void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, St
 		totalXP = 0;
 	}
 
-	handleInput(input,gamePtr,textureM,stagegenerator,enemyList,p);
+	handleInput(input,gamePtr,textureM,stagegenerator,enemyList,p,a);
 	state_->update(*this, frameTime);
 
 
@@ -65,9 +65,9 @@ void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, St
 	//move->update(frameTime);
 }
 
-void Player::handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+void Player::handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
-    PlayerState* state = state_->handleInput(*this, input,gamePtr,textureM,stagegenerator,enemyList,p);
+    PlayerState* state = state_->handleInput(*this, input,gamePtr,textureM,stagegenerator,enemyList,p,a);
 	if (state != NULL)
 	{
 		delete state_;
