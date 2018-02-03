@@ -73,7 +73,7 @@ bool WeaponManager::initializeStone(Game *gamePtr, int width, int height, int nc
 
 
 void WeaponManager::update(float frameTime, Input *input, Game *gamePtr, int width, int height, int arrowcols, int stonecols,
-	TextureManager *textureM, Player &player, KeyBinding *key)
+	TextureManager *textureM, Player &player, KeyBinding *key, Audio *a)
 {
 	int X = player.getCenterX();
 	int Y = player.getY();
@@ -85,6 +85,7 @@ void WeaponManager::update(float frameTime, Input *input, Game *gamePtr, int wid
 			Tick = GetTickCount();
 			arrow_collection.push_back(new Arrow());
 			player.setTotalArrow(player.getTotalArrow() - 1);
+			a->playCue(SWORD);
 			initializeArrow(gamePtr, width, height, arrowcols, textureM, X, Y, player, key);
 		}
 	}
