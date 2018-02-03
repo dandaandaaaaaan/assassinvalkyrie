@@ -372,20 +372,17 @@
     <ClInclude Include="playerBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="distractedState.h" />
-    <ClInclude Include="keyBinding.h">
-      <Filter>Header Files</Filter>
-=======
     <ClInclude Include="distractedState.h">
       <Filter>State Files\Enemy State</Filter>
->>>>>>> 5304817638499128f0c2042b53543a33ce4321da
     </ClInclude>
     <ClInclude Include="ClimbReadyState.h">
       <Filter>State Files\Player State</Filter>
     </ClInclude>
     <ClInclude Include="ClimbingState.h">
       <Filter>State Files\Player State</Filter>
+    </ClInclude>
+    <ClInclude Include="keyBinding.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
