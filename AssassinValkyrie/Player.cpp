@@ -32,7 +32,7 @@ Player::Player() : Entity()
 	currentTotalLevel = 4;
 	skillPointAvailable = 0;
 
-	// yuteng didn;t add this in
+	// yuteng didn't add this in
 	maxHealth = playerNS::HEALTH;
 	health = playerNS::HEALTH;
 	total_stone = 3;
@@ -47,7 +47,7 @@ bool Player::initialize(Game *gamePtr, int width, int height, int ncols, Texture
 int Player::getNextLevelXP() {
 	return ((currentTotalLevel - 3) * 50);
 }
-void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p)
+void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	if (totalXP >= getNextLevelXP()) {
 		currentTotalLevel++;
@@ -55,7 +55,7 @@ void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, St
 		totalXP = 0;
 	}
 
-	//if (stealthSet) {
+  //if (stealthSet) {
 	//	VECTOR2 collisionVector;
 	//	GUNNERLIST *gunnerCollection = enemyList->getGunners();
 	//	TROOPERLIST *trooperCollection = enemyList->getTroopers();
@@ -75,7 +75,7 @@ void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, St
 	//	}
 	//	stealthSet = false;
 	//}
-	handleInput(input,gamePtr,textureM,stagegenerator,enemyList,p);
+	handleInput(input,gamePtr,textureM,stagegenerator,enemyList,p,a);
 	state_->update(*this, frameTime);
 
 
@@ -85,9 +85,9 @@ void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, St
 	//move->update(frameTime);
 }
 
-void Player::handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+void Player::handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
-    PlayerState* state = state_->handleInput(*this, input,gamePtr,textureM,stagegenerator,enemyList,p);
+    PlayerState* state = state_->handleInput(*this, input,gamePtr,textureM,stagegenerator,enemyList,p,a);
 	if (state != NULL)
 	{
 		delete state_;
@@ -119,7 +119,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 
 			if (isAssassinating == true)
 			{
-				(*gunner)->getHealth()->damage(trooperNS::HEALTH);
+				(*gunner)->getHealth()->damage(gunnerNS::HEALTH);
 				isAssassinating = false;
 				if (!(*gunner)->isAlive() && (currentTotalLevel < totalLevels))
 					totalXP += 20;
@@ -164,7 +164,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 			}
 			if (isAssassinating == true)
 			{
-				(*serpant)->getHealth()->damage(trooperNS::HEALTH);
+				(*serpant)->getHealth()->damage(serpantNS::HEALTH);
 				isAssassinating = false;
 				if (!(*serpant)->isAlive() && (currentTotalLevel < totalLevels))
 					totalXP += 40;

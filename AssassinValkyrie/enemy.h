@@ -165,7 +165,7 @@ public:
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
 		TextureManager *textureM, TextureManager *textureHealth);
 	virtual void handleInput(EnemyState* newState, PLATFORM *p = NULL);
-	void update(float frameTime, PLATFORM p);
+	void update(float frameTime, PLATFORM p, Audio *a);
 	virtual void ai();
 	void draw();
 	void drawRay(Graphics *g);

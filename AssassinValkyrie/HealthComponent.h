@@ -20,11 +20,12 @@ private:
 	int damageTimer;
 	Image *animation;
 	int isAnimating;
+	bool dieSound;
 
 public:
 	HealthComponent(Image *image);
 	bool initialize(Graphics *graphics, TextureManager *textureM, int max);
-	void update(float frameTime, VECTOR2 pos);
+	void update(float frameTime, VECTOR2 pos, Audio *a);
 	void draw(Entity *ent);
 	void damage(int hitPoint);
 

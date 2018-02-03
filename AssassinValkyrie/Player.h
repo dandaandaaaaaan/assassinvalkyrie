@@ -67,8 +67,8 @@ public:
 
 	// inherited member functions
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
-	void update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p);
-	void handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p);
+	void update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p,Audio *a);
+	void handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a);
 	void ai(Entity &ship1, Entity &ship2);
 	//void collisions(EnemyManager *enemyList);
 	void collisions(EnemyManager *enemyList, StageGenerator *stageGen);
