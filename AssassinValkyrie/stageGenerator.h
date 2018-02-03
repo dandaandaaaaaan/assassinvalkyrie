@@ -81,5 +81,6 @@ public:
 	HPS *getHP() { return &hpCollection; }
 	PICKUPARROWS *getPickupArrows() { return &pickupArrowCollection; }
 	PICKUPSTONES *getPickupStones() { return &pickupStoneCollection; }
+	HIDEOUTS *getHideouts() { return &hideoutCollection; }
 };
 #endif

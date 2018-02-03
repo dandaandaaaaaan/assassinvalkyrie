@@ -65,7 +65,7 @@ bool Dashboard::initialize(Graphics *g, Cursor *cursor, Player *playerM)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player bar"));
 	
 	//Health Bar
-	if (!underHealth.initialize(g, &barTexture, playerM->getHealth()))
+	if (!underHealth.initialize(g, &barTexture, playerM->getMaxHealth()))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player health"));
 	underHealth.setX(10);
 	underHealth.setY(10);
@@ -76,7 +76,7 @@ bool Dashboard::initialize(Graphics *g, Cursor *cursor, Player *playerM)
 	playerHealth.setX(10);
 	playerHealth.setY(10);
 
-	playerMaxHealth = playerM->getHealth();
+	playerMaxHealth = playerM->getMaxHealth();
 	playerCurrentHealth = playerM->getHealth();
 
 	// Stealth points

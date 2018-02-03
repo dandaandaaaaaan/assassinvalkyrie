@@ -100,6 +100,8 @@ const UCHAR DEFAULT_JUMPING_KEY = VK_SPACE;
 const UCHAR CLIMBING_KEY = 'W';
 const UCHAR CLIMBING_UP_KEY = 'W';
 const UCHAR CLIMBING_DOWN_KEY = 'S';
+const UCHAR ENTER_HIDEOUT = 'W';
+
 // weapon types
 enum WEAPON { };
 

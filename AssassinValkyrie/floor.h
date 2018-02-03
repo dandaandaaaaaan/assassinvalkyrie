@@ -21,7 +21,7 @@ namespace floorNS
 	const int	Y = GAME_HEIGHT / 2 - HEIGHT*SCALE;
 	const float SPEED = 100;
 	const float MASS = 300.0f;
-	const int   TEXTURE_COLS = 1;
+	const int   TEXTURE_COLS = 2;
 	const int   START_FRAME = 0;
 	const int   END_FRAME = 0;
 }

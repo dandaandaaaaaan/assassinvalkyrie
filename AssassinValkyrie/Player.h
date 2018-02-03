@@ -58,6 +58,7 @@ protected:
 	int armorLevel;
 	PlayerState* state_;
 	int skillPointAvailable;
+	int maxHealth;
 public:
 	// constructor
 	Player();
@@ -123,11 +124,12 @@ public:
 	{
 		return onGround;
 	}
+
 	void setTotalArrow(int number)
 	{
 		total_arrow = number;
 	}
-	bool getTotalArrow()
+	int getTotalArrow()
 	{
 		return total_arrow;
 	}
@@ -135,11 +137,11 @@ public:
 	{
 		total_stone = number;
 	}
-	bool getTotalStone()
+	int getTotalStone()
 	{
 		return total_stone;
 	}
-	void setSpeedLevel(int i) { speedLevel = i; }
+  
 	void setStealthLevel() { stealthLevel++; }
 	int getStealthLevel() { return stealthLevel; }
 
@@ -161,5 +163,8 @@ public:
 	int getSkillPoints() { return skillPointAvailable; }
 	void useSkillPoints() { skillPointAvailable--; }
 	float calcMultipler(int level) { return 1 + (level *0.33); }
+
+	void setMaxHealth(int i) { maxHealth = i; }
+	int getMaxHealth() { return maxHealth; }
 };
 #endif

@@ -392,16 +392,16 @@ void MainMenu::collisions()
 
 	if (!gameStart && settings && !enterKey)
 	{
-		rightButton.collisions(*cursor, settingsNS::RIGHT_FRAME, settingsNS::RIGHT_HOVER);
-		leftButton.collisions(*cursor, settingsNS::LEFT_FRAME, settingsNS::LEFT_HOVER);
-		upButton.collisions(*cursor, settingsNS::UP_FRAME, settingsNS::UP_HOVER);
-		downButton.collisions(*cursor, settingsNS::DOWN_FRAME, settingsNS::DOWN_HOVER);
-		meleeButton.collisions(*cursor, settingsNS::MELEE_FRAME, settingsNS::MELEE_HOVER);
-		rangeButton.collisions(*cursor, settingsNS::RANGE_FRAME, settingsNS::RANGE_HOVER);
-		distractButton.collisions(*cursor, settingsNS::DISTRACT_FRAME, settingsNS::DISTRACT_HOVER);
-		assassinateButton.collisions(*cursor, settingsNS::ASSASSINATE_FRAME, settingsNS::ASSASSINATE_HOVER);
-		backButton.collisions(*cursor, settingsNS::BACK_FRAME, settingsNS::BACK_HOVER);
-		defaultButton.collisions(*cursor, settingsNS::DEFAULT_FRAME, settingsNS::DEFAULT_HOVER);
+		rightButton.collisions(*cursor, settingsNS::RIGHT_FRAME, settingsNS::RIGHT_HOVER, audio);
+		leftButton.collisions(*cursor, settingsNS::LEFT_FRAME, settingsNS::LEFT_HOVER, audio);
+		upButton.collisions(*cursor, settingsNS::UP_FRAME, settingsNS::UP_HOVER, audio);
+		downButton.collisions(*cursor, settingsNS::DOWN_FRAME, settingsNS::DOWN_HOVER, audio);
+		meleeButton.collisions(*cursor, settingsNS::MELEE_FRAME, settingsNS::MELEE_HOVER, audio);
+		rangeButton.collisions(*cursor, settingsNS::RANGE_FRAME, settingsNS::RANGE_HOVER, audio);
+		distractButton.collisions(*cursor, settingsNS::DISTRACT_FRAME, settingsNS::DISTRACT_HOVER, audio);
+		assassinateButton.collisions(*cursor, settingsNS::ASSASSINATE_FRAME, settingsNS::ASSASSINATE_HOVER, audio);
+		backButton.collisions(*cursor, settingsNS::BACK_FRAME, settingsNS::BACK_HOVER, audio);
+		defaultButton.collisions(*cursor, settingsNS::DEFAULT_FRAME, settingsNS::DEFAULT_HOVER, audio);
 	}
 
 	if (gameStart && !assValk->getPause())
@@ -412,8 +412,8 @@ void MainMenu::collisions()
 
 	if (gameStart && assValk->getPause())
 	{
-		resumeButton.collisions(*cursor, buttonNS::RESUME_BUTTON_FRAME, buttonNS::RESUME_HOVER_BUTTON_FRAME);
-		pExitButton.collisions(*cursor, buttonNS::EXIT_BUTTON_FRAME, buttonNS::EXIT_HOVER_BUTTON_FRAME);
+		resumeButton.collisions(*cursor, buttonNS::RESUME_BUTTON_FRAME, buttonNS::RESUME_HOVER_BUTTON_FRAME, audio);
+		pExitButton.collisions(*cursor, buttonNS::EXIT_BUTTON_FRAME, buttonNS::EXIT_HOVER_BUTTON_FRAME, audio);
 
 	}
 }
