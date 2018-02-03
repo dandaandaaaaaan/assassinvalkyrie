@@ -32,8 +32,8 @@ public:
 	void initialize(EnemyManager *enemyList);
 	bool initializeBullet(Game *gamePtr, TextureManager *textureM, Gunner *gunner);
 	bool initializeFire(Game *gamePtr, TextureManager *textureM, Serpant *serpant, Entity *play);
-	void update(float frameTime, Game *gamePtr, TextureManager *textureM, Entity *play);
-	void collisions(Entity *play);
+	void update(float frameTime, Game *gamePtr, TextureManager *textureM, Entity *play, Audio *a);
+	void collisions(Entity *play, PLATFORM p);
 	void render();
 	void camera(float frameTime, int direction);
 };

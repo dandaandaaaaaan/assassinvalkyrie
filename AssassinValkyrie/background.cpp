@@ -30,7 +30,7 @@ bool Background::initialize(Game *gamePtr, int width, int height, int ncols, Tex
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
-void Background::update(float frameTime, Player *player, StageGenerator *stageGen, EnemyManager *emList, EnemyBulletManager *emBulletList)
+void Background::update(float frameTime, Player *player, StageGenerator *stageGen, EnemyManager *emList, EnemyBulletManager *emBulletList, KeyBinding *key)
 {
 
 	bool left =false;
@@ -50,14 +50,14 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 		stageGen->update(frameTime, 0, 1, false);
 	}
 	if ((player->getX() < centreX) && !left) {
-		if (input->isKeyDown(RUNNING_LEFT_KEY) && moveOn) {
+		if (input->isKeyDown(key->getLeftKey()) && moveOn) {
 			velocity.x = 100;
 			spriteData.x += frameTime * (velocity.x);         // move ship along X
 			stageGen->update(frameTime, 1, 0, true);
 			emList->camera(frameTime, 1);
 			emBulletList->camera(frameTime, 1);
 		}
-		if (input->isKeyDown(RUNNING_RIGHT_KEY) && moveOn) {
+		if (input->isKeyDown(key->getRangeKey()) && moveOn) {
 			velocity.x = 100;
 			spriteData.x += frameTime * (-velocity.x);         // move ship along X
 			stageGen->update(frameTime, 2, 0, true);
@@ -68,14 +68,14 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 	}
 
 	if ((player->getX() >= centreX) && !right) {
-		if (input->isKeyDown(RUNNING_LEFT_KEY) && moveOn) {
+		if (input->isKeyDown(key->getLeftKey()) && moveOn) {
 			velocity.x = 100;
 			spriteData.x += frameTime * (velocity.x);         // move ship along X
 			stageGen->update(frameTime, 1, 0, true);
 			emList->camera(frameTime, 1);
 			emBulletList->camera(frameTime, 2);
 		}
-		if (input->isKeyDown(RUNNING_RIGHT_KEY) && moveOn) {
+		if (input->isKeyDown(key->getRightKey()) && moveOn) {
 			velocity.x = 100;
 			spriteData.x += frameTime * (-velocity.x);         // move ship along X
 			stageGen->update(frameTime, 2, 0, true);

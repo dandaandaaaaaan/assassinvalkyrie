@@ -33,8 +33,10 @@ Player::Player() : Entity()
 	skillPointAvailable = 0;
 
 	// yuteng didn;t add this in
+	maxHealth = playerNS::HEALTH;
 	health = playerNS::HEALTH;
-
+	total_stone = 3;
+	total_arrow = 5;
 }
 
 bool Player::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
@@ -83,7 +85,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 
 	for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
 	{
-		if (collidesWith(**gunner,collisionVector))
+		if (collidesWith(**gunner, collisionVector))
 		{
 
 			if (isMeleeAttacking == true)
@@ -134,7 +136,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 		{
 			if (isMeleeAttacking == true)
 			{
-				(*serpant)->getHealth()->damage(serpantNS::HEALTH/2);
+				(*serpant)->getHealth()->damage(serpantNS::HEALTH / 2);
 				isMeleeAttacking = false;
 				if (!(*serpant)->isAlive() && (currentTotalLevel < totalLevels))
 					totalXP += 100;
@@ -156,7 +158,9 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 	{
 		if ((collidesWith(**hp, collisionVector)))
 		{
-			//set health increase;
+			health += (maxHealth *  0.25);
+			if ((health) >= maxHealth)
+				health = maxHealth;
 			(*hp)->setActive(false);
 			(*hp)->setVisible(false);
 			break;
@@ -178,13 +182,36 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 	{
 		if ((collidesWith(**pickupStone, collisionVector)))
 		{
-			//add number of arrows
+			//add number of stones
 			(*pickupStone)->setActive(false);
 			(*pickupStone)->setVisible(false);
 			break;
 		}
 	}
 
+	HIDEOUTS *hideoutCollection = stageGen->getHideouts();
+	for (HIDEOUTS::iterator hideout = (hideoutCollection->begin()); hideout != hideoutCollection->end(); hideout++)
+	{
+		if ((collidesWith(**hideout, collisionVector)))
+		{
+			if (input->isKeyDown(ENTER_HIDEOUT))
+			{
+				(*hideout)->setCurrentFrame(hideoutNS::HIDING_FRAME);
+				visible = false;
+				active = false;
+				break;
+			}
+		}
+		else if (active == false || visible == false) {
+			if (input->isKeyDown(ENTER_HIDEOUT))
+			{
+				(*hideout)->setCurrentFrame(hideoutNS::FRAME);
+				visible = true;
+				active = true;
+				break;
+			}
+		}
+	}
 }
 
 // To find closest ship vector position

@@ -67,6 +67,12 @@ string getType(string v)
 		return "GUNNER";
 	case 'S':
 		return "SERPANT";
+	case 'P':
+		return "PICKUPHP";
+	case 'A':
+		return "PICKUPARROW";
+	case 'D':
+		return "PICKUPSTONE";
 	default:
 		return "";
 	}

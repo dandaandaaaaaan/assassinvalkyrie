@@ -24,6 +24,7 @@
 #include "background.h"
 #include "dashboard.h"
 #include "textDX.h"
+#include "keyBinding.h"
 #include <vector>
 #include <thread>
 
@@ -59,13 +60,14 @@ private:
 	Dashboard *dashboard;
 	TextDX *text;
 	TextDX *displayTimer;
+	KeyBinding *key;
 
 public:
     AssassinValkyrie();
     virtual ~AssassinValkyrie();
 
 	void initialize(Game &gamePtr, HWND *hwndM, HRESULT *hrM, LARGE_INTEGER *timeStartM, LARGE_INTEGER *timeEndM,
-		LARGE_INTEGER *timerFreqM, float *frameTimeM, bool *paused, Cursor *cursor);
+		LARGE_INTEGER *timerFreqM, float *frameTimeM, bool *paused, Cursor *cursor, KeyBinding *key);
     // Initialize the game
     void update();      // must override pure virtual from Game
     void ai();          // "

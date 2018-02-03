@@ -13,6 +13,8 @@ Button::Button() : Entity()
 
 	edge = RECT{ (long)(-buttonNS::BUTTON_WIDTH / 2), (long)(-buttonNS::BUTTON_HEIGHT / 2), (long)(buttonNS::BUTTON_WIDTH / 2), (long)(buttonNS::BUTTON_HEIGHT / 2) };
 	collisionType = entityNS::BOX;
+
+	mouseOn = false;
 }
 
 Button::~Button()
@@ -52,13 +54,16 @@ void Button::collisions(int startFrame, int endFrame)
 	update(endFrame);
 }
 
-void Button::collisions(Entity &ent, int startFrame, int endFrame)
+void Button::collisions(Entity &ent, int startFrame, int endFrame, Audio *a)
 {
 	if (collideButton(ent))
+	{
 		update(endFrame);
+	}
 	else
+	{
 		update(startFrame);
-
+	}
 }
 
 bool Button::collideButton(Entity &ent)

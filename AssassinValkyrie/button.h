@@ -31,12 +31,41 @@ namespace buttonNS
 	const int SPEED_FRAME = 1;
 	const int RANGE_FRAME = 2;
 	const int ARMOUR_FRAME = 3;
+
+}
+
+namespace settingsNS
+{
+	const int WIDTH = 248;
+	const int HEIGHT = 70;
+	const int NCOLS = 2;
+
+	const int RIGHT_FRAME = 10;
+	const int RIGHT_HOVER = 11;
+	const int LEFT_FRAME = 12;
+	const int LEFT_HOVER = 13;
+	const int UP_FRAME = 14;
+	const int UP_HOVER = 15;
+	const int DOWN_FRAME = 16;
+	const int DOWN_HOVER = 17;
+	const int MELEE_FRAME = 18;
+	const int MELEE_HOVER = 19;
+	const int RANGE_FRAME = 20;
+	const int RANGE_HOVER = 21;
+	const int DISTRACT_FRAME = 22;
+	const int DISTRACT_HOVER = 23;
+	const int ASSASSINATE_FRAME = 24;
+	const int ASSASSINATE_HOVER = 25;
+	const int BACK_FRAME = 26;
+	const int BACK_HOVER = 27;
+	const int DEFAULT_FRAME = 28;
+	const int DEFAULT_HOVER = 29;
 }
 
 class Button : public Entity
 {
 private:
-
+	bool mouseOn;
 public:
 	Button();
 	virtual ~Button();
@@ -50,7 +79,7 @@ public:
 	bool collideButton(Entity &ent);
 
 	void collisions(int startFrame, int endFrame);
-	void collisions(Entity &ent, int startFrame, int endFrame);
+	void collisions(Entity &ent, int startFrame, int endFrame, Audio *a);
 	bool collideWithin();
 	void releaseAll();
 	void resetAll();

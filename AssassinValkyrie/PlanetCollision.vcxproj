@@ -111,6 +111,7 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="assassinValkyrie.cpp" />
+    <ClCompile Include="keyBinding.cpp" />
     <ClCompile Include="leftFill.cpp" />
     <ClCompile Include="levelLoader.cpp" />
     <ClCompile Include="mainMenu.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="assassinValkyrie.h" />
+    <ClInclude Include="keyBinding.h" />
     <ClInclude Include="ladder.h" />
     <ClInclude Include="leftFill.h" />
     <ClInclude Include="levelLoader.h" />

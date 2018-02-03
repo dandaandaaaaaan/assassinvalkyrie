@@ -36,15 +36,16 @@ private:
 	POSITION	gunnerPos;
 	POSITION	serpantPos;
 	int			alertRange;
+	bool alertSound;
 
 public:
 	EnemyManager();
 	~EnemyManager();
 
 	bool initialize(Game *gamePtr, TextureManager *textureTrooper, TextureManager *textureGunner, TextureManager *textureSerpant, TextureManager *textureHealth, Entity *play);
-	void update(float frameTime, PLATFORM p);
+	void update(float frameTime, PLATFORM p, Audio *a);
 	void ai();
-	void collisions(Entity *play, PLATFORM floor, PLATFORM fill);
+	void collisions(Entity *play, PLATFORM floor, PLATFORM fill, Audio *a);
 	void render();
 	void renderRay(Graphics *g);
 	void unCollide(Enemy *t, PLATFORM floor, PLATFORM fill);

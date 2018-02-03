@@ -10,7 +10,7 @@ WeaponManager::WeaponManager()
 }
 
 bool WeaponManager::initializeArrow(Game *gamePtr, int width, int height, int ncols,
-	TextureManager *textureM, float X, float Y, Entity &player)
+	TextureManager *textureM, float X, float Y, Entity &player, KeyBinding *key)
 {
 	bool is_initialised_arrow = true;
 	Arrow *arrow = arrow_collection.back();
@@ -73,23 +73,23 @@ bool WeaponManager::initializeStone(Game *gamePtr, int width, int height, int nc
 
 
 void WeaponManager::update(float frameTime, Input *input, Game *gamePtr, int width, int height, int arrowcols, int stonecols,
-	TextureManager *textureM, Player &player)
+	TextureManager *textureM, Player &player, KeyBinding *key)
 {
 	int X = player.getCenterX();
 	int Y = player.getY();
 
-	if (input->isKeyDown(RANGE_ATTACK_KEY))
+	if (input->isKeyDown(key->getRangeKey()))
 	{
 		if (GetTickCount() - Tick > 500 && player.getTotalArrow()>0)
 		{
 			Tick = GetTickCount();
 			arrow_collection.push_back(new Arrow());
 			player.setTotalArrow(player.getTotalArrow() - 1);
-			initializeArrow(gamePtr, width, height, arrowcols, textureM, X, Y, player);
+			initializeArrow(gamePtr, width, height, arrowcols, textureM, X, Y, player, key);
 		}
 	}
 
-	else if (input->isKeyDown(DISTRACT_KEY))
+	else if (input->isKeyDown(key->getDistractKey()) )
 	{
 		if (GetTickCount() - Tick2 > 500 && player.getTotalStone()>0)
 		{

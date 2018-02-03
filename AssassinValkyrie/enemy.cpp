@@ -13,6 +13,7 @@ Enemy::Enemy(Entity *play) : Entity()
 	state_ = new PatrollingState();
 	player = play;
 	vision = new Ray();
+	triggerAlert = false;
 }
 
 Enemy::~Enemy()

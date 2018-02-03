@@ -68,11 +68,29 @@ bool EnemyManager::initialize(Game *gamePtr, TextureManager *textureTrooper, Tex
 	return isInitialised;
 }
 
-void EnemyManager::update(float frameTime, PLATFORM p)
+void EnemyManager::update(float frameTime, PLATFORM p, Audio *a)
 {
-	for ( Enemy *t : worldCollection)
+	alertSound = false;
+	for (Enemy *t : worldCollection)
 		if (!t->outOfBounds())
+		{
 			t->update(frameTime, p);
+			if (AlertedState *state = dynamic_cast<AlertedState*>(t->getState()))
+			{
+				if (!t->triggerAlert)
+				{
+					t->triggerAlert = true;
+					alertSound = true;
+				}
+			}
+			else
+				t->triggerAlert = false;
+		}
+
+	if (alertSound) {
+		a->playCue(ALERT);
+		alertSound = false;
+	}
 }
 
 void EnemyManager::ai()
@@ -96,7 +114,7 @@ void EnemyManager::ai()
 			}
 }
 
-void EnemyManager::collisions(Entity *play, PLATFORM floor, PLATFORM fill)
+void EnemyManager::collisions(Entity *play, PLATFORM floor, PLATFORM fill, Audio *a)
 {
 	VECTOR2 collisionVector;
 
@@ -118,6 +136,7 @@ void EnemyManager::collisions(Entity *play, PLATFORM floor, PLATFORM fill)
 		if (!t->outOfBounds())
 			if (t->getAttack()->getAnimation() && t->collidesWith(*play, collisionVector) && t->getAttack()->getAttack())
 			{
+				a->playCue(SWORD);
 				play->setHealth(play->getHealth() - 5);
 				t->getAttack()->offAttack();
 			}

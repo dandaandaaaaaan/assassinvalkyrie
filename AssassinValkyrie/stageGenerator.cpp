@@ -48,8 +48,8 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 			if (horizontalElement2.element == "FLOOR")
 			{
 				floorCollection.emplace_back(new Floor());
-				success = floorCollection.back()->initialize(gamePtr, floorNS::WIDTH, floorNS::HEIGHT, 2, textureM);
-				floorCollection.back()->setCurrentFrame(0);
+				success = floorCollection.back()->initialize(gamePtr, floorNS::WIDTH, floorNS::HEIGHT, floorNS::TEXTURE_COLS, textureM);
+				floorCollection.back()->setCurrentFrame(floorNS::START_FRAME);
 				floorCollection.back()->setX(horizontalElement2.x);
 				floorCollection.back()->setStartX(horizontalElement2.x);
 				floorCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y + block_height - floorNS::HEIGHT);
@@ -63,8 +63,8 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 			else if (horizontalElement2.element == "FILL")
 			{
 				fillCollection.emplace_back(new Fill());
-				success = fillCollection.back()->initialize(gamePtr, fillNS::WIDTH, fillNS::HEIGHT, 2, textureM);
-				fillCollection.back()->setCurrentFrame(1);
+				success = fillCollection.back()->initialize(gamePtr, fillNS::WIDTH, fillNS::HEIGHT, fillNS::TEXTURE_COLS, textureM);
+				fillCollection.back()->setCurrentFrame(fillNS::START_FRAME);
 				fillCollection.back()->setX(horizontalElement2.x);
 				fillCollection.back()->setStartX(horizontalElement2.x);
 				fillCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y);
@@ -78,8 +78,8 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 			else if (horizontalElement2.element == "LEFT")
 			{
 				sideCollection.emplace_back(new LeftFill());
-				success = sideCollection.back()->initialize(gamePtr, fillNS::WIDTH, fillNS::HEIGHT, 3, textureM);
-				sideCollection.back()->setCurrentFrame(2);
+				success = sideCollection.back()->initialize(gamePtr, fillNS::WIDTH, fillNS::HEIGHT, fillNS::LEFT_TEXTURE_COLS, textureM);
+				sideCollection.back()->setCurrentFrame(fillNS::LEFT_FRAME);
 				sideCollection.back()->setX(horizontalElement2.x);
 				sideCollection.back()->setStartX(horizontalElement2.x);
 				sideCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y);
@@ -93,8 +93,8 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 			else if (horizontalElement2.element == "RIGHT")
 			{
 				sideCollection.emplace_back(new RightFill());
-				success = sideCollection.back()->initialize(gamePtr, fillNS::WIDTH, fillNS::HEIGHT, 4, textureM);
-				sideCollection.back()->setCurrentFrame(3);
+				success = sideCollection.back()->initialize(gamePtr, fillNS::WIDTH, fillNS::HEIGHT, fillNS::RIGHT_TEXTURE_COLS, textureM);
+				sideCollection.back()->setCurrentFrame(fillNS::RIGHT_FRAME);
 				sideCollection.back()->setX(horizontalElement2.x);
 				sideCollection.back()->setStartX(horizontalElement2.x);
 				sideCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y);
@@ -108,11 +108,11 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 			else if (horizontalElement2.element == "HIDEOUT")
 			{
 				hideoutCollection.emplace_back(new Hideout());
-				success = hideoutCollection.back()->initialize(gamePtr, hideoutNS::WIDTH, hideoutNS::HEIGHT, 6, textureM);
-				hideoutCollection.back()->setCurrentFrame(5);
+				success = hideoutCollection.back()->initialize(gamePtr, hideoutNS::WIDTH, hideoutNS::HEIGHT, hideoutNS::TEXTURE_COLS, textureM);
+				hideoutCollection.back()->setCurrentFrame(hideoutNS::FRAME);
 				hideoutCollection.back()->setX(horizontalElement2.x);
 				hideoutCollection.back()->setStartX(horizontalElement2.x);
-				hideoutCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y);
+				hideoutCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
 				hideoutCollection.back()->setStartY(GAME_HEIGHT - horizontalElement2.y);
 				hideoutCollection.back()->setEdge(RECT{ (long)(-hideoutNS::WIDTH / 2), (long)(-hideoutNS::HEIGHT / 2), (long)(hideoutNS::WIDTH / 2), (long)(hideoutNS::HEIGHT / 2) });
 				hideoutCollection.back()->setCollisionType(entityNS::ROTATED_BOX);

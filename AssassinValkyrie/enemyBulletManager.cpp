@@ -84,7 +84,7 @@ bool EnemyBulletManager::initializeFire(Game *gamePtr, TextureManager *textureM,
 	return isInitialised;
 }
 
-void EnemyBulletManager::update(float frameTime, Game *gamePtr, TextureManager *textureM, Entity *play)
+void EnemyBulletManager::update(float frameTime, Game *gamePtr, TextureManager *textureM, Entity *play, Audio *a)
 {
 	for (Gunner *g : *gunnerList)
 		if (g->isAlive() && !g->outOfBounds())
@@ -94,6 +94,7 @@ void EnemyBulletManager::update(float frameTime, Game *gamePtr, TextureManager *
 			{
 				shot->shootTimer = GetTickCount();
 				initializeBullet(gamePtr, textureM, g);
+				a->playCue(BULLET);
 			}
 		}
 
@@ -105,6 +106,7 @@ void EnemyBulletManager::update(float frameTime, Game *gamePtr, TextureManager *
 			{
 				shot->fireTimer = GetTickCount();
 				initializeFire(gamePtr, textureM, g, play);
+				a->playCue(FIREBALL);
 			}
 		}
 
@@ -117,9 +119,14 @@ void EnemyBulletManager::update(float frameTime, Game *gamePtr, TextureManager *
 			t->update(frameTime);
 }
 
-void EnemyBulletManager::collisions(Entity *play)
+void EnemyBulletManager::collisions(Entity *play, PLATFORM p)
 {
 	VECTOR2 collisionVector;
+	std::vector<Entity *> inRangeP;
+	for (Entity *t : p)
+		if (!t->outOfBounds())
+			inRangeP.emplace_back(t);
+
 	bullet = bulletList.begin();
 	while (bullet != bulletList.end())
 	{
@@ -129,6 +136,10 @@ void EnemyBulletManager::collisions(Entity *play)
 				(*bullet)->setActive(false);
 				play->setHealth(play->getHealth() - 4);
 			}
+			else
+				for (Entity *t : inRangeP)
+					if ((*bullet)->collidesWith(*t, collisionVector))
+						(*bullet)->setActive(false);
 			bullet++;
 		}
 		else
@@ -144,6 +155,10 @@ void EnemyBulletManager::collisions(Entity *play)
 				(*fireball)->setActive(false);
 				play->setHealth(play->getHealth() - 6);
 			}
+			else
+				for (Entity *t : inRangeP)
+					if ((*fireball)->collidesWith(*t, collisionVector))
+						(*fireball)->setActive(false);
 			fireball++;
 		}
 		else

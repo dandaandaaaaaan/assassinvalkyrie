@@ -25,11 +25,11 @@ public:
 	WeaponManager();
 
 	bool initializeArrow(Game *gamePtr, int width, int height, int ncols,
-		TextureManager *textureM, float X, float Y, Entity &player);
+		TextureManager *textureM, float X, float Y, Entity &player, KeyBinding *key);
 	bool initializeStone(Game *gamePtr, int width, int height, int ncols,
 		TextureManager *textureM, float X, float Y, Entity &player);
 	void update(float frameTime, Input *input, Game *gamePtr, int width, int height, int arrowcols, int stonecols,
-		TextureManager *textureM, Player &player);
+		TextureManager *textureM, Player &player, KeyBinding *key);
 	void collisions(EnemyManager *enemyList, Player *player, PLATFORM floor);
 	void ai();
 	void render();

@@ -42,7 +42,7 @@ public:
 	{
 		
 		velocityY += gravity*t*frameTime;
-
+		player.setVelocityY(velocityY);
 		if (player.getJumpRight())
 		{
 

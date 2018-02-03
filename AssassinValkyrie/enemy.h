@@ -154,12 +154,12 @@ protected:
 	Image	cautionAnimation;
 	int		range;
 	int		attackFrame;
-	bool	triggerAlert;
 
 public:
 	// constructor
 	Enemy(Entity *play);
 	~Enemy();
+	bool	triggerAlert;
 
 	// inherited member functions
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
