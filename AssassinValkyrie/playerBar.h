@@ -1,3 +1,7 @@
+// Module			: Gameplay Programming
+// Assignment1		: Assassin Valkyrie
+// Student Number	: Png Yeow Li
+// Student Number	: S10164245H
 #pragma once
 
 #ifndef _PLAYERBAR_H

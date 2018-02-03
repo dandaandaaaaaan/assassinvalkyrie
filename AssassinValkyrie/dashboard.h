@@ -1,3 +1,8 @@
+// Module			: Gameplay Programming
+// Assignment1		: Assassin Valkyrie
+// Student Number	: Png Yeow Li
+// Student Number	: S10164245H
+
 #ifndef _DASHBOARD_H
 #define _DASHBOARD_H
 #define WIN32_LEAN_AND_MEAN
