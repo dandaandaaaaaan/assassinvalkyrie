@@ -125,7 +125,7 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 		player.setFrameDelay(0.1);
 		player.setLoop(false);
 		player.IsMeleeAttacking(true);
-		a->playCue(SWORD);
+		a->playCue(PLAYERMELEE);
 		return new MeleeAttackState();
 
 	}
@@ -293,7 +293,7 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 		player.setFrameDelay(0.1);
 		player.setLoop(false);
 		player.IsMeleeAttacking(true);
-		a->playCue(SWORD);
+		a->playCue(PLAYERMELEE);
 		return new MeleeAttackState();
 
 	}

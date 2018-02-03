@@ -85,7 +85,7 @@ void WeaponManager::update(float frameTime, Input *input, Game *gamePtr, int wid
 			Tick = GetTickCount();
 			arrow_collection.push_back(new Arrow());
 			player.setTotalArrow(player.getTotalArrow() - 1);
-			a->playCue(SWORD);
+			a->playCue(PLAYERRANGE);
 			initializeArrow(gamePtr, width, height, arrowcols, textureM, X, Y, player, key);
 		}
 	}
