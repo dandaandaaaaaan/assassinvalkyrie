@@ -134,7 +134,7 @@ void EnemyBulletManager::collisions(Entity *play, PLATFORM p)
 			if ((*bullet)->collidesWith(*play, collisionVector))
 			{
 				(*bullet)->setActive(false);
-				play->setHealth(play->getHealth() - 4);
+				play->setHealth(play->getHealth() - 4;
 			}
 			else
 				for (Entity *t : inRangeP)
