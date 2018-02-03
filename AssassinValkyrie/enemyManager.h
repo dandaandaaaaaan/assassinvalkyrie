@@ -44,7 +44,7 @@ public:
 
 	bool initialize(Game *gamePtr, TextureManager *textureTrooper, TextureManager *textureGunner, TextureManager *textureSerpant, TextureManager *textureHealth, Entity *play);
 	void update(float frameTime, PLATFORM p, Audio *a);
-	void ai();
+	void ai(Entity *player);
 	void collisions(Entity *play, PLATFORM floor, PLATFORM fill, Audio *a);
 	void render();
 	void renderRay(Graphics *g);

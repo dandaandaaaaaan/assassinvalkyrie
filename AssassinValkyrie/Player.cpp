@@ -32,7 +32,7 @@ Player::Player() : Entity()
 	currentTotalLevel = 4;
 	skillPointAvailable = 0;
 
-	// yuteng didn;t add this in
+	// yuteng didn't add this in
 	maxHealth = playerNS::HEALTH;
 	health = playerNS::HEALTH;
 	total_stone = 3;
@@ -44,17 +44,37 @@ bool Player::initialize(Game *gamePtr, int width, int height, int ncols, Texture
 
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
-int returnXPToNextLevel(int i) {
-	return ((i - 3) * 50);
+int Player::getNextLevelXP() {
+	return ((currentTotalLevel - 3) * 50);
 }
 void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
-	if (totalXP >= returnXPToNextLevel(currentTotalLevel)) {
+	if (totalXP >= getNextLevelXP()) {
 		currentTotalLevel++;
 		skillPointAvailable++;
 		totalXP = 0;
 	}
 
+  //if (stealthSet) {
+	//	VECTOR2 collisionVector;
+	//	GUNNERLIST *gunnerCollection = enemyList->getGunners();
+	//	TROOPERLIST *trooperCollection = enemyList->getTroopers();
+	//	SERPANTLIST *serpantCollection = enemyList->getSerpants();
+
+	//	for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
+	//	{
+	//		(*gunner)->getRay()->setRayMultiplier((*gunner)->getRay()->getRayMultipler()*calcNegativeMultipler(stealthLevel));
+	//	}
+	//	for (TROOPERLIST::iterator trooper = (trooperCollection->begin()); trooper != trooperCollection->end(); trooper++)
+	//	{
+	//		(*trooper)->getRay()->setRayMultiplier((*trooper)->getRay()->getRayMultipler()*calcNegativeMultipler(stealthLevel));
+	//	}
+	//	for (SERPANTLIST::iterator serpant = (serpantCollection->begin()); serpant != serpantCollection->end(); serpant++)
+	//	{
+	//		(*serpant)->getRay()->setRayMultiplier((*serpant)->getRay()->getRayMultipler()*calcNegativeMultipler(stealthLevel));
+	//	}
+	//	stealthSet = false;
+	//}
 	handleInput(input,gamePtr,textureM,stagegenerator,enemyList,p,a);
 	state_->update(*this, frameTime);
 
@@ -93,16 +113,16 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 				(*gunner)->getHealth()->damage(gunnerNS::HEALTH);
 				isMeleeAttacking = false;
 				if (!(*gunner)->isAlive() && (currentTotalLevel < totalLevels))
-					totalXP += 50;
+					totalXP += 10;
 				break;
 			}
 
 			if (isAssassinating == true)
 			{
-				(*gunner)->getHealth()->damage(trooperNS::HEALTH);
+				(*gunner)->getHealth()->damage(gunnerNS::HEALTH);
 				isAssassinating = false;
 				if (!(*gunner)->isAlive() && (currentTotalLevel < totalLevels))
-					totalXP += 50;
+					totalXP += 20;
 				break;
 			}
 		}
@@ -116,7 +136,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 				(*trooper)->getHealth()->damage(trooperNS::HEALTH);
 				isMeleeAttacking = false;
 				if (!(*trooper)->isAlive() && (currentTotalLevel < totalLevels))
-					totalXP += 50;
+					totalXP += 10;
 				break;
 			}
 
@@ -125,7 +145,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 				(*trooper)->getHealth()->damage(trooperNS::HEALTH);
 				isAssassinating = false;
 				if (!(*trooper)->isAlive() && (currentTotalLevel < totalLevels))
-					totalXP += 50;
+					totalXP += 20;
 				break;
 			}
 		}
@@ -139,15 +159,15 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 				(*serpant)->getHealth()->damage(serpantNS::HEALTH / 2);
 				isMeleeAttacking = false;
 				if (!(*serpant)->isAlive() && (currentTotalLevel < totalLevels))
-					totalXP += 100;
+					totalXP += 20;
 				break;
 			}
 			if (isAssassinating == true)
 			{
-				(*serpant)->getHealth()->damage(trooperNS::HEALTH);
+				(*serpant)->getHealth()->damage(serpantNS::HEALTH);
 				isAssassinating = false;
 				if (!(*serpant)->isAlive() && (currentTotalLevel < totalLevels))
-					totalXP += 50;
+					totalXP += 40;
 				break;
 			}
 		}
@@ -171,7 +191,8 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 	{
 		if ((collidesWith(**pickupArrow, collisionVector)))
 		{
-			//add number of arrows
+			total_arrow += 5;
+			audio->playCue(PICKUP);
 			(*pickupArrow)->setActive(false);
 			(*pickupArrow)->setVisible(false);
 			break;
@@ -182,7 +203,8 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 	{
 		if ((collidesWith(**pickupStone, collisionVector)))
 		{
-			//add number of stones
+			total_stone += 3;
+			audio->playCue(PICKUP);
 			(*pickupStone)->setActive(false);
 			(*pickupStone)->setVisible(false);
 			break;
@@ -206,6 +228,8 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 			if (input->isKeyDown(ENTER_HIDEOUT))
 			{
 				(*hideout)->setCurrentFrame(hideoutNS::FRAME);
+				spriteData.x = (*hideout)->getX();
+				spriteData.y = (*hideout)->getY() -(spriteData.height - hideoutNS::HEIGHT);
 				visible = true;
 				active = true;
 				break;

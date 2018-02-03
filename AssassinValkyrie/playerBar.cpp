@@ -1,3 +1,7 @@
+// Module			: Gameplay Programming
+// Assignment1		: Assassin Valkyrie
+// Student Number	: Png Yeow Li
+// Student Number	: S10164245H
 #include "playerBar.h"
 
 bool PlayerBar::initialize(Graphics *graphics, TextureManager *textureM, int total_health)
@@ -14,3 +18,13 @@ void PlayerBar::setHealthSize(int health)
 		health = fullHealth;
 	spriteData.rect.right = spriteData.rect.left + (LONG)(spriteData.width * health / fullHealth);
 }
+
+void PlayerBar::setXPSize(int XP)
+{
+	if (XP < 0)
+		XP = 0;
+	else if (XP > fullHealth)
+		XP = fullHealth;
+	spriteData.rect.right = spriteData.rect.left + (LONG)(spriteData.width * XP / fullHealth);
+}
+

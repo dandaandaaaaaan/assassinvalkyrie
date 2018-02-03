@@ -334,17 +334,23 @@ void MainMenu::update()
 	if (gameStart && !assValk->getPause())
 	{
 		if (pauseButton.collideButton(*cursor) && input->getMouseLButton())
+		{
+			audio->stopCue(STEALTH);
 			assValk->setPause(true);
-
+		}
 		assValk->update();
 	}
 
 	if (gameStart && assValk->getPause())
 	{
 		if (resumeButton.collideButton(*cursor) && input->getMouseLButton())
-			assValk->setPause(false);
-		if (pExitButton.collideButton(*cursor) && input->getMouseLButton())
 		{
+			audio->playCue(STEALTH);
+			assValk->setPause(false);
+		}
+			if (pExitButton.collideButton(*cursor) && input->getMouseLButton())
+		{
+			audio->playCue(RUSH);
 			assValk->resetAll();
 			gameStart = false;
 		}

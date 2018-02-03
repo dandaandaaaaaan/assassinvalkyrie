@@ -1,8 +1,14 @@
+// Module			: Gameplay Programming
+// Assignment1		: Assassin Valkyrie
+// Student Number	: Png Yeow Li
+// Student Number	: S10164245H
+
 #include "dashboard.h"
 
 Dashboard::Dashboard()
 {
 	healthRemaining = new TextDX();
+	XP = new TextDX();
 	stealthLevel = new TextDX();
 	speedLevel = new TextDX();
 	rangeLevel = new TextDX();
@@ -79,6 +85,22 @@ bool Dashboard::initialize(Graphics *g, Cursor *cursor, Player *playerM)
 	playerMaxHealth = playerM->getMaxHealth();
 	playerCurrentHealth = playerM->getHealth();
 
+	// XP bar
+	if (!underExp.initialize(g, &barTexture, playerM->getNextLevelXP()))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player health"));
+	underExp.setX(10);
+	underExp.setY(40);
+	if (!playerExp.initialize(g, &barTexture, playerM->getNextLevelXP()))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player health"));
+	playerExp.setX(10);
+	playerExp.setY(40);
+
+	playerCurrentXP = playerM->getTotalXP();
+	playerMaxXP = playerM->getNextLevelXP();
+
+	if (!XP->initialize(g, dashboardNS::SKILL_TEXT_HEIGHT, false, false, "Spectre 007"))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing dashboard text"));
+
 	// Stealth points
 	if (!stealthLevel->initialize(g, dashboardNS::SKILL_TEXT_HEIGHT, false, false, "Spectre 007"))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing dashboard text"));
@@ -107,6 +129,9 @@ void Dashboard::draw()
 	underHealth.draw(graphicsNS::BLACK);
 	playerHealth.draw(graphicsNS::RED);
 
+	underExp.draw(graphicsNS::BLACK);
+	playerExp.draw(graphicsNS::BLUE);
+
 	stealthIcon.draw();
 	speedIcon.draw();
 	rangeIcon.draw();
@@ -117,7 +142,11 @@ void Dashboard::draw()
 	_snprintf(text, textSize, "%d/%d", (int)playerCurrentHealth, (int)playerMaxHealth);
 	healthRemaining->setFontColor(graphicsNS::WHITE);
 	healthRemaining->print(text, underHealth.getX(), underHealth.getY());
-
+	
+	static char exp[textSize];
+	_snprintf(exp, textSize, "%d/%d", (int)playerCurrentXP, (int)playerMaxXP);
+	XP->setFontColor(graphicsNS::WHITE);
+	XP->print(exp, underExp.getX(), underExp.getY());
 	
 	static char stealth[textSize];
 	_snprintf(stealth, textSize, "%d", (int)stealthPoints);
@@ -125,17 +154,17 @@ void Dashboard::draw()
 	stealthLevel->print(stealth, (stealthIcon.getX() + stealthIcon.getWidth() + 20), (stealthIcon.getY() + 20));
 
 	static char speed[textSize];
-	_snprintf(speed, textSize, "%d", (int)stealthPoints);
+	_snprintf(speed, textSize, "%d", (int)speedPoints);
 	speedLevel->setFontColor(graphicsNS::WHITE);
 	speedLevel->print(speed, (speedIcon.getX() + speedIcon.getWidth() + 20), (speedIcon.getY() + 20));
 
 	static char range[textSize];
-	_snprintf(range, textSize, "%d", (int)stealthPoints);
+	_snprintf(range, textSize, "%d", (int)rangePoints);
 	rangeLevel->setFontColor(graphicsNS::WHITE);
 	rangeLevel->print(range, (rangeIcon.getX() - 20), (rangeIcon.getY() + 20));
 
 	static char armor[textSize];
-	_snprintf(armor, textSize, "%d", (int)stealthPoints);
+	_snprintf(armor, textSize, "%d", (int)armorPoints);
 	armorLevel->setFontColor(graphicsNS::WHITE);
 	armorLevel->print(armor, (armorIcon.getX() - 20), (armorIcon.getY() + 20));
 
@@ -146,6 +175,8 @@ void Dashboard::update(float frameTime,Player *playerM, Input *input)
 {
 	playerCurrentHealth = playerM->getHealth();
 	playerHealth.setHealthSize(playerM->getHealth());
+	playerCurrentXP = playerM->getTotalXP();
+	playerExp.setXPSize(playerM->getTotalXP());
 	stealthPoints = playerM->getStealthLevel();
 	speedPoints = playerM->getSpeedLevel();
 	rangePoints = playerM->getRangeLevel();
@@ -155,6 +186,7 @@ void Dashboard::update(float frameTime,Player *playerM, Input *input)
 	if (stealthIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton())
 	{
 		playerM->setStealthLevel();
+		playerM->setStealthSet(true);
 		playerM->useSkillPoints();
 	}
 

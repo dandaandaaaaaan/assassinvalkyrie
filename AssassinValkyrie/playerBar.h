@@ -1,3 +1,7 @@
+// Module			: Gameplay Programming
+// Assignment1		: Assassin Valkyrie
+// Student Number	: Png Yeow Li
+// Student Number	: S10164245H
 #pragma once
 
 #ifndef _PLAYERBAR_H
@@ -25,6 +29,7 @@ private:
 public:
 	bool initialize(Graphics *graphics, TextureManager *textureM, int total_health);
 	void setHealthSize(int value);
+	void setXPSize(int value);
 };
 
 #endif

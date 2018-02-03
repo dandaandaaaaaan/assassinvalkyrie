@@ -12,15 +12,29 @@ bool HealthComponent::initialize(Graphics *graphics, TextureManager *textureM, i
 	isAlive = true;
 	animationOn = false;
 	isAnimating = 1;
+	dieSound = false;
 	healthbar.initialize(graphics, textureM, max);
 	return true;
 }
-void HealthComponent::update(float frameTime, VECTOR2 pos)
+
+bool randomBool() {
+	return 0 + (rand() % (1 - 0 + 1)) == 1;
+}
+
+void HealthComponent::update(float frameTime, VECTOR2 pos, Audio *a)
 {
 	healthbar.update(frameTime, pos);
 
 	if (animationOn)
 	{
+		if (!dieSound)
+		{
+			if (randomBool())
+				a->playCue(DIE);
+			else
+				a->playCue(DIE2);
+			dieSound = true;
+		}
 		isAnimating = 2;
 		animation->update(frameTime);
 		if (animation->getAnimationComplete()) {

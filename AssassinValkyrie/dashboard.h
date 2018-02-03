@@ -1,3 +1,8 @@
+// Module			: Gameplay Programming
+// Assignment1		: Assassin Valkyrie
+// Student Number	: Png Yeow Li
+// Student Number	: S10164245H
+
 #ifndef _DASHBOARD_H
 #define _DASHBOARD_H
 #define WIN32_LEAN_AND_MEAN
@@ -37,7 +42,9 @@ private:
 	PlayerBar playerHealth;
 	PlayerBar underHealth;
 	PlayerBar playerExp;
+	PlayerBar underExp;
 	TextDX *healthRemaining;
+	TextDX *XP;
 	TextDX *stealthLevel;
 	TextDX *speedLevel;
 	TextDX *rangeLevel;
@@ -45,6 +52,8 @@ private:
 
 	int playerMaxHealth;
 	int playerCurrentHealth;
+	int playerMaxXP;
+	int playerCurrentXP;
 	int stealthPoints;
 	int speedPoints;
 	int rangePoints;
