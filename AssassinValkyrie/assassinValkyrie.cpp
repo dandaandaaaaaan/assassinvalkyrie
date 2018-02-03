@@ -1,8 +1,3 @@
-// Module			: Gameplay Programming
-// Assignment2		: Assassin Valkyrie
-// Student Number	: Chua Wei Jie Timothy
-// Student Number	: S10165581F
-
 #include "assassinValkyrie.h"
 #include "levelLoader.h"
 

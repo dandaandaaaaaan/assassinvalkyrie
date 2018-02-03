@@ -81,6 +81,8 @@ const char SWORD[] = "sword";
 const char PICKUP[] = "pickup";
 const char DIE[] = "die";
 const char DIE2[] = "die2";
+const char PLAYERMELEE[] = "playermelee";
+const char PLAYERRANGE[] = "playerrange";
 
 // key mappings
 // In this game simple constants are used for key mappings. If variables were used
