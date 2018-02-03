@@ -49,7 +49,7 @@ void Enemy::handleInput(EnemyState* newState, PLATFORM *p)
 	}
 }
 
-void Enemy::update(float frameTime, PLATFORM p)
+void Enemy::update(float frameTime, PLATFORM p, Audio *a)
 {
 	if (!health->getDieAnimation()) {
 		handleInput(NULL, &p);
@@ -60,7 +60,7 @@ void Enemy::update(float frameTime, PLATFORM p)
 		vision->setDirection(move->getCurrentVelocity());
 		vision->updateVision(p);
 	}
-	health->update(frameTime, { spriteData.x + spriteData.width / 2, spriteData.y });
+	health->update(frameTime, { spriteData.x + spriteData.width / 2, spriteData.y }, a);
 	cautionAnimation.setX(spriteData.x + spriteData.width / 2 - cautionNS::WIDTH / 2);
 	cautionAnimation.setY(spriteData.y - cautionNS::HEIGHT * 2);
 	Entity::update(frameTime);

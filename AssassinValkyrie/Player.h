@@ -59,6 +59,7 @@ protected:
 	PlayerState* state_;
 	int skillPointAvailable;
 	int maxHealth;
+	bool stealthSet = false;
 public:
 	// constructor
 	Player();
@@ -66,8 +67,8 @@ public:
 
 	// inherited member functions
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
-	void update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p);
-	void handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p);
+	void update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p,Audio *a);
+	void handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a);
 	void ai(Entity &ship1, Entity &ship2);
 	//void collisions(EnemyManager *enemyList);
 	void collisions(EnemyManager *enemyList, StageGenerator *stageGen);
@@ -163,8 +164,13 @@ public:
 	int getSkillPoints() { return skillPointAvailable; }
 	void useSkillPoints() { skillPointAvailable--; }
 	float calcMultipler(int level) { return 1 + (level *0.33); }
+	float calcNegativeMultipler(int level) { return ((3-level) * 0.33); }
 
 	void setMaxHealth(int i) { maxHealth = i; }
 	int getMaxHealth() { return maxHealth; }
+	int getNextLevelXP();
+
+	bool getStealthSet() { return stealthSet; }
+	void setStealthSet(bool i) { stealthSet = i; }
 };
 #endif

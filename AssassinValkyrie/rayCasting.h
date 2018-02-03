@@ -57,5 +57,8 @@ public:
 		}
 	}
 	void setColor(COLOR_ARGB c) { color = c; }
+
+	//void setRayMultiplier(int i) { rayMultiplier = i; }
+	//int getRayMultipler() { return rayMultiplier; }
 };
 #endif

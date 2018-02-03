@@ -1,4 +1,7 @@
-
+// Module			: Gameplay Programming
+// Assignment2		: Assassin Valkyrie
+// Student Number	: Zhuang yuteng
+// Student Number	: S10163964C
 
 #include "Player.h"
 #include "RunningState.h"
@@ -16,7 +19,7 @@
 #include "ClimbingState.h"
 
 
-PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p)
+PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	KeyBinding key;
 	player.setCollideWithVision(false);
@@ -125,6 +128,7 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 		player.setFrameDelay(0.1);
 		player.setLoop(false);
 		player.IsMeleeAttacking(true);
+		a->playCue(PLAYERMELEE);
 		return new MeleeAttackState();
 
 	}
@@ -154,7 +158,7 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 	return NULL;
 }
 
-PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM,  StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM,  StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	KeyBinding key;
 	player.setOnGround(false);
@@ -292,6 +296,7 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 		player.setFrameDelay(0.1);
 		player.setLoop(false);
 		player.IsMeleeAttacking(true);
+		a->playCue(PLAYERMELEE);
 		return new MeleeAttackState();
 
 	}
@@ -301,7 +306,7 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 	return NULL;
 }
 
-PlayerState* CrouchingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* CrouchingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	KeyBinding key;
 	if (!input->isKeyDown(key.getDownKey()))
@@ -340,7 +345,7 @@ PlayerState* CrouchingState::handleInput(Player& player, Input* input, Game *gam
 	return NULL;
 }
 
-PlayerState* AssassinateState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* AssassinateState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	
 	if (player.getAnimationComplete())
@@ -358,7 +363,7 @@ PlayerState* AssassinateState::handleInput(Player& player, Input* input, Game *g
 	return NULL;
 }
 
-PlayerState* MeleeAttackState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* MeleeAttackState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	if (player.getAnimationComplete())
 	{
@@ -375,7 +380,7 @@ PlayerState* MeleeAttackState::handleInput(Player& player, Input* input, Game *g
 	return NULL;
 }
 
-PlayerState* RangeAttackState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* RangeAttackState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	if (player.getAnimationComplete())
 	{
@@ -390,7 +395,7 @@ PlayerState* RangeAttackState::handleInput(Player& player, Input* input, Game *g
 	return NULL;
 }
 
-PlayerState* ThrowingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* ThrowingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	if (player.getAnimationComplete())
 	{
@@ -405,7 +410,7 @@ PlayerState* ThrowingState::handleInput(Player& player, Input* input, Game *game
 	return NULL;
 }
 
-PlayerState* CrouchWalkingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* CrouchWalkingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	KeyBinding key;
 	//VECTOR2 collisionVector;
@@ -441,7 +446,7 @@ PlayerState* CrouchWalkingState::handleInput(Player& player, Input* input, Game 
 	return NULL;
 }
 
-PlayerState* JumpingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* JumpingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	
 	
@@ -503,7 +508,7 @@ PlayerState* JumpingState::handleInput(Player& player, Input* input, Game *gameP
 	return NULL;
 }
 
-PlayerState* FallingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* FallingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	VECTOR2 collisionVector;
 	FLOORS *floorCollection = stagegenerator->getFloors();
@@ -524,7 +529,7 @@ PlayerState* FallingState::handleInput(Player& player, Input* input, Game *gameP
 	return NULL;
 }
 
-PlayerState* ClimbReadyState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* ClimbReadyState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	if (input->isKeyDown(CLIMBING_UP_KEY))
 	{
@@ -550,7 +555,7 @@ PlayerState* ClimbReadyState::handleInput(Player& player, Input* input, Game *ga
 	return NULL;
 }
 
-PlayerState* ClimbingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)
+PlayerState* ClimbingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	player.setCollideWithLadder(false);
 	LADDERS *ladderCollection = stagegenerator->getLadders();

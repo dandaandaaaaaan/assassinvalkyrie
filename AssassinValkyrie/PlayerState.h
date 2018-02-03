@@ -19,7 +19,7 @@ private:
 public:
 	PlayerState() {}
 	~PlayerState() {}
-	virtual PlayerState* handleInput(Player &player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p)=0;
+	virtual PlayerState* handleInput(Player &player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)=0;
 	virtual void update(Player &player, float frameTime)=0;
 
 	
