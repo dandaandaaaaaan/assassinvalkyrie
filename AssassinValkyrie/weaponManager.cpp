@@ -125,14 +125,14 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 	{
 		for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
 		{
-			if ((*gunner)->collidesWith(**it, collisionVector) && (*gunner)->isAlive() && !(*gunner)->outOfBounds())
+			if ((*gunner)->collidesWith(**it, collisionVector) && (*gunner)->isAlive() && !(*gunner)->outOfBounds() )
 			{
 				(*gunner)->getHealth()->damage(gunnerNS::HEALTH / 2);
 				(*gunner)->handleInput(new AlertedState());
 				(*it)->setVisible(false);
 				(*it)->setActive(false);
 				if (!(*gunner)->isAlive() && (player->getCurrentTotalLevel() < player->getTotalLevels()))
-					player->setTotalXP(player->getTotalXP() + 50);
+					player->setTotalXP(player->getTotalXP() + 10);
 				break;
 			}
 		}
@@ -145,7 +145,7 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 				(*it)->setVisible(false);
 				(*it)->setActive(false);
 				if (!(*trooper)->isAlive() && (player->getCurrentTotalLevel() < player->getTotalLevels()))
-					player->setTotalXP(player->getTotalXP() + 50);
+					player->setTotalXP(player->getTotalXP() + 10);
 				break;
 			}
 		}
@@ -158,7 +158,7 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 				(*it)->setVisible(false);
 				(*it)->setActive(false);
 				if (!(*serpant)->isAlive() && (player->getCurrentTotalLevel() < player->getTotalLevels()))
-					player->setTotalXP(player->getTotalXP() + 100);
+					player->setTotalXP(player->getTotalXP() + 20);
 				break;
 			}
 		}

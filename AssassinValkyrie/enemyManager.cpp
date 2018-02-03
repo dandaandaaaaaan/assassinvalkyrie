@@ -94,7 +94,7 @@ void EnemyManager::update(float frameTime, PLATFORM p, Audio *a)
 	}
 }
 
-void EnemyManager::ai()
+void EnemyManager::ai(Entity *player)
 {
 	std::vector<VECTOR2*> posAlertList;
 	std::vector<Enemy*> posNotList;

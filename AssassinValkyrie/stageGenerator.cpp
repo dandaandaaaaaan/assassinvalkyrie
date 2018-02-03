@@ -113,7 +113,7 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 				hideoutCollection.back()->setX(horizontalElement2.x);
 				hideoutCollection.back()->setStartX(horizontalElement2.x);
 				hideoutCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
-				hideoutCollection.back()->setStartY(GAME_HEIGHT - horizontalElement2.y);
+				hideoutCollection.back()->setStartY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
 				hideoutCollection.back()->setEdge(RECT{ (long)(-hideoutNS::WIDTH / 2), (long)(-hideoutNS::HEIGHT / 2), (long)(hideoutNS::WIDTH / 2), (long)(hideoutNS::HEIGHT / 2) });
 				hideoutCollection.back()->setCollisionType(entityNS::ROTATED_BOX);
 				if (!success)
@@ -274,26 +274,24 @@ void StageGenerator::update(float frametime, int direction, int leftrightupdown,
 		if (moveOn)
 			(*side)->update(frametime, direction);
 	}
-	/* to be uncommented and fixed on hideout.cpp AFTER player is merged in
-	for (hideout = hideoutCollection.begin(); hideout != hideoutCollection.end(); hideout++) {
+	for (Hideout *hideout : hideoutCollection) {
 		switch (leftrightupdown) {
 		case 1:
-			(*hideout)->setX((*hideout)->getStartX() - 160);
+			(hideout)->setX((hideout)->getStartX() - 2560);
 			break;
 		case 2:
-			((*hideout)->setX((*hideout)->getStartX()));
+			((hideout)->setX((hideout)->getStartX()));
 			break;
 		case 3:
-			(*hideout)->setY((*hideout)->getStartY() + 720);
+			(hideout)->setY((hideout)->getStartY() + 1264);
 			break;
 		case 4:
-			(*hideout)->setY((*hideout)->getStartY());
+			(hideout)->setY((hideout)->getStartY());
 			break;
 		}
 		if (moveOn)
-			(*hideout)->update(frametime, direction);
+			(hideout)->update(frametime, direction);
 	}
-	*/
 	
 	for (Ladder *ladder : ladderCollection) {
 		switch (leftrightupdown) {

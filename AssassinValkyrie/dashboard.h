@@ -37,7 +37,9 @@ private:
 	PlayerBar playerHealth;
 	PlayerBar underHealth;
 	PlayerBar playerExp;
+	PlayerBar underExp;
 	TextDX *healthRemaining;
+	TextDX *XP;
 	TextDX *stealthLevel;
 	TextDX *speedLevel;
 	TextDX *rangeLevel;
@@ -45,6 +47,8 @@ private:
 
 	int playerMaxHealth;
 	int playerCurrentHealth;
+	int playerMaxXP;
+	int playerCurrentXP;
 	int stealthPoints;
 	int speedPoints;
 	int rangePoints;

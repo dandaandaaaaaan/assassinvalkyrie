@@ -59,6 +59,7 @@ protected:
 	PlayerState* state_;
 	int skillPointAvailable;
 	int maxHealth;
+	bool stealthSet = false;
 public:
 	// constructor
 	Player();
@@ -163,8 +164,13 @@ public:
 	int getSkillPoints() { return skillPointAvailable; }
 	void useSkillPoints() { skillPointAvailable--; }
 	float calcMultipler(int level) { return 1 + (level *0.33); }
+	float calcNegativeMultipler(int level) { return ((3-level) * 0.33); }
 
 	void setMaxHealth(int i) { maxHealth = i; }
 	int getMaxHealth() { return maxHealth; }
+	int getNextLevelXP();
+
+	bool getStealthSet() { return stealthSet; }
+	void setStealthSet(bool i) { stealthSet = i; }
 };
 #endif

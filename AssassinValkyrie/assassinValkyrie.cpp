@@ -155,7 +155,7 @@ void AssassinValkyrie::update()
 // Artificial Intelligence
 void AssassinValkyrie::ai()
 {
-	emList.ai();
+	emList.ai(player);
 }
 
 // Handle collisions
