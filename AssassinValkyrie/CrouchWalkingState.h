@@ -14,7 +14,7 @@ namespace CROUCH_WALKING_STATE
 	const int TEXTURE_COLS = 7;
 	const int   START_FRAME = 16;
 	const int   END_FRAME = 20;
-	const int CROUCH_WALKING_SPEED = 100;
+	const int CROUCH_WALKING_SPEED = 140;
 
 }
 

@@ -25,7 +25,7 @@ class FallingState : public PlayerState
 private:
 
 	float fallingVelocity =150;
-	float gravity = 9.81;
+	float gravity = 3;
 public:
 
 	FallingState() :PlayerState() {}
@@ -35,7 +35,7 @@ public:
 
 	void update(Player &player, float frameTime)
 	{
-		fallingVelocity += gravity*frameTime;
+		fallingVelocity += gravity;
 		player.setY(player.getY() + fallingVelocity *frameTime);
 		player.setVelocityY(fallingVelocity);
 	}
