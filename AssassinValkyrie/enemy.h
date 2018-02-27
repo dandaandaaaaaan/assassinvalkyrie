@@ -166,7 +166,7 @@ public:
 		TextureManager *textureM, TextureManager *textureHealth);
 	virtual void handleInput(EnemyState* newState, PLATFORM *p = NULL);
 	void update(float frameTime, PLATFORM p, Audio *a);
-	virtual void ai();
+	virtual void ai(PLATFORM p);
 	void draw();
 	void drawRay(Graphics *g);
 

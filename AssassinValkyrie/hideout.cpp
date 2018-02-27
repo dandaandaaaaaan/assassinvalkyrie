@@ -16,6 +16,7 @@ Hideout::Hideout() : Entity()
 	currentFrame = startFrame;
 	edge = RECT{ (long)(-hideoutNS::WIDTH*hideoutNS::SCALE / 2), (long)(-hideoutNS::HEIGHT*hideoutNS::SCALE / 2), (long)(hideoutNS::WIDTH*hideoutNS::SCALE / 2), (long)(hideoutNS::HEIGHT*hideoutNS::SCALE / 2) };
 	collisionType = entityNS::BOX;
+	timer = GetTickCount();
 }
 
 bool Hideout::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
@@ -31,22 +32,6 @@ void Hideout::update(float frameTime, int direction)
 	Entity::update(frameTime);
 
 	move->movementWithDirection(frameTime, direction);
-	/* placeholder player controls
-	if (input->isKeyDown(SHIP_RIGHT_KEY))
-	{
-		spriteData.x += frameTime * velocity.x;         // move ship along X 
-	}
-
-	if (input->isKeyDown(SHIP_LEFT_KEY))
-	{
-		spriteData.x += frameTime * (-velocity.x);         // move ship along X 
-	}
-	if (input->isKeyDown(SHIP_DOWN_KEY))
-		spriteData.y += frameTime * velocity.y;
-	if (input->isKeyDown(SHIP_UP_KEY))
-		spriteData.y += frameTime * (-velocity.y);
-		*/
-	//move->update(frameTime);
 }
 
 

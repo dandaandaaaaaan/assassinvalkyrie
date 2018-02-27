@@ -87,7 +87,7 @@ void Entity::ai(float frameTime, Entity &ent)
 bool Entity::collidesWith(Entity &ent, VECTOR2 &collisionVector)
 { 
     // if either entity is not active then no collision may occcur
-    if (!active || !ent.getActive())    
+    if (!active || !ent.getActive())
         return false;
 
     // If both entities are CIRCLE collision
