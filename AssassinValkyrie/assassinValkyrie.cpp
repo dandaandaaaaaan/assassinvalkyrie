@@ -102,10 +102,10 @@ void AssassinValkyrie::initialize(Game &gamePtr, HWND *hwndM, HRESULT *hrM, LARG
 
 	emBulletList.initialize(&emList);
 
-/////////////////////////////////////////
-//				Player
-/////////////////////////////////////////
-// Player
+	/////////////////////////////////////////
+	//				Player
+	/////////////////////////////////////////
+	// Player
 	if (!playerTextures.initialize(graphics, PLAYER_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player Textures"));
 
@@ -138,7 +138,6 @@ void AssassinValkyrie::update()
 	}
 
 	dashboard->update(frameTime, player, input);
-	//stageGenerator->update(frameTime);
 	mouse->update();
 	emBulletList.update(frameTime, this, &bulletTextures, player, audio);
 	player->update(frameTime,this,&playerTextures,stageGenerator,&emList,visionPlatforms,audio);
@@ -150,14 +149,14 @@ void AssassinValkyrie::update()
 // Artificial Intelligence
 void AssassinValkyrie::ai()
 {
-	emList.ai(player);
+	emList.ai(player, visionPlatforms);
 }
 
 // Handle collisions
 void AssassinValkyrie::collisions()
 {
     VECTOR2 collisionVector;
-	weaponManager.collisions(&emList, player, floorPlatforms);
+	weaponManager.collisions(&emList, player, visionPlatforms);
 	player->collisions(&emList, stageGenerator);
 	emList.collisions(player, floorPlatforms, sidePlatforms, audio);
 	emBulletList.collisions(player, visionPlatforms);

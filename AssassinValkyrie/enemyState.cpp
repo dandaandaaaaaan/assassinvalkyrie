@@ -27,7 +27,7 @@ PatrollingState::PatrollingState() : EnemyState()
 
 EnemyState* PatrollingState::handleInput(Enemy *enemy, Entity *target, PLATFORM p)
 {
-	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive())
+	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive() && target->getVisible())
 		return new AlertedState();
 	return NULL;
 }
@@ -87,7 +87,7 @@ EnemyState* StandingState::handleInput(Enemy *enemy, Entity *target, PLATFORM p)
 		enemy->getMove()->setVelocity(enemy->getMove()->getInitialVelocity());
 		return new ReturningState();
 	}
-	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive())
+	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive() && target->getVisible())
 		return new AlertedState();
 	return NULL;
 }
@@ -104,7 +104,7 @@ EnemyState* ReturningState::handleInput(Enemy *enemy, Entity *target, PLATFORM p
 		enemy->getMove()->setVelocity(enemy->getMove()->getInitialVelocity());
 		return new PatrollingState();
 	}
-	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive())
+	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive() && target->getVisible())
 	{
 		enemy->getRay()->setColor(graphicsNS::YELLOW);
 		return new AlertedState();
@@ -128,7 +128,7 @@ DistractedState::DistractedState(VECTOR2 pos) : EnemyState()
 
 EnemyState* DistractedState::handleInput(Enemy *enemy, Entity *target, PLATFORM p)
 {
-	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive())
+	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive() && target->getVisible())
 	{
 		enemy->drawCaution(false);
 		return new AlertedState();

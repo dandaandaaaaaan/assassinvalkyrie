@@ -145,11 +145,11 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 				hpCollection.emplace_back(new PickupHP());
 				success = hpCollection.back()->initialize(gamePtr, pickupHPNS::WIDTH, pickupHPNS::HEIGHT, pickupHPNS::TEXTURE_COLS, pickupTextures);
 				hpCollection.back()->setCurrentFrame(pickupHPNS::START_FRAME);
-				hpCollection.back()->setY(GAME_HEIGHT - (pickupHPNS::HEIGHT) - horizontalElement2.y);
-				hpCollection.back()->setStartY(GAME_HEIGHT - (pickupHPNS::HEIGHT) - horizontalElement2.y);
+				hpCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
+				hpCollection.back()->setStartY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
 				hpCollection.back()->setCollisionType(entityNS::ROTATED_BOX);
-				hpCollection.back()->setX(horizontalElement2.x + (pickupHPNS::WIDTH));
-				hpCollection.back()->setStartX(horizontalElement2.x + pickupHPNS::WIDTH);
+				hpCollection.back()->setX(horizontalElement2.x);
+				hpCollection.back()->setStartX(horizontalElement2.x);
 			}
 
 			else if (horizontalElement2.element == "PICKUPARROW")
@@ -157,11 +157,11 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 				pickupArrowCollection.emplace_back(new PickupArrow());
 				success = pickupArrowCollection.back()->initialize(gamePtr, pickupArrowNS::WIDTH, pickupArrowNS::HEIGHT, pickupArrowNS::TEXTURE_COLS, pickupTextures);
 				pickupArrowCollection.back()->setCurrentFrame(pickupArrowNS::START_FRAME);
-				pickupArrowCollection.back()->setY(GAME_HEIGHT - (pickupArrowNS::HEIGHT) - horizontalElement2.y);
-				pickupArrowCollection.back()->setStartY(GAME_HEIGHT - (pickupArrowNS::HEIGHT) - horizontalElement2.y);
+				pickupArrowCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
+				pickupArrowCollection.back()->setStartY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
 				pickupArrowCollection.back()->setCollisionType(entityNS::ROTATED_BOX);
-				pickupArrowCollection.back()->setX(horizontalElement2.x + (pickupArrowNS::WIDTH));
-				pickupArrowCollection.back()->setStartX(horizontalElement2.x + pickupArrowNS::WIDTH);
+				pickupArrowCollection.back()->setX(horizontalElement2.x);
+				pickupArrowCollection.back()->setStartX(horizontalElement2.x);
 			}
 
 			else if (horizontalElement2.element == "PICKUPSTONE")
@@ -169,11 +169,11 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 				pickupStoneCollection.emplace_back(new PickupStone());
 				success = pickupStoneCollection.back()->initialize(gamePtr, pickupStoneNS::WIDTH, pickupStoneNS::HEIGHT, pickupStoneNS::TEXTURE_COLS, pickupTextures);
 				pickupStoneCollection.back()->setCurrentFrame(pickupStoneNS::START_FRAME);
-				pickupStoneCollection.back()->setY(GAME_HEIGHT - (pickupStoneNS::HEIGHT) - horizontalElement2.y);
-				pickupStoneCollection.back()->setStartY(GAME_HEIGHT - (pickupStoneNS::HEIGHT) - horizontalElement2.y);
+				pickupStoneCollection.back()->setY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
+				pickupStoneCollection.back()->setStartY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
 				pickupStoneCollection.back()->setCollisionType(entityNS::ROTATED_BOX);
-				pickupStoneCollection.back()->setX(horizontalElement2.x + (pickupStoneNS::WIDTH));
-				pickupStoneCollection.back()->setStartX(horizontalElement2.x + pickupStoneNS::WIDTH);
+				pickupStoneCollection.back()->setX(horizontalElement2.x);
+				pickupStoneCollection.back()->setStartX(horizontalElement2.x);
 			}
 		}
 

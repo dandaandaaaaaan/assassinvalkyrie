@@ -9,8 +9,8 @@
 
 namespace JUMPING_STATE
 {
-	const int	WIDTH = 65;
-	const int	HEIGHT = 96;
+	const int	WIDTH = 64;
+	const int	HEIGHT = 95;
 	const int TEXTURE_COLS = 14;
 	const int   START_FRAME = 42;
 	const int   END_FRAME = 55;
@@ -28,7 +28,7 @@ private:
 	float velocityX = 150 * cos(45 * PI / 180);
 	float velocityY = -(150 * sin(45 * PI / 180));
 	float gravity = 9.81;
-	float DestinationTime =2293 / velocityX;
+	float DestinationTime = (150*150*sin(90*PI/180)/gravity) / velocityX;
 	float TimeInterval = DestinationTime /150;
 	float t = 0;
 public:

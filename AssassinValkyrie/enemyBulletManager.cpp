@@ -86,30 +86,32 @@ bool EnemyBulletManager::initializeFire(Game *gamePtr, TextureManager *textureM,
 
 void EnemyBulletManager::update(float frameTime, Game *gamePtr, TextureManager *textureM, Entity *play, Audio *a)
 {
-	for (Gunner *g : *gunnerList)
-		if (g->isAlive() && !g->outOfBounds())
-		{
-			ShootComponent *shot = g->getShoot();
-			if (shot->getAnimation() && (GetTickCount() - shot->shootTimer > shot->maxTimeShoot))
+	if (play->getVisible())
+	{
+		for (Gunner *g : *gunnerList)
+			if (g->isAlive() && !g->outOfBounds())
 			{
-				shot->shootTimer = GetTickCount();
-				initializeBullet(gamePtr, textureM, g);
-				a->playCue(BULLET);
+				ShootComponent *shot = g->getShoot();
+				if (shot->getAnimation() && (GetTickCount() - shot->shootTimer > shot->maxTimeShoot))
+				{
+					shot->shootTimer = GetTickCount();
+					initializeBullet(gamePtr, textureM, g);
+					a->playCue(BULLET);
+				}
 			}
-		}
 
-	for (Serpant *g : *serpantList)
-		if (g->isAlive() && !g->outOfBounds())
-		{
-			FireComponent *shot = g->getShoot();
-			if (shot->isFire() && (GetTickCount() - shot->fireTimer > shot->maxTimeFire))
+		for (Serpant *g : *serpantList)
+			if (g->isAlive() && !g->outOfBounds())
 			{
-				shot->fireTimer = GetTickCount();
-				initializeFire(gamePtr, textureM, g, play);
-				a->playCue(FIREBALL);
+				FireComponent *shot = g->getShoot();
+				if (shot->isFire() && (GetTickCount() - shot->fireTimer > shot->maxTimeFire))
+				{
+					shot->fireTimer = GetTickCount();
+					initializeFire(gamePtr, textureM, g, play);
+					a->playCue(FIREBALL);
+				}
 			}
-		}
-
+	}
 	for (Bullet *t : bulletList)
 		if (t->getActive())
 			t->update(frameTime);
@@ -127,42 +129,45 @@ void EnemyBulletManager::collisions(Entity *play, PLATFORM p)
 		if (!t->outOfBounds())
 			inRangeP.emplace_back(t);
 
-	bullet = bulletList.begin();
-	while (bullet != bulletList.end())
+	if (play->getVisible())
 	{
-		if ((*bullet)->getActive()) {
-			if ((*bullet)->collidesWith(*play, collisionVector))
-			{
-				(*bullet)->setActive(false);
-				play->setHealth(play->getHealth() - 4);
+		bullet = bulletList.begin();
+		while (bullet != bulletList.end())
+		{
+			if ((*bullet)->getActive()) {
+				if ((*bullet)->collidesWith(*play, collisionVector))
+				{
+					(*bullet)->setActive(false);
+					play->setHealth(play->getHealth() - 4);
+				}
+				else
+					for (Entity *t : inRangeP)
+						if ((*bullet)->collidesWith(*t, collisionVector))
+							(*bullet)->setActive(false);
+				bullet++;
 			}
 			else
-				for (Entity *t : inRangeP)
-					if ((*bullet)->collidesWith(*t, collisionVector))
-						(*bullet)->setActive(false);
-			bullet++;
+				bullet = bulletList.erase(bullet);
 		}
-		else
-			bullet = bulletList.erase(bullet);
-	}
 
-	fireball = fireList.begin();
-	while (fireball != fireList.end())
-	{
-		if ((*fireball)->getActive()) {
-			if ((*fireball)->collidesWith(*play, collisionVector))
-			{
-				(*fireball)->setActive(false);
-				play->setHealth(play->getHealth() - 6);
+		fireball = fireList.begin();
+		while (fireball != fireList.end())
+		{
+			if ((*fireball)->getActive()) {
+				if ((*fireball)->collidesWith(*play, collisionVector))
+				{
+					(*fireball)->setActive(false);
+					play->setHealth(play->getHealth() - 6);
+				}
+				else
+					for (Entity *t : inRangeP)
+						if ((*fireball)->collidesWith(*t, collisionVector))
+							(*fireball)->setActive(false);
+				fireball++;
 			}
 			else
-				for (Entity *t : inRangeP)
-					if ((*fireball)->collidesWith(*t, collisionVector))
-						(*fireball)->setActive(false);
-			fireball++;
+				fireball = fireList.erase(fireball);
 		}
-		else
-			fireball = fireList.erase(fireball);
 	}
 }
 

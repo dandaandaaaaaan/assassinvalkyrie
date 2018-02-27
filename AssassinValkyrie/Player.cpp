@@ -32,7 +32,6 @@ Player::Player() : Entity()
 	currentTotalLevel = 4;
 	skillPointAvailable = 0;
 
-	// yuteng didn't add this in
 	maxHealth = playerNS::HEALTH;
 	health = playerNS::HEALTH;
 	total_stone = 3;
@@ -54,35 +53,15 @@ void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, St
 		skillPointAvailable++;
 		totalXP = 0;
 	}
+	if (health <= 0)
+		visible = false;
 
-  //if (stealthSet) {
-	//	VECTOR2 collisionVector;
-	//	GUNNERLIST *gunnerCollection = enemyList->getGunners();
-	//	TROOPERLIST *trooperCollection = enemyList->getTroopers();
-	//	SERPANTLIST *serpantCollection = enemyList->getSerpants();
-
-	//	for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
-	//	{
-	//		(*gunner)->getRay()->setRayMultiplier((*gunner)->getRay()->getRayMultipler()*calcNegativeMultipler(stealthLevel));
-	//	}
-	//	for (TROOPERLIST::iterator trooper = (trooperCollection->begin()); trooper != trooperCollection->end(); trooper++)
-	//	{
-	//		(*trooper)->getRay()->setRayMultiplier((*trooper)->getRay()->getRayMultipler()*calcNegativeMultipler(stealthLevel));
-	//	}
-	//	for (SERPANTLIST::iterator serpant = (serpantCollection->begin()); serpant != serpantCollection->end(); serpant++)
-	//	{
-	//		(*serpant)->getRay()->setRayMultiplier((*serpant)->getRay()->getRayMultipler()*calcNegativeMultipler(stealthLevel));
-	//	}
-	//	stealthSet = false;
-	//}
-	handleInput(input,gamePtr,textureM,stagegenerator,enemyList,p,a);
-	state_->update(*this, frameTime);
-
-
-
+	if (visible)
+	{
+		handleInput(input, gamePtr, textureM, stagegenerator, enemyList, p, a);
+		state_->update(*this, frameTime);
+	}
 	Entity::update(frameTime);
-
-	//move->update(frameTime);
 }
 
 void Player::handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
@@ -105,7 +84,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 
 	for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
 	{
-		if (collidesWith(**gunner, collisionVector))
+		if ((*gunner)->isAlive() && collidesWith(**gunner, collisionVector))
 		{
 
 			if (isMeleeAttacking == true)
@@ -129,7 +108,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 	}
 	for (TROOPERLIST::iterator trooper = (trooperCollection->begin()); trooper != trooperCollection->end(); trooper++)
 	{
-		if (collidesWith(**trooper, collisionVector))
+		if ((*trooper)->isAlive() && collidesWith(**trooper, collisionVector))
 		{
 			if (isMeleeAttacking == true)
 			{
@@ -152,7 +131,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 	}
 	for (SERPANTLIST::iterator serpant = (serpantCollection->begin()); serpant != serpantCollection->end(); serpant++)
 	{
-		if (collidesWith(**serpant, collisionVector))
+		if ((*serpant)->isAlive() && collidesWith(**serpant, collisionVector))
 		{
 			if (isMeleeAttacking == true)
 			{
@@ -179,6 +158,7 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 		if ((collidesWith(**hp, collisionVector)))
 		{
 			health += (maxHealth *  0.25);
+			audio->playCue(PICKUP);
 			if ((health) >= maxHealth)
 				health = maxHealth;
 			(*hp)->setActive(false);
@@ -214,26 +194,23 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 	HIDEOUTS *hideoutCollection = stageGen->getHideouts();
 	for (HIDEOUTS::iterator hideout = (hideoutCollection->begin()); hideout != hideoutCollection->end(); hideout++)
 	{
-		if ((collidesWith(**hideout, collisionVector)))
+		if (GetTickCount() - (*hideout)->getTimer() < 300)
+			continue;
+
+		if (collidesWith(**hideout, collisionVector) && (input->isKeyDown(ENTER_HIDEOUT)))
 		{
-			if (input->isKeyDown(ENTER_HIDEOUT))
+			if (visible == true)
 			{
 				(*hideout)->setCurrentFrame(hideoutNS::HIDING_FRAME);
 				visible = false;
-				active = false;
-				break;
 			}
-		}
-		else if (active == false || visible == false) {
-			if (input->isKeyDown(ENTER_HIDEOUT))
+			else
 			{
 				(*hideout)->setCurrentFrame(hideoutNS::FRAME);
-				spriteData.x = (*hideout)->getX();
-				spriteData.y = (*hideout)->getY() -(spriteData.height - hideoutNS::HEIGHT);
 				visible = true;
-				active = true;
-				break;
 			}
+			(*hideout)->setTimer();
+			break;
 		}
 	}
 }
@@ -245,6 +222,5 @@ void Player::ai(Entity &ship1, Entity &ship2)
 
 void Player::draw()
 {
-
 	Image::draw();              // draw ship
 }

@@ -1,7 +1,7 @@
 // Module			: Gameplay Programming
 // Assignment2		: Assassin Valkyrie
-// Student Number	: Chua Wei Jie Timothy
-// Student Number	: S10165581F
+// Student Number	: Png Yeow Li
+// Student Number	: S10164245H
 
 #include "MainMenu.h"
 
