@@ -14,7 +14,7 @@ namespace RUNNING_STATE
 	const int TEXTURE_COLS = 4;
 	const int   START_FRAME = 4;
 	const int   END_FRAME = 7;
-	const int RUNNING_SPEED=150;
+	const int RUNNING_SPEED=250;
 }
 
 #include "PlayerState.h"

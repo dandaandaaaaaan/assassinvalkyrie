@@ -25,11 +25,11 @@ class JumpingState : public PlayerState
 
 private:
 
-	float velocityX = 150 * cos(45 * PI / 180);
-	float velocityY = -(150 * sin(45 * PI / 180));
+	float velocityX = 250 * cos(45 * PI / 180);
+	float velocityY = -(250 * sin(45 * PI / 180));
 	float gravity = 9.81;
-	float DestinationTime = (150*150*sin(90*PI/180)/gravity) / velocityX;
-	float TimeInterval = DestinationTime /150;
+	float DestinationTime =(250*250*sin(90*PI/180)/gravity) / velocityX;
+	float TimeInterval = DestinationTime /145;
 	float t = 0;
 public:
 
