@@ -11,13 +11,19 @@
 
 namespace HelpTextNS
 {
-	const auto MOVE = "Use A & D to move";
-	const auto LADDER = "Press W to climb\nup ladder";
-	const auto HIDE_ASS = "Press W to use hideout to avoid contact\n\nUse R to assassin an enemy";
-	const auto TOSS = "Press H to toss a distraction\nto avoid direct contact";
-	const auto ATTACK = "G for melee\n\nF for arrowshots";
+	const auto MOVE = "Use 'A' & 'D' to move";
+	const auto LADDER = "Hold 'W' to climb\nup ladder";
+	const auto HIDE_ASS = "Press 'W' to use hideout to avoid contact\n\nUse 'R' to assassin an enemy";
+	const auto TOSS = "Press 'H' to toss a distraction\nto avoid direct contact";
+	const auto ATTACK = "'G' for melee\n\n'F' for arrowshots";
 }
-
+namespace HelpTextNS2
+{
+	const auto MOVE = "Skill One : ";
+	const auto LADDER = "Skill Two : ";
+	const auto HIDE_ASS = "Skill Three : ";
+	const auto TOSS = "Skill Four : ";
+}
 class HelpText : public Fill
 {
 private:
@@ -31,6 +37,6 @@ public:
 	// inherited member functions
 	bool initialize(Graphics *g, VECTOR2 pos, int t);
 	void update(float frameTime, int direction);
-	void draw();
+	void draw(int stage);
 };
 #endif

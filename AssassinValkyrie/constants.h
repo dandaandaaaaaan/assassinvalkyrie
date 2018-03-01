@@ -43,6 +43,9 @@ const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 fr
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
 const float GRAVITY = 9.81f;
 
+const int	INIT_STAGE = 1;
+const int	FINAL_STAGE = 2;
+
 // graphic images
 const char MMBACKGROUND_IMAGE[] = "pictures\\mainMenuBackground.png";
 const char LOADING_IMAGE[] = "pictures\\Loading.png";

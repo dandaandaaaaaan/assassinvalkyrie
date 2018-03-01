@@ -21,16 +21,10 @@ EnemyManager::~EnemyManager()
 		SAFE_DELETE(*world);
 	worldCollection.clear();
 
-	//for (trooper = trooperCollection.begin(); trooper != trooperCollection.end(); ++trooper)
-	//	SAFE_DELETE(*trooper);
 	trooperCollection.clear();
 
-	//for (gunner = gunnerCollection.begin(); gunner != gunnerCollection.end(); ++gunner)
-	//	SAFE_DELETE(*gunner);
 	gunnerCollection.clear();
 
-	//for (serpant = serpantCollection.begin(); serpant != serpantCollection.end(); ++serpant)
-	//	SAFE_DELETE(*serpant);
 	serpantCollection.clear();
 }
 
@@ -202,14 +196,14 @@ void EnemyManager::unCollide(Enemy *t, PLATFORM floor, PLATFORM fill)
 void EnemyManager::render()
 {
 	for (Enemy *t : worldCollection)
-		if (!t->outOfBounds())
+		if (!t->outOfBounds() && t->isAlive())
 			t->draw();
 }
 
 void EnemyManager::renderRay(Graphics *g)
 {
 	for (Enemy *t : worldCollection)
-		if (!t->outOfBounds())
+		if (!t->outOfBounds() && t->isAlive())
 			t->drawRay(g);
 }
 

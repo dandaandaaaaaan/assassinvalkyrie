@@ -11,7 +11,7 @@ AssassinValkyrie::AssassinValkyrie()
 	background = new Background();
 	stageGenerator = new StageGenerator();
 	emList = new EnemyManager();
-	currentStage = 0;
+	currentStage = INIT_STAGE;
 	displayTimer = new TextDX();
 	mins = 0;
 	secs = 0;
@@ -250,7 +250,7 @@ void AssassinValkyrie::update()
 	auto t = player->outOfBounds();
 	if (t && player->getCenterX() > GAME_WIDTH)
 	{
-		if (currentStage != 2)
+		if (currentStage != FINAL_STAGE)
 		{
 			currentStage++;
 			player->setVisible(false);
@@ -282,7 +282,7 @@ void AssassinValkyrie::collisions()
 void AssassinValkyrie::render()
 {
 	background->draw();
-	stageGenerator->render();
+	stageGenerator->render(currentStage);
 	mouse->draw();
     player->draw();
     weaponManager.render();

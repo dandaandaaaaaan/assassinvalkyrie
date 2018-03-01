@@ -233,7 +233,7 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 	ent->loadSerpant(serpantPos);
 }
 
-void StageGenerator::render()
+void StageGenerator::render(int stage)
 {
 	for (Floor *t : floorCollection)
 		if (!t->outOfBounds())
@@ -269,7 +269,7 @@ void StageGenerator::render()
 
 	for (HelpText *t : helpList)
 		if (!t->outOfBounds())
-			t->draw();
+			t->draw(stage);
 }
 
 void StageGenerator::update(float frametime, int direction, int leftrightupdown, bool moveOn)
