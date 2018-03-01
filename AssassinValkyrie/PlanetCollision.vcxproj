@@ -107,6 +107,7 @@
     <ClCompile Include="gunner.cpp" />
     <ClCompile Include="healthbar.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="HelpText.cpp" />
     <ClCompile Include="hideout.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="gameError.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="arrow.h" />
+    <ClInclude Include="helpText.h" />
     <ClInclude Include="hideout.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
@@ -210,7 +212,9 @@
   <ItemGroup>
     <Text Include="1-horizontal.txt" />
     <Text Include="1-vertical.txt" />
-    <Text Include="map.txt" />
+    <Text Include="map_s0.txt" />
+    <Text Include="map_s1.txt" />
+    <Text Include="map_s2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

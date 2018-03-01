@@ -19,10 +19,18 @@ EnemyManager::~EnemyManager()
 {
 	for (world = worldCollection.begin(); world != worldCollection.end(); ++world)
 		SAFE_DELETE(*world);
-
 	worldCollection.clear();
+
+	//for (trooper = trooperCollection.begin(); trooper != trooperCollection.end(); ++trooper)
+	//	SAFE_DELETE(*trooper);
 	trooperCollection.clear();
+
+	//for (gunner = gunnerCollection.begin(); gunner != gunnerCollection.end(); ++gunner)
+	//	SAFE_DELETE(*gunner);
 	gunnerCollection.clear();
+
+	//for (serpant = serpantCollection.begin(); serpant != serpantCollection.end(); ++serpant)
+	//	SAFE_DELETE(*serpant);
 	serpantCollection.clear();
 }
 

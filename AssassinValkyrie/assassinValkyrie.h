@@ -25,6 +25,8 @@
 #include "dashboard.h"
 #include "textDX.h"
 #include "keyBinding.h"
+#include "helpText.h"
+
 #include <vector>
 #include <thread>
 
@@ -37,18 +39,20 @@ private:
 	TextureManager	serpantTexture;
 	TextureManager	healthTexture;
 	Cursor			*mouse;
-	EnemyManager	emList;
+	EnemyManager	*emList;
 	EnemyBulletManager	emBulletList;
 	PLATFORM		visionPlatforms;
 	PLATFORM		sidePlatforms;
 	PLATFORM		floorPlatforms;
 
 	TextureManager	playerTextures;
-	Player *player;
-	WeaponManager weaponManager;
-	TextureManager backgroundTexture;
+	Player			*player;
+	WeaponManager	weaponManager;
+	TextureManager	backgroundTexture;
 
-	int	currentStage;
+	int				currentStage;
+	TextureManager	loadingTexture;
+	Image			loading;
 	Background		*background;
 	StageGenerator	*stageGenerator;
 	TextureManager	floorTexture;
@@ -56,11 +60,10 @@ private:
 	TextureManager	bulletTextures;
 
 	TextureManager	pickupTextures;
-
-	Dashboard *dashboard;
-	TextDX *text;
-	TextDX *displayTimer;
-	KeyBinding *key;
+	Dashboard		*dashboard;
+	TextDX			*text;
+	TextDX			*displayTimer;
+	KeyBinding		*key;
 
 public:
     AssassinValkyrie();
@@ -68,6 +71,7 @@ public:
 
 	void initialize(Game &gamePtr, HWND *hwndM, HRESULT *hrM, LARGE_INTEGER *timeStartM, LARGE_INTEGER *timeEndM,
 		LARGE_INTEGER *timerFreqM, float *frameTimeM, bool *paused, Cursor *cursor, KeyBinding *key);
+	void re_initialize();
     // Initialize the game
     void update();      // must override pure virtual from Game
     void ai();          // "

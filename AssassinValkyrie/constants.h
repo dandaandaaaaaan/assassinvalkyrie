@@ -45,6 +45,7 @@ const float GRAVITY = 9.81f;
 
 // graphic images
 const char MMBACKGROUND_IMAGE[] = "pictures\\mainMenuBackground.png";
+const char LOADING_IMAGE[] = "pictures\\Loading.png";
 const char MOUSE_IMAGE[] = "pictures\\mouse.png";
 const char ENEMY_IMAGE[] = "pictures\\enemyTexture.png";
 const char BUTTON_IMAGE[] = "pictures\\Buttons.png";

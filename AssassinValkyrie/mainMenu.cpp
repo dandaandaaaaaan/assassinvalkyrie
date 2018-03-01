@@ -369,27 +369,6 @@ void MainMenu::collisions()
 	VECTOR2 collisionVector;
 	if (!gameStart && !settings)
 	{
-		//if (!startButton.collideButton(*cursor))
-		//	startButton.collisions(buttonNS::START_BUTTON_FRAME, buttonNS::START_HOVER_BUTTON_FRAME);
-		//if (startButton.collideButton(*cursor))
-		//	startButton.setCurrentFrame(buttonNS::START_BUTTON_FRAME);
-		//if (startButton.collidesWith(*cursor,collisionVector))
-		//	startButton.collisions(buttonNS::START_BUTTON_FRAME, buttonNS::START_HOVER_BUTTON_FRAME);
-		//if (!startButton.collideButton(*cursor))
-		//	startButton.setCurrentFrame(buttonNS::START_BUTTON_FRAME);
-		//if (settingsButton.collideButton(*cursor))
-		//	settingsButton.collisions(buttonNS::SETTINGS_BUTTON_FRAME, buttonNS::SETTINGS_HOVER_BUTTON_FRAME);
-		//if (!settingsButton.collideButton(*cursor))
-		//	settingsButton.setCurrentFrame(buttonNS::SETTINGS_BUTTON_FRAME);
-		//if (creditsButton.collideButton(*cursor))
-		//	creditsButton.collisions(buttonNS::CREDITS_BUTTON_FRAME, buttonNS::CREDITS_HOVER_BUTTON_FRAME);
-		//if (!creditsButton.collideButton(*cursor))
-		//	creditsButton.setCurrentFrame(buttonNS::CREDITS_BUTTON_FRAME);
-		//if (exitButton.collideButton(*cursor))
-		//	exitButton.collisions(buttonNS::EXIT_BUTTON_FRAME, buttonNS::EXIT_HOVER_BUTTON_FRAME);
-		//if (!exitButton.collidesWith(*cursor, collisionVector))
-		//	exitButton.setCurrentFrame(buttonNS::EXIT_BUTTON_FRAME);
-
 		startButton.collisions(*cursor, buttonNS::START_BUTTON_FRAME, buttonNS::START_HOVER_BUTTON_FRAME, audio);
 		settingsButton.collisions(*cursor, buttonNS::SETTINGS_BUTTON_FRAME, buttonNS::SETTINGS_HOVER_BUTTON_FRAME, audio);
 		creditsButton.collisions(*cursor, buttonNS::CREDITS_BUTTON_FRAME, buttonNS::CREDITS_HOVER_BUTTON_FRAME, audio);
