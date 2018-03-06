@@ -52,6 +52,7 @@ const char SKILL_IMAGE[] = "pictures\\skillIcon.png";
 const char DASHBOARD_IMAGE[] = "pictures\\dashboard.png";
 const char PAUSE_IMAGE[] = "pictures\\pause.png";
 const char BAR_IMAGE[] = "pictures\\bar.png";
+const char TOOLTIP_IMAGE[] = "pictures\\tooltip.png";
 
 const char PLAYER_IMAGE[] = "pictures\\Player.png";
 const char FLOOR_IMAGE[] = "pictures\\newElements.png";

@@ -24,6 +24,7 @@ private:
 	bool gameStart;				// true to activate game
 	bool settings;				// check if in settings screen
 	bool enterKey;
+	bool isEnterKey;
 
 	// Textures & pictures
 	TextureManager mmBackgroundTexture;

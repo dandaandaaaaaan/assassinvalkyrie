@@ -415,5 +415,8 @@
     <Text Include="1-horizontal.txt" />
     <Text Include="1-vertical.txt" />
     <Text Include="map.txt" />
+    <Text Include="Credits.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -25,6 +25,7 @@ namespace dashboardNS
 	const int PAUSE_FRAME = 0;
 	const int PAUSE_HOVER_FRAME = 1;
 	const int SKILL_TEXT_HEIGHT = 30;
+	const int TOOLTIP_TEXT = 15;
 }
 
 class Dashboard
@@ -33,12 +34,14 @@ private:
 	TextureManager skillTexture;
 	TextureManager dashboardTexture;
 	TextureManager barTexture;
+	TextureManager tooltipTexture;
 	Button stealthIcon;
 	Button speedIcon;
 	Button rangeIcon;
 	Button armorIcon;
 	Cursor *mouse;
 	Image dashboard;
+	Image tooltip;
 	PlayerBar playerHealth;
 	PlayerBar underHealth;
 	PlayerBar playerExp;
@@ -49,7 +52,9 @@ private:
 	TextDX *speedLevel;
 	TextDX *rangeLevel;
 	TextDX *armorLevel;
-
+	TextDX *inventoryCount;
+	TextDX *skillTooltip;
+	
 	int playerMaxHealth;
 	int playerCurrentHealth;
 	int playerMaxXP;
@@ -58,7 +63,10 @@ private:
 	int speedPoints;
 	int rangePoints;
 	int armorPoints;
-
+	int stoneCount;
+	int arrowCount;
+	bool tooltipActive;
+	int tooltipType;
 
 public:
 	Dashboard();
