@@ -10,6 +10,8 @@ MainMenu::MainMenu()
 	cursor = new Cursor();
 	gameStart = false;
 	settings = false;
+	isEnterKey = false;
+
 	key = new KeyBinding();
 	insertKey = ' ';
 	rightKey = new TextDX();
@@ -237,82 +239,82 @@ void MainMenu::update()
 	{
 		if (rightButton.collideButton(*cursor) && input->getMouseLButton())
 		{
-			enterKey = true;
+			isEnterKey = true;
 			if (input->anyKeyPressed())
 			{
 				insertKey = input->getCharIn();
 				key->setRightKey(insertKey);
-				enterKey = false;
+				isEnterKey = false;
 			}
 		}
 		if (leftButton.collideButton(*cursor) && input->getMouseLButton())
 		{
-			enterKey = true;
+			isEnterKey = true;
 			if (input->anyKeyPressed())
 			{
 				insertKey = input->getCharIn();
 				key->setLeftKey(insertKey);
-				enterKey = false;
+				isEnterKey = false;
 			}
 		}
 		if (upButton.collideButton(*cursor) && input->getMouseLButton())
 		{
-			enterKey = true;
+			isEnterKey = true;
 			if (input->anyKeyPressed())
 			{
 				insertKey = input->getCharIn();
 				key->setUpKey(insertKey);
-				enterKey = false;
+				isEnterKey = false;
 			}
 		}
 		if (downButton.collideButton(*cursor) && input->getMouseLButton())
 		{
-			enterKey = true;
+			isEnterKey = true;
 			if (input->anyKeyPressed())
 			{
 				insertKey = input->getCharIn();
 				key->setDownKey(insertKey);
-				enterKey = false;
+				isEnterKey = false;
 			}
 		}
 		if (meleeButton.collideButton(*cursor) && input->getMouseLButton())
 		{
-			enterKey = true;
+			isEnterKey = true;
 			if (input->anyKeyPressed())
 			{
 				insertKey = input->getCharIn();
 				key->setMeleeKey(insertKey);
-				enterKey = false;
+				isEnterKey = false;
 			}
 		}
 		if (rangeButton.collideButton(*cursor) && input->getMouseLButton())
 		{
-			enterKey = true;
+			isEnterKey = true;
 			if (input->anyKeyPressed())
 			{
 				insertKey = input->getCharIn();
 				key->setRangeKey(insertKey);
-				enterKey = false;
+				isEnterKey = false;
 			}
 		}
 		if (distractButton.collideButton(*cursor) && input->getMouseLButton())
 		{
-			enterKey = true;
+			isEnterKey = true;
 			if (input->anyKeyPressed())
 			{
 				insertKey = input->getCharIn();
 				key->setDistractKey(insertKey);
-				enterKey = false;
+				isEnterKey = false;
 			}
 		}
 		if (assassinateButton.collideButton(*cursor) && input->getMouseLButton())
 		{
-			enterKey = true;
+			isEnterKey = true;
 			if (input->anyKeyPressed())
 			{
 				insertKey = input->getCharIn();
 				key->setAssassinateKey(insertKey);
-				enterKey = false;
+				isEnterKey = false;
 			}
 		}
 		if (backButton.collideButton(*cursor) && input->getMouseLButton())

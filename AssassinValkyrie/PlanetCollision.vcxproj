@@ -215,6 +215,7 @@
     <Text Include="map_s0.txt" />
     <Text Include="map_s1.txt" />
     <Text Include="map_s2.txt" />
+    <Text Include="Credits.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

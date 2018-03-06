@@ -423,5 +423,8 @@
     <Text Include="map_s0.txt" />
     <Text Include="map_s1.txt" />
     <Text Include="map_s2.txt" />
+    <Text Include="Credits.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
