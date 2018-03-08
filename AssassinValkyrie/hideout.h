@@ -49,5 +49,6 @@ public:
 	int getStartY() { return startY; }
 	int getTimer() { return timer; }
 	void setTimer() {timer = GetTickCount(); }
+	MovementComponent *getMove() { return move; }
 };
 #endif

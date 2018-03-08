@@ -36,4 +36,5 @@ public:
 	void collisions(Entity *play, PLATFORM p);
 	void render();
 	void camera(float frameTime, int direction);
+	void setCameraVelocity(VECTOR2 velocity);
 };

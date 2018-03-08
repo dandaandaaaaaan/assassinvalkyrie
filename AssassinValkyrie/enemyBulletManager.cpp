@@ -190,3 +190,12 @@ void EnemyBulletManager::camera(float frameTime, int direction)
 	for (Fireball *t : fireList)
 		t->getMove()->movementWithDirection(frameTime, direction);
 }
+
+void EnemyBulletManager::setCameraVelocity(VECTOR2 velocity)
+{
+	for (Bullet *t : bulletList)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (Fireball *t : fireList)
+		t->getMove()->setCameraVelocity(velocity);
+}

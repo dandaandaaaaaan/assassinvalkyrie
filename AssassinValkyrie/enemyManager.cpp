@@ -210,3 +210,9 @@ void EnemyManager::camera(float frameTime, int direction)
 	for (Enemy *t : worldCollection)
 		t->getMove()->movementWithDirection(frameTime, direction);
 }
+
+void EnemyManager::setCameraVelocity(VECTOR2 velocity)
+{
+	for (Enemy *t : worldCollection)
+		t->getMove()->setCameraVelocity(velocity);
+}

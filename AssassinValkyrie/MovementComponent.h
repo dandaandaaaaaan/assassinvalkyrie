@@ -20,6 +20,7 @@ protected:
 	int initialVelocity = 0;
 	int currentVelocity;
 	bool enable;
+	VECTOR2 cameraVelocity;
 
 public:
 	MovementComponent(Entity* ent);
@@ -30,6 +31,7 @@ public:
 	virtual void update(float frameTime);
 	void movementWithDirection(float frameTime, int direction);
 	void setEnable(bool value) { enable = value; }
+	void setCameraVelocity(VECTOR2 velocity);
 };
 
 class PatrolMovement : public MovementComponent

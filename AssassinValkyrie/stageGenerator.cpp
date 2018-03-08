@@ -370,6 +370,32 @@ void StageGenerator::update(float frametime, int direction, int leftrightupdown,
 	}
 }
 
+void StageGenerator::updateSpeed(VECTOR2 velocity) {
+	for (Floor *t : floorCollection)
+		t->getMove()->setCameraVelocity(velocity);
+	for (Fill *t : fillCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (Fill *t : sideCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (Hideout *t : hideoutCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (Ladder *t : ladderCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (PickupHP *t : hpCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (PickupArrow *t : pickupArrowCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (PickupStone *t : pickupStoneCollection)
+		t->getMove()->setCameraVelocity(velocity);
+}
+
+
 PLATFORM StageGenerator::getVisionPlatforms()
 {
 	PLATFORM p;

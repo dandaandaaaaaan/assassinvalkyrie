@@ -60,5 +60,6 @@ public:
 	void loadSerpant(POSITION p) { serpantPos = p; }
 
 	void camera(float frameTime, int direction);
+	void setCameraVelocity(VECTOR2 velocity);
 };
 #endif
