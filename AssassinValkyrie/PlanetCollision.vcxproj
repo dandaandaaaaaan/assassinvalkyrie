@@ -150,6 +150,7 @@
     <ClInclude Include="cursor.h" />
     <ClInclude Include="dashboard.h" />
     <ClInclude Include="distractedState.h" />
+    <ClInclude Include="DyingState.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="enemyBulletManager.h" />
     <ClInclude Include="enemyManager.h" />

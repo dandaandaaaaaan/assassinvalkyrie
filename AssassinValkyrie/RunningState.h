@@ -9,11 +9,11 @@
 
 namespace RUNNING_STATE
 {
-	const int	WIDTH = 79.73;
-	const int	HEIGHT = 96;
-	const int TEXTURE_COLS = 4;
-	const int   START_FRAME = 4;
-	const int   END_FRAME = 7;
+	const int	WIDTH = 81;
+	const int	HEIGHT = 97;
+	const int TEXTURE_COLS = 6;
+	const int   START_FRAME = 6;
+	const int   END_FRAME = 11;
 	const int RUNNING_SPEED=250;
 }
 

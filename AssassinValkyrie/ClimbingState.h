@@ -9,8 +9,8 @@
 
 namespace CLIMBING_STATE
 {
-	const int	WIDTH = 79;
-	const int	HEIGHT = 96;
+	const int	WIDTH = 76;
+	const int	HEIGHT = 97;
 	const int TEXTURE_COLS = 3;
 	const int   START_FRAME =27;
 	const int   END_FRAME = 29;
