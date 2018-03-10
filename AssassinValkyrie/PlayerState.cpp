@@ -17,11 +17,11 @@
 #include "keyBinding.h"
 #include "ClimbReadyState.h"
 #include "ClimbingState.h"
-<<<<<<< HEAD
+
 #include "DyingState.h"
-=======
+
 #include "alertState.h"
->>>>>>> 8b6459469d6f061b151308844cec0b5071efad82
+
 
 
 PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a)
