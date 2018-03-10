@@ -32,6 +32,8 @@ private:
 	int startX;
 	int startY;
 	MovementComponent *move;
+	int timer;
+
 public:
 	// constructor
 	Hideout();
@@ -45,5 +47,7 @@ public:
 	void setStartY(int i);
 	int getStartX() { return startX; }
 	int getStartY() { return startY; }
+	int getTimer() { return timer; }
+	void setTimer() {timer = GetTickCount(); }
 };
 #endif

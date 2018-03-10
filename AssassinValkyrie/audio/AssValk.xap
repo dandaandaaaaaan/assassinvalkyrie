@@ -16,8 +16,8 @@ Global Settings
     Header File = D:\1 - School\Year 3.2\GPP\Assignment 2\AssassinValkyrie\AssassinValkyrie\audio\AssValk.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 1931125288;
-    Last Modified High = 30645455;
+    Last Modified Low = 30645455;
+    Last Modified High = 1931125288;
 
     Category
     {
@@ -229,6 +229,8 @@ Wave Bank
     Xbox Bank Last Modified High = 0;
     PC Bank Last Modified Low = 1931325422;
     PC Bank Last Modified High = 30645455;
+    Header Last Modified Low = 0;
+    Header Last Modified High = 0;
     Bank Last Revised Low = 1815657090;
     Bank Last Revised High = 30645455;
 
@@ -470,8 +472,6 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 1947233874;
-    Bank Last Modified High = 30645455;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 

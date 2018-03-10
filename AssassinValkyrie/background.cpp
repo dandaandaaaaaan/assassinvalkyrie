@@ -32,7 +32,8 @@ bool Background::initialize(Game *gamePtr, int width, int height, int ncols, Tex
 
 void Background::update(float frameTime, Player *player, StageGenerator *stageGen, EnemyManager *emList, EnemyBulletManager *emBulletList, KeyBinding *key)
 {
-
+	if (player->outOfBounds() || !player->getVisible())
+		return;
 	bool left =false;
 	bool right = false;
 	//bool onSide = false;

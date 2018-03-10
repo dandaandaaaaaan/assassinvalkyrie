@@ -17,7 +17,11 @@
 #include "keyBinding.h"
 #include "ClimbReadyState.h"
 #include "ClimbingState.h"
+<<<<<<< HEAD
 #include "DyingState.h"
+=======
+#include "alertState.h"
+>>>>>>> 8b6459469d6f061b151308844cec0b5071efad82
 
 
 PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a)
@@ -44,30 +48,21 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 
 	for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
 	{
-		if ((*gunner)->getRay()->inSight(*playerpointer->getCenter(),p))
-		{
-			
-			player.setCollideWithVision(true);
-		
-		}
+		if (AlertedState *state = dynamic_cast<AlertedState*>((*gunner)->getState()))
+			if ((*gunner)->isAlive())
+				player.setCollideWithVision(true);
 	}
 	for (TROOPERLIST::iterator trooper = (trooperCollection->begin()); trooper != trooperCollection->end(); trooper++)
 	{
-		if ((*trooper)->getRay()->inSight(*playerpointer->getCenter(), p))
-		{
-
-			player.setCollideWithVision(true);
-
-		}
+		if (AlertedState *state = dynamic_cast<AlertedState*>((*trooper)->getState()))
+			if ((*trooper)->isAlive())
+				player.setCollideWithVision(true);
 	}
 	for (SERPANTLIST::iterator serpant = (serpantCollection->begin()); serpant != serpantCollection->end(); serpant++)
 	{
-		if ((*serpant)->getRay()->inSight(*playerpointer->getCenter(), p))
-		{
-
-			player.setCollideWithVision(true);
-
-		}
+		if (AlertedState *state = dynamic_cast<AlertedState*>((*serpant)->getState()))
+			if ((*serpant)->isAlive())
+				player.setCollideWithVision(true);
 	}
 
 	for (LADDERS::iterator ladder = (ladderCollection->begin()); ladder != ladderCollection->end(); ladder++)
@@ -195,30 +190,21 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 
 	for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
 	{
-		if ((*gunner)->getRay()->inSight(*playerpointer->getCenter(), p))
-		{
-
-			player.setCollideWithVision(true);
-
-		}
+		if (AlertedState *state = dynamic_cast<AlertedState*>((*gunner)->getState()))
+			if ((*gunner)->isAlive())
+				player.setCollideWithVision(true);
 	}
 	for (TROOPERLIST::iterator trooper = (trooperCollection->begin()); trooper != trooperCollection->end(); trooper++)
 	{
-		if ((*trooper)->getRay()->inSight(*playerpointer->getCenter(), p))
-		{
-
-			player.setCollideWithVision(true);
-
-		}
+		if (AlertedState *state = dynamic_cast<AlertedState*>((*trooper)->getState()))
+			if ((*trooper)->isAlive())
+				player.setCollideWithVision(true);
 	}
 	for (SERPANTLIST::iterator serpant = (serpantCollection->begin()); serpant != serpantCollection->end(); serpant++)
 	{
-		if ((*serpant)->getRay()->inSight(*playerpointer->getCenter(), p))
-		{
-
-			player.setCollideWithVision(true);
-
-		}
+		if (AlertedState *state = dynamic_cast<AlertedState*>((*serpant)->getState()))
+			if ((*serpant)->isAlive())
+				player.setCollideWithVision(true);
 	}
 
 	
@@ -231,25 +217,6 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 		}
 	}
 
-
-	//VECTOR2 collisionVector;
-	//FILLS *fillCollection = stagegenerator->getFills();
-	//for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
-	//{
-	//	if (player.collidesWith(**fill, collisionVector))
-	//	{
-	//		if (!player.isFlipHorizontal())
-	//		{
-	//			player.setX((*fill)->getX() - RUNNING_STATE::WIDTH);
-	//		}
-
-	//		else
-	//		{
-	//			player.setX((*fill)->getX() + RUNNING_STATE::WIDTH);
-	//		}
-	//		
-	//	}
-	//} 
 	if (!player.isCollidingWithVision())
 	{
 		if (input->isKeyDown(key.getAssassinateKey()))
@@ -432,26 +399,6 @@ PlayerState* ThrowingState::handleInput(Player& player, Input* input, Game *game
 PlayerState* CrouchWalkingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	KeyBinding key;
-	//VECTOR2 collisionVector;
-	//FILLS *fillCollection = stagegenerator->getFills();
-
-	//for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
-	//{
-	//	if (player.collidesWith(**fill, collisionVector))
-	//	{
-	//		if (!player.isFlipHorizontal())
-	//		{
-	//			player.setX((*fill)->getX() - CROUCH_WALKING_STATE::WIDTH-30);
-	//		}
-
-	//		else
-	//		{
-	//			player.setX((*fill)->getX() + CROUCH_WALKING_STATE::WIDTH+30);
-	//		}
-	//		
-
-	//	}
-	//}
 
 	if (!input->isKeyDown(key.getRightKey()) && !input->isKeyDown(key.getLeftKey()) || !input->isKeyDown(key.getDownKey()))
 	{
@@ -467,8 +414,6 @@ PlayerState* CrouchWalkingState::handleInput(Player& player, Input* input, Game 
 
 PlayerState* JumpingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
-	
-	
 	VECTOR2 collisionVector;
 	FLOORS *floorCollection = stagegenerator->getFloors();
 	FILLS *fillCollection = stagegenerator->getSides();
@@ -500,30 +445,6 @@ PlayerState* JumpingState::handleInput(Player& player, Input* input, Game *gameP
 			}
 		}
 	}
-
-	//for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
-	//{
-		//if (player.collidesWith(**fill, collisionVector))
-		//{
-			//if (!player.isFlipHorizontal())
-			//{
-				//player.setX((*fill)->getX() - FALLING_STATE::WIDTH-10);
-			//}
-
-			//else
-			//{
-				//player.setX((*fill)->getX() + FALLING_STATE::WIDTH+10);
-			//}
-			
-			//player.initialize(gamePtr, FALLING_STATE::WIDTH, FALLING_STATE::HEIGHT, FALLING_STATE::TEXTURE_COLS, textureM);
-			//player.setFrames(FALLING_STATE::START_FRAME, FALLING_STATE::END_FRAME);
-			//player.setCurrentFrame(FALLING_STATE::START_FRAME);
-			//player.setVelocity(VECTOR2(FALLING_STATE::FALLING_SPEED*player.calcMultipler(player.getSpeedLevel()), FALLING_STATE::FALLING_SPEED*player.calcMultipler(player.getSpeedLevel())));
-			//return new FallingState();
-
-		//}
-	//}
-
 	return NULL;
 }
 

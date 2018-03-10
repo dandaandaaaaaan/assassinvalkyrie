@@ -52,7 +52,6 @@ void Enemy::handleInput(EnemyState* newState, PLATFORM *p)
 void Enemy::update(float frameTime, PLATFORM p, Audio *a)
 {
 	if (!health->getDieAnimation()) {
-		handleInput(NULL, &p);
 		state_->update(this, player);
 
 		move->update(frameTime);
@@ -66,8 +65,9 @@ void Enemy::update(float frameTime, PLATFORM p, Audio *a)
 	Entity::update(frameTime);
 }
 
-void Enemy::ai()
+void Enemy::ai(PLATFORM p)
 {
+	handleInput(NULL, &p);
 }
 
 void Enemy::draw()

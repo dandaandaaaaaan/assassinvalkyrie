@@ -117,9 +117,15 @@ void WeaponManager::update(float frameTime, Input *input, Game *gamePtr, int wid
 
 void WeaponManager::ai() {}
 
-void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM floor)
+void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM plat)
 {
 	VECTOR2 collisionVector;
+	
+	std::vector<Entity *> inRangeP;
+	for (Entity *t : plat)
+		if (!t->outOfBounds())
+			inRangeP.emplace_back(t);
+	
 	GUNNERLIST *gunnerCollection = enemyList->getGunners();
 	TROOPERLIST *trooperCollection = enemyList->getTroopers();
 	SERPANTLIST *serpantCollection = enemyList->getSerpants();
@@ -140,6 +146,7 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 				break;
 			}
 		}
+
 		for (TROOPERLIST::iterator trooper = (trooperCollection->begin()); trooper != trooperCollection->end(); trooper++)
 		{
 			if ((*trooper)->collidesWith(**it, collisionVector) && (*trooper)->isAlive() && !(*trooper)->outOfBounds())
@@ -167,6 +174,13 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 			}
 		}
 
+		for (Entity *t : inRangeP)
+			if ((*it)->collidesWith(*t, collisionVector))
+			{
+				(*it)->setVisible(false);
+				(*it)->setActive(false);
+			}
+
 		if (!(*it)->getActive())
 			it = arrow_collection.erase(it);
 		else
@@ -176,14 +190,14 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 	STONELIST::iterator stone = stone_collection.begin();
 	while (stone != stone_collection.end())
 	{
-		bool floorCollision = false;
-		for (Entity *f : floor)
+		bool platCollision = false;
+		for (Entity *f : plat)
 			if ((*stone)->collidesWith(*f, collisionVector))
 			{
-				floorCollision = true;
+				platCollision = true;
 				break;
 			}
-		if (floorCollision)
+		if (platCollision)
 		{
 			for (Enemy *e : *enemyList->getWorlds())
 			{

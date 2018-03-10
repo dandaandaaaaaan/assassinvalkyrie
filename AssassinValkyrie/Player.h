@@ -18,12 +18,11 @@
 namespace playerNS
 {
 	const int	HEALTH = 20;
-	const int	WIDTH = 57.15;
-	const int	HEIGHT = 96;
+	const int	WIDTH = 57;
+	const int	HEIGHT = 95;
 	const double ROTATION = 0;
 	const float SCALE = 1.0f;
 	const int	X = GAME_WIDTH / 4 ;
-	//const int	Y = GAME_HEIGHT/2-100 ;
 	const int	Y = 100;
 	const float SPEED = 100;
 	const float MASS = 300.0f;

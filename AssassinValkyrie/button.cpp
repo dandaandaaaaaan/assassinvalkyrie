@@ -1,3 +1,8 @@
+// Module			: Gameplay Programming
+// Assignment2		: Assassin Valkyrie
+// Student Number	: Png Yeow Li
+// Student Number	: S10164245H
+
 #include "button.h"
 
 Button::Button() : Entity()
