@@ -10,8 +10,9 @@
 #include "entity.h"
 
 namespace MovementComponentNS {
-	const int cameraVelocity = 100;
+	const int cameraVelocity = 125; //PLEASE MAKE THIS VARIBLE CHANGE CONSTANTLY TO THE DIFF PLAYER WALKING, JUMPING, UPSKILL RUN PERK
 }
+
 class MovementComponent
 {
 protected:
