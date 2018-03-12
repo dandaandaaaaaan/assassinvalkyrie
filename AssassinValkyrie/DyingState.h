@@ -3,23 +3,23 @@
 // Student Number	: Zhuang yuteng
 // Student Number	: S10163964C
 
-#ifndef _CROUCHING_STATE_H                // Prevent multiple definitions if this 
-#define _CROUCHING_STATE_H                // file is included in more than one place
+#ifndef _DYING_STATE_H                // Prevent multiple definitions if this 
+#define _DYING_STATE_H                // file is included in more than one place
 #define WIN32_LEAN_AND_MEAN
 
-namespace CROUCHING_STATE
+namespace DYING_STATE
 {
-	const int	WIDTH = 81;
+	const int	WIDTH = 97;
 	const int	HEIGHT = 97;
-	const int TEXTURE_COLS = 7;
-	const int   START_FRAME = 17;
-	const int   END_FRAME =17;
+	const int TEXTURE_COLS = 10;
+	const int   START_FRAME = 100;
+	const int   END_FRAME = 109;
 	
 }
 
 #include "PlayerState.h"
 
-class CrouchingState : public PlayerState
+class DyingState : public PlayerState
 {
 
 private:
@@ -27,14 +27,13 @@ private:
 
 public:
 
-	CrouchingState() :PlayerState() {}
-	~CrouchingState() {}
+	DyingState() :PlayerState() {}
+	~DyingState() {}
 
 	virtual PlayerState* handleInput(Player &player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *floorList, EnemyManager *enemyList, PLATFORM p, Audio *a);
 
 	void update(Player &player, float frameTime)
 	{
-		
 	}
 };
 #endif

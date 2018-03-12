@@ -9,8 +9,8 @@
 
 namespace RANGE_ATTACK_STATE
 {
-	const int	WIDTH = 79;
-	const int	HEIGHT = 96;
+	const int	WIDTH = 110;
+	const int	HEIGHT = 97;
 	const int TEXTURE_COLS = 4;
 	const int   START_FRAME = 20;
 	const int   END_FRAME = 23;

@@ -14,11 +14,11 @@
 
 namespace STANDING_STATE
 {
-	const int	WIDTH = 57.15;
-	const int	HEIGHT = 96;
-	const int TEXTURE_COLS = 1;
+	const int	WIDTH = 57;
+	const int	HEIGHT = 97;
+	const int TEXTURE_COLS = 6;
 	const int   START_FRAME = 0;
-	const int   END_FRAME = 0;
+	const int   END_FRAME = 5;
 }
 
 

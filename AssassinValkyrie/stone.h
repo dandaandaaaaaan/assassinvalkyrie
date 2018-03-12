@@ -12,8 +12,8 @@
 
 namespace stoneNS
 {
-	const float WIDTH = 78;                   // image width
-	const float HEIGHT = 95;                  // image height
+	const float WIDTH = 84;                   // image width
+	const float HEIGHT = 97;                  // image height
 	const float SCALE = 0.2f;
 	const float SPEED = 300;                // 200 pixels per second
 	const int   STONE_TEXTURE_COLS = 2;           // texture has 8 columns
@@ -30,11 +30,11 @@ class Stone : public Entity
 
 private:
 
-	float velocityX = 150 * cos(45 * PI / 180);
-	float velocityY = -(150 * sin(45 * PI / 180));
+	float velocityX = 250 * cos(45 * PI / 180);
+	float velocityY = -(250 * sin(45 * PI / 180));
 	float gravity = 9.81;
-	float DestinationTime = (150 * 150 * sin(90 * PI / 180) / gravity) / velocityX;
-	float TimeInterval = DestinationTime / 200;
+	float DestinationTime = (250 * 250 * sin(90 * PI / 180) / gravity) / velocityX;
+	float TimeInterval = DestinationTime / 145;
 	float t = 0;
 	bool throwingRight = true;
 
