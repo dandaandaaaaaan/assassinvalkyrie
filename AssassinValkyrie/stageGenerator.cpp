@@ -30,12 +30,25 @@ StageGenerator::~StageGenerator()
 	for (Ladder *t : ladderCollection)
 		SAFE_DELETE(t);
 	ladderCollection.clear();
+
+	for (PickupHP *t : hpCollection)
+		SAFE_DELETE(t);
+	hpCollection.clear();
+
+	for (PickupArrow *t : pickupArrowCollection)
+		SAFE_DELETE(t);
+	pickupArrowCollection.clear();
+
+	for (PickupStone *t : pickupStoneCollection)
+		SAFE_DELETE(t);
+	pickupStoneCollection.clear();
 }
 
 bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *stageNo, EnemyManager *ent, TextureManager *pickupTextures)
 {
 	bool success = true;
-	
+
+	LevelLoader level;
 	level.initializeStage(*stageNo);
 	level.loadElements();
 	totalElements = level.elementSize();
@@ -121,7 +134,7 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 			}
 
 			else if (horizontalElement2.element == "TROOPER")
-				trooperPos.emplace_back(VECTOR2{ (float)horizontalElement2.x + fillNS::WIDTH/2, GAME_HEIGHT - (float)horizontalElement2.y + fillNS::HEIGHT });
+				trooperPos.emplace_back(VECTOR2{ (float)horizontalElement2.x + fillNS::WIDTH / 2, GAME_HEIGHT - (float)horizontalElement2.y + fillNS::HEIGHT });
 			else if (horizontalElement2.element == "GUNNER")
 				gunnerPos.emplace_back(VECTOR2{ (float)horizontalElement2.x + fillNS::WIDTH / 2, GAME_HEIGHT - (float)horizontalElement2.y + fillNS::HEIGHT });
 			else if (horizontalElement2.element == "SERPANT")
@@ -175,15 +188,52 @@ bool StageGenerator::initialize(Game *gamePtr, TextureManager *textureM, int *st
 				pickupStoneCollection.back()->setX(horizontalElement2.x);
 				pickupStoneCollection.back()->setStartX(horizontalElement2.x);
 			}
-		}
 
-		ent->loadTrooper(trooperPos);
-		ent->loadGunner(gunnerPos);
-		ent->loadSerpant(serpantPos);
+			else if (horizontalElement2.element == "SPAWN")
+				playerPos = { (float)horizontalElement2.x + fillNS::WIDTH / 2, GAME_HEIGHT - (float)horizontalElement2.y + fillNS::HEIGHT };
+			else if (horizontalElement2.element == "T1")
+			{
+				helpList.emplace_back(new HelpText());
+				helpList.back()->initialize(gamePtr->getGraphics(), VECTOR2{ (float)horizontalElement2.x + fillNS::WIDTH / 2, GAME_HEIGHT - (float)horizontalElement2.y + fillNS::HEIGHT }, 1);
+				helpList.back()->setStartX(horizontalElement2.x);
+				helpList.back()->setStartY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
+			}
+			else if (horizontalElement2.element == "T2")
+			{
+				helpList.emplace_back(new HelpText());
+				helpList.back()->initialize(gamePtr->getGraphics(), VECTOR2{ (float)horizontalElement2.x + fillNS::WIDTH / 2, GAME_HEIGHT - (float)horizontalElement2.y + fillNS::HEIGHT }, 2);
+				helpList.back()->setStartX(horizontalElement2.x);
+				helpList.back()->setStartY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
+			}
+			else if (horizontalElement2.element == "T3")
+			{
+				helpList.emplace_back(new HelpText());
+				helpList.back()->initialize(gamePtr->getGraphics(), VECTOR2{ (float)horizontalElement2.x + fillNS::WIDTH / 2, GAME_HEIGHT - (float)horizontalElement2.y + fillNS::HEIGHT }, 3);
+				helpList.back()->setStartX(horizontalElement2.x);
+				helpList.back()->setStartY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
+			}
+			else if (horizontalElement2.element == "T4")
+			{
+				helpList.emplace_back(new HelpText());
+				helpList.back()->initialize(gamePtr->getGraphics(), VECTOR2{ (float)horizontalElement2.x + fillNS::WIDTH / 2, GAME_HEIGHT - (float)horizontalElement2.y + fillNS::HEIGHT }, 4);
+				helpList.back()->setStartX(horizontalElement2.x);
+				helpList.back()->setStartY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
+			}
+			else if (horizontalElement2.element == "T5")
+			{
+				helpList.emplace_back(new HelpText());
+				helpList.back()->initialize(gamePtr->getGraphics(), VECTOR2{ (float)horizontalElement2.x + fillNS::WIDTH / 2, GAME_HEIGHT - (float)horizontalElement2.y + fillNS::HEIGHT }, 5);
+				helpList.back()->setStartX(horizontalElement2.x);
+				helpList.back()->setStartY(GAME_HEIGHT - horizontalElement2.y + (fillNS::HEIGHT - floorNS::HEIGHT));
+			}
+		}
 	}
+	ent->loadTrooper(trooperPos);
+	ent->loadGunner(gunnerPos);
+	ent->loadSerpant(serpantPos);
 }
 
-void StageGenerator::render()
+void StageGenerator::render(int stage)
 {
 	for (Floor *t : floorCollection)
 		if (!t->outOfBounds())
@@ -216,6 +266,10 @@ void StageGenerator::render()
 	for (PickupStone *t : pickupStoneCollection)
 		if (!t->outOfBounds())
 			t->draw();
+
+	for (HelpText *t : helpList)
+		if (!t->outOfBounds())
+			t->draw(stage);
 }
 
 void StageGenerator::update(float frametime, int direction, int leftrightupdown, bool moveOn)
@@ -368,7 +422,41 @@ void StageGenerator::update(float frametime, int direction, int leftrightupdown,
 		if (moveOn)
 			(stone)->update(frametime, direction);
 	}
+
+	for (HelpText *t : helpList) {
+		if (moveOn)
+			(t)->update(frametime, direction);
+	}
 }
+
+void StageGenerator::updateSpeed(VECTOR2 velocity) {
+	for (Floor *t : floorCollection)
+		t->getMove()->setCameraVelocity(velocity);
+	for (Fill *t : fillCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (Fill *t : sideCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (Hideout *t : hideoutCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (Ladder *t : ladderCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (PickupHP *t : hpCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (PickupArrow *t : pickupArrowCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (PickupStone *t : pickupStoneCollection)
+		t->getMove()->setCameraVelocity(velocity);
+
+	for (HelpText *t : helpList)
+		t->getMove()->setCameraVelocity(velocity);
+}
+
 
 PLATFORM StageGenerator::getVisionPlatforms()
 {

@@ -36,6 +36,13 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 		return;
 	bool left =false;
 	bool right = false;
+	VECTOR2 cameraVelocity = player->getVelocity();
+	cameraVelocity.x = cameraVelocity.x / 2;
+	//cameraVelocity.y = cameraVelocity.y / 2;
+	if (cameraVelocity.x < 0)
+		cameraVelocity.x = -cameraVelocity.x;
+	if (cameraVelocity.y < 0)
+		cameraVelocity.y = -cameraVelocity.y;
 	//bool onSide = false;
 	if (spriteData.x >= 0) {
 		left = true;
@@ -52,35 +59,47 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 	}
 	if ((player->getX() < centreX) && !left) {
 		if (input->isKeyDown(key->getLeftKey()) && moveOn) {
-			velocity.x = 100;
+			velocity.x = cameraVelocity.x;
 			spriteData.x += frameTime * (velocity.x);         // move ship along X
+			stageGen->updateSpeed(cameraVelocity);
 			stageGen->update(frameTime, 1, 0, true);
+			emList->setCameraVelocity(cameraVelocity);
 			emList->camera(frameTime, 1);
+			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 1);
 		}
-		if (input->isKeyDown(key->getRangeKey()) && moveOn) {
-			velocity.x = 100;
+		if (input->isKeyDown(key->getRightKey()) && moveOn) {
+			velocity.x = cameraVelocity.x;;
 			spriteData.x += frameTime * (-velocity.x);         // move ship along X
+			stageGen->updateSpeed(cameraVelocity);
 			stageGen->update(frameTime, 2, 0, true);
+			emList->setCameraVelocity(cameraVelocity);
 			emList->camera(frameTime, 2);
+			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 2);
 		}
 		player->setX(centreX);
 	}
 
-	if ((player->getX() >= centreX) && !right) {
+	if ((player->getX() > centreX) && !right) {
 		if (input->isKeyDown(key->getLeftKey()) && moveOn) {
-			velocity.x = 100;
+			velocity.x = cameraVelocity.x;
 			spriteData.x += frameTime * (velocity.x);         // move ship along X
+			stageGen->updateSpeed(cameraVelocity);
 			stageGen->update(frameTime, 1, 0, true);
+			emList->setCameraVelocity(cameraVelocity);
 			emList->camera(frameTime, 1);
-			emBulletList->camera(frameTime, 2);
+			emBulletList->setCameraVelocity(cameraVelocity);
+			emBulletList->camera(frameTime, 1);
 		}
 		if (input->isKeyDown(key->getRightKey()) && moveOn) {
-			velocity.x = 100;
+			velocity.x = cameraVelocity.x;
 			spriteData.x += frameTime * (-velocity.x);         // move ship along X
+			stageGen->updateSpeed(cameraVelocity);
 			stageGen->update(frameTime, 2, 0, true);
+			emList->setCameraVelocity(cameraVelocity);
 			emList->camera(frameTime, 2);
+			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 2);
 		}
 		player->setX(centreX);
@@ -103,18 +122,24 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 		topLock = true;
 	if ((player->getY() < centreY) && !up && !topLock ) {
 		if (player->getVelocityY() >= 0 ){
-			velocity.y = 100;
+			velocity.y = cameraVelocity.y;
 			spriteData.y += frameTime * (-velocity.y);         // move ship along X
+			stageGen->updateSpeed(cameraVelocity);
 			stageGen->update(frameTime, 4, 0, true);
+			emList->setCameraVelocity(cameraVelocity);
 			emList->camera(frameTime, 4);
+			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 4);
 
 		}
 		if (player->getVelocityY() < 0 ) {
-			velocity.y = 100;
+			velocity.y = cameraVelocity.y;
 			spriteData.y += frameTime * (velocity.y);         // move ship along X
+			stageGen->updateSpeed(cameraVelocity);
 			stageGen->update(frameTime, 3, 0, true);
+			emList->setCameraVelocity(cameraVelocity);
 			emList->camera(frameTime, 3);
+			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 3);
 
 		}
@@ -122,109 +147,31 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 	}
 	if ((player->getY() > centreY) && !down && !topLock ) {
 		if (player->getVelocityY() > 0) {
-			velocity.y = 100;
+			velocity.y = cameraVelocity.y;
 			spriteData.y += frameTime * (-velocity.y);         // move ship along X
+			stageGen->updateSpeed(cameraVelocity);
 			stageGen->update(frameTime, 4, 0, true);
+			emList->setCameraVelocity(cameraVelocity);
 			emList->camera(frameTime, 4);
+			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 4);
 
 		}
 		if (player->getVelocityY() < 0 ) {
-			velocity.y = 100;
+			velocity.y = cameraVelocity.y;
 			spriteData.y += frameTime * (velocity.y);         // move ship along X
+			stageGen->updateSpeed(cameraVelocity);
 			stageGen->update(frameTime, 3 , 0, true);
+			emList->setCameraVelocity(cameraVelocity);
 			emList->camera(frameTime, 3);
+			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 3);
 
 		}
 		player->setY(centreY);
 	}
 
-	/*	
-	bool leftSide = (player->getX() - spriteData.x) > (GAME_WIDTH / 2);
-	bool rightSide = (player->getX() - spriteData.x) < (backgroundNS::WIDTH - (GAME_WIDTH / 2));
-	bool bottom = (player->getY() - spriteData.y) < (GAME_HEIGHT + (GAME_HEIGHT/2));
-	bool top = (player->getY() - spriteData.y ) > ( GAME_HEIGHT- (GAME_HEIGHT / 2));
-	
-	
-	if (top && bottom) 
-	{
-		if (player->getVelocity() == VECTOR2(100, 0) || player->getVelocity() == VECTOR2(100, 100))
-			player->setVelocity(VECTOR2(100, 0));
-		else
-			player->setVelocity(VECTOR2(0, 0));
-		velocity.y = 100;
-
-		if (input->isKeyDown(SHIP_UP_KEY))
-		{
-			spriteData.y += frameTime * velocity.y;         // move ship along X 
-			stageGen->update(frameTime, false, 3, true);
-		}
-
-		else if (input->isKeyDown(SHIP_DOWN_KEY))
-		{
-			spriteData.y += frameTime * (-velocity.y);         // move ship along X 
-			stageGen->update(frameTime, false, 4, true);
-		}
-	}
-	
-	if (leftSide && rightSide)
-	{
-		if (player->getVelocity() == VECTOR2(0, 100) || player->getVelocity() == VECTOR2(100, 100))
-			player->setVelocity(VECTOR2(0, 100));
-		else
-			player->setVelocity(VECTOR2(0, 0));		
-		velocity.x = 100;
-		if (input->isKeyDown(SHIP_LEFT_KEY))
-		{
-			spriteData.x += frameTime * velocity.x;         // move ship along X 
-			stageGen->update(frameTime, true, 0, true);
-		}
-
-		else if (input->isKeyDown(SHIP_RIGHT_KEY))
-		{
-			spriteData.x += frameTime * (-velocity.x);         // move ship along X 
-			stageGen->update(frameTime, true, 0, true);
-		}
-	}
-	else {
-		if (leftSide)
-		{
-			stageGen->update(frameTime, false, 1, false);
-			if (spriteData.x > 0)
-				spriteData.x = 0;
-		}
-		else if (rightSide)
-		{
-			stageGen->update(frameTime, false, 2, false);
-			if (spriteData.x < -160)
-				spriteData.x = -160;
-		}
-		
-		else if (top)
-		{
-			stageGen->update(frameTime, false, 3, false);
-			if (spriteData.y < -720)
-				spriteData.y = -720;
-		}
-		else if (bottom) 
-		{
-			stageGen->update(frameTime, false, 4, false);
-			if (spriteData.y > 0)
-				spriteData.y= 0;
-		}
-		
-		velocity.x = 0;
-		velocity.y = 0;
-		if (spriteData.y > 0)
-			spriteData.y = 0;
-		player->setVelocity(VECTOR2(100, 100));
-	}
-	*/
 	Entity::update(frameTime);
-
-
-	//move->update(frameTime);
 }
 
 

@@ -19,10 +19,12 @@ EnemyManager::~EnemyManager()
 {
 	for (world = worldCollection.begin(); world != worldCollection.end(); ++world)
 		SAFE_DELETE(*world);
-
 	worldCollection.clear();
+
 	trooperCollection.clear();
+
 	gunnerCollection.clear();
+
 	serpantCollection.clear();
 }
 
@@ -136,14 +138,14 @@ void EnemyManager::collisions(Entity *play, PLATFORM floor, PLATFORM fill, Audio
 			world++;
 	}
 
-	for (Trooper *t : trooperCollection)
-		if (!t->outOfBounds())
-			if (t->getAttack()->getAnimation() && t->collidesWith(*play, collisionVector) && t->getAttack()->getAttack() && t->getVisible() && play->getVisible())
-			{
-				a->playCue(SWORD);
-				play->setHealth(play->getHealth() - 5);
-				t->getAttack()->offAttack();
-			}
+	//for (Trooper *t : trooperCollection)
+	//	if (!t->outOfBounds())
+	//		if (t->getAttack()->getAnimation() && t->collidesWith(*play, collisionVector) && t->getAttack()->getAttack() && t->getVisible() && play->getVisible())
+	//		{
+	//			a->playCue(SWORD);
+	//			play->setHealth(play->getHealth() - 5);
+	//			t->getAttack()->offAttack();
+	//		}
 	for (Enemy *t : worldCollection)
 		if (!t->outOfBounds())
 			unCollide(t, floor, fill);
@@ -194,14 +196,14 @@ void EnemyManager::unCollide(Enemy *t, PLATFORM floor, PLATFORM fill)
 void EnemyManager::render()
 {
 	for (Enemy *t : worldCollection)
-		if (!t->outOfBounds())
+		if (!t->outOfBounds() && t->isAlive())
 			t->draw();
 }
 
 void EnemyManager::renderRay(Graphics *g)
 {
 	for (Enemy *t : worldCollection)
-		if (!t->outOfBounds())
+		if (!t->outOfBounds() && t->isAlive())
 			t->drawRay(g);
 }
 
@@ -209,4 +211,10 @@ void EnemyManager::camera(float frameTime, int direction)
 {
 	for (Enemy *t : worldCollection)
 		t->getMove()->movementWithDirection(frameTime, direction);
+}
+
+void EnemyManager::setCameraVelocity(VECTOR2 velocity)
+{
+	for (Enemy *t : worldCollection)
+		t->getMove()->setCameraVelocity(velocity);
 }

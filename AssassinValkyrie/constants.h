@@ -43,8 +43,12 @@ const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 fr
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
 const float GRAVITY = 9.81f;
 
+const int	INIT_STAGE = 0;
+const int	FINAL_STAGE = 2;
+
 // graphic images
 const char MMBACKGROUND_IMAGE[] = "pictures\\mainMenuBackground.png";
+const char LOADING_IMAGE[] = "pictures\\Loading.png";
 const char MOUSE_IMAGE[] = "pictures\\mouse.png";
 const char ENEMY_IMAGE[] = "pictures\\enemyTexture.png";
 const char BUTTON_IMAGE[] = "pictures\\Buttons.png";
@@ -52,6 +56,7 @@ const char SKILL_IMAGE[] = "pictures\\skillIcon.png";
 const char DASHBOARD_IMAGE[] = "pictures\\dashboard.png";
 const char PAUSE_IMAGE[] = "pictures\\pause.png";
 const char BAR_IMAGE[] = "pictures\\bar.png";
+const char TOOLTIP_IMAGE[] = "pictures\\tooltip.png";
 
 const char PLAYER_IMAGE[] = "pictures\\Player.png";
 const char FLOOR_IMAGE[] = "pictures\\newElements.png";

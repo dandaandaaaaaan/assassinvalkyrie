@@ -178,6 +178,9 @@
     <ClCompile Include="keyBinding.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HelpText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h">
@@ -384,6 +387,9 @@
     <ClInclude Include="keyBinding.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="helpText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="DyingState.h">
       <Filter>State Files\Player State</Filter>
     </ClInclude>
@@ -417,6 +423,11 @@
   <ItemGroup>
     <Text Include="1-horizontal.txt" />
     <Text Include="1-vertical.txt" />
-    <Text Include="map.txt" />
+    <Text Include="map_s0.txt" />
+    <Text Include="map_s1.txt" />
+    <Text Include="map_s2.txt" />
+    <Text Include="Credits.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

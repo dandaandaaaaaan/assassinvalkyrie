@@ -9,6 +9,7 @@ MovementComponent::MovementComponent(Entity* ent)
 {
 	object = ent;
 	enable = true;
+	cameraVelocity = VECTOR2(MovementComponentNS::cameraVelocity, MovementComponentNS::cameraVelocity);
 };
 void MovementComponent::setVelocity(int speed) {
 	if (initialVelocity == 0)
@@ -25,20 +26,24 @@ void MovementComponent::movementWithDirection(float frameTime, int direction)
 {
 	if (direction == 1)
 	{
-		object->setX(object->getX() + MovementComponentNS::cameraVelocity *frameTime);
+		object->setX(object->getX() + cameraVelocity.x *frameTime);
 	}
 	else if (direction == 2)
 	{
-		object->setX(object->getX() + (-MovementComponentNS::cameraVelocity) * frameTime);
+		object->setX(object->getX() + (-cameraVelocity.x) * frameTime);
 	}
 	else if (direction == 3)
 	{
-		object->setY(object->getY() + MovementComponentNS::cameraVelocity * frameTime);
+		object->setY(object->getY() + cameraVelocity.y * frameTime);
 	}
 	else if (direction == 4)
 	{
-		object->setY(object->getY() + (-MovementComponentNS::cameraVelocity) * frameTime);
+		object->setY(object->getY() + (-cameraVelocity.y) * frameTime);
 	}
+}
+
+void MovementComponent::setCameraVelocity(VECTOR2 velocity) {
+	cameraVelocity = velocity;
 }
 
 PatrolMovement::PatrolMovement(Entity* ent) : MovementComponent(ent) {}

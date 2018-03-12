@@ -13,6 +13,8 @@ Dashboard::Dashboard()
 	speedLevel = new TextDX();
 	rangeLevel = new TextDX();
 	armorLevel = new TextDX();
+	inventoryCount = new TextDX();
+	skillTooltip = new TextDX();
 
 	mins = 0;
 	secs = 0;
@@ -66,6 +68,16 @@ bool Dashboard::initialize(Graphics *g, Cursor *cursor, Player *playerM)
 
 	if (!dashboard.initialize(g, GAME_WIDTH, GAME_HEIGHT, 0, &dashboardTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing dashboard"));
+
+	if (!tooltipTexture.initialize(g, TOOLTIP_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing tooltip"));
+
+	if (!tooltip.initialize(g, 201, 51, 0, &tooltipTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing tooltip"));
+	tooltip.setX(mouse->getX());
+	tooltip.setY(mouse->getY() - tooltip.getHeight());
+	tooltip.setCurrentFrame(0);
+
 
 	if (!barTexture.initialize(g, BAR_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player bar"));
@@ -121,6 +133,14 @@ bool Dashboard::initialize(Graphics *g, Cursor *cursor, Player *playerM)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing dashboard text"));
 	armorPoints = playerM->getArmorLevel();
 
+	if (!inventoryCount->initialize(g, dashboardNS::SKILL_TEXT_HEIGHT, false, false, "Spectre 007"))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing dashboard text"));
+	stoneCount = playerM->getTotalStone();
+	arrowCount = playerM->getTotalArrow();
+
+	if (!skillTooltip->initialize(g, dashboardNS::TOOLTIP_TEXT, false, false, "Spectre 007"))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing dashboard text"));
+
 }
 
 void Dashboard::draw()
@@ -168,6 +188,43 @@ void Dashboard::draw()
 	armorLevel->setFontColor(graphicsNS::WHITE);
 	armorLevel->print(armor, (armorIcon.getX() - 20), (armorIcon.getY() + 20));
 
+	static char invenCount[textSize];
+	_snprintf(invenCount, textSize, "Arrow: %d \nStone: %d", (int)arrowCount, (int)stoneCount);
+	inventoryCount->setFontColor(graphicsNS::WHITE);
+	inventoryCount->print(invenCount, (underHealth.getX()), (underHealth.getY() + underHealth.getWidth() + 10));
+
+	if (tooltipActive)
+	{
+		const int tooltipSize = 50;
+		static char tooltipText[tooltipSize];
+
+		tooltip.draw();
+		if (tooltipType == 1)
+		{
+			_snprintf(tooltipText, tooltipSize, "Increase Player's Stealth");
+			skillTooltip->setFontColor(graphicsNS::WHITE);
+			skillTooltip->print(tooltipText, (tooltip.getX() + 23), (tooltip.getY() + 20));
+		}
+		if (tooltipType == 2)
+		{
+			_snprintf(tooltipText, tooltipSize, "Increase Player's Speed");
+			skillTooltip->setFontColor(graphicsNS::WHITE);
+			skillTooltip->print(tooltipText, (tooltip.getX() + 32), (tooltip.getY() + 20));
+		}
+		if (tooltipType == 3)
+		{
+			_snprintf(tooltipText, tooltipSize, "Increase Arrow Range");
+			skillTooltip->setFontColor(graphicsNS::WHITE);
+			skillTooltip->print(tooltipText, (tooltip.getX() + 34), (tooltip.getY() + 20));
+		}
+		if (tooltipType == 4)
+		{
+			_snprintf(tooltipText, tooltipSize, "Increase Player's Defence");
+			skillTooltip->setFontColor(graphicsNS::WHITE);
+			skillTooltip->print(tooltipText, (tooltip.getX() + 25), (tooltip.getY() + 20));
+		}
+
+	}
 
 }
 
@@ -182,7 +239,35 @@ void Dashboard::update(float frameTime,Player *playerM, Input *input)
 	rangePoints = playerM->getRangeLevel();
 	armorPoints = playerM->getArmorLevel();
 
+	tooltipActive = false;
+	tooltipType = 0;
+	
+
 	VECTOR2 collisionVector;
+	if (stealthIcon.collidesWith(*mouse, collisionVector))
+	{
+		tooltipActive = true;
+		tooltipType = 1;		
+	}
+
+	if (speedIcon.collidesWith(*mouse, collisionVector))
+	{
+		tooltipActive = true;
+		tooltipType = 2;		
+	}
+
+	if (rangeIcon.collidesWith(*mouse, collisionVector))
+	{
+		tooltipActive = true;
+		tooltipType = 3;
+	}
+
+	if (armorIcon.collidesWith(*mouse, collisionVector))
+	{
+		tooltipActive = true;
+		tooltipType = 4;
+	}
+
 	if (stealthIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton())
 	{
 		playerM->setStealthLevel();

@@ -31,7 +31,7 @@ namespace fillNS
 
 class Fill : public Entity
 {
-private:
+protected:
 	int startX;
 	int startY;
 	MovementComponent	*move;
@@ -48,5 +48,7 @@ public:
 	void setStartY(int i);
 	int getStartX() { return startX; }
 	int getStartY() { return startY; }
+
+	MovementComponent *getMove() { return move; }
 };
 #endif

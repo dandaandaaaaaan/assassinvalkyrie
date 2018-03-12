@@ -9,6 +9,7 @@
 
 #include "entity.h"
 #include "constants.h"
+#include "Player.h";
 
 namespace arrowNS
 {
@@ -26,6 +27,8 @@ namespace arrowNS
 // inherits from Entity class
 class Arrow : public Entity
 {
+private:
+	int startX;
 public:
 	// constructor
 	Arrow();
@@ -34,8 +37,11 @@ public:
 	virtual void draw();
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
 		TextureManager *textureM);
-	void update(float frameTime);
+	void update(float frameTime, Player p);
 	void damage(WEAPON);
+
+	int getStartX() { return startX; }
+	void setStartX(int x) { startX = x; }
 };
 #endif
 

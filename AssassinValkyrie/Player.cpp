@@ -74,13 +74,22 @@ void Player::handleInput(Input* input, Game *gamePtr, TextureManager *textureM, 
 	}
 }
 
-void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
+void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen, Audio *a)
 {
 	VECTOR2 collisionVector;
+	SIDES fill = *stageGen->getSides();
+
+	// Check wall collisions
+	for (Entity *e : fill)
+		if (collidesWith(*e, VECTOR2{})) 
+		{
+			setVelocity({ 0 ,getVelocityY()});
+			break;
+		}
+
 	GUNNERLIST *gunnerCollection = enemyList->getGunners();
 	TROOPERLIST *trooperCollection = enemyList->getTroopers();
 	SERPANTLIST *serpantCollection = enemyList->getSerpants();
-
 
 	for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
 	{
@@ -128,6 +137,13 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen)
 				break;
 			}
 		}
+		if (!(*trooper)->outOfBounds())
+			if ((*trooper)->getAttack()->getAnimation() && collidesWith(**trooper, collisionVector) && (*trooper)->getAttack()->getAttack() && (*trooper)->getVisible() && visible)
+			{
+				a->playCue(SWORD);
+				health = health - round((5 * calcNegativeMultipler(armorLevel - 1)));
+				(*trooper)->getAttack()->offAttack();
+			}
 	}
 	for (SERPANTLIST::iterator serpant = (serpantCollection->begin()); serpant != serpantCollection->end(); serpant++)
 	{

@@ -50,12 +50,16 @@ void Arrow::draw()
 // typically called once per frame
 // frameTime is used to regulate the speed of movement and animation
 //=============================================================================
-void Arrow::update(float frameTime)
+void Arrow::update(float frameTime, Player p)
 {
 	Entity::update(frameTime);
-
-	spriteData.x += frameTime * velocity.x;         // move ship along y
-
+	if ((spriteData.x - startX) > (200 + (200* (p.getRangeLevel() - 1)))) {
+		active = false;
+		visible = false;
+	}
+	else {
+		spriteData.x += frameTime * velocity.x;         // move ship along y
+	}
 }
 
 
