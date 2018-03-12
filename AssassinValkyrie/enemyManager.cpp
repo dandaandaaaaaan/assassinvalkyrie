@@ -19,10 +19,12 @@ EnemyManager::~EnemyManager()
 {
 	for (world = worldCollection.begin(); world != worldCollection.end(); ++world)
 		SAFE_DELETE(*world);
-
 	worldCollection.clear();
+
 	trooperCollection.clear();
+
 	gunnerCollection.clear();
+
 	serpantCollection.clear();
 }
 
@@ -194,14 +196,14 @@ void EnemyManager::unCollide(Enemy *t, PLATFORM floor, PLATFORM fill)
 void EnemyManager::render()
 {
 	for (Enemy *t : worldCollection)
-		if (!t->outOfBounds())
+		if (!t->outOfBounds() && t->isAlive())
 			t->draw();
 }
 
 void EnemyManager::renderRay(Graphics *g)
 {
 	for (Enemy *t : worldCollection)
-		if (!t->outOfBounds())
+		if (!t->outOfBounds() && t->isAlive())
 			t->drawRay(g);
 }
 

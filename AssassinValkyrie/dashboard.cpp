@@ -201,27 +201,27 @@ void Dashboard::draw()
 		tooltip.draw();
 		if (tooltipType == 1)
 		{
-			_snprintf(tooltipText, tooltipSize, "Increase Player's Sleath.");
+			_snprintf(tooltipText, tooltipSize, "Increase Player's Stealth");
 			skillTooltip->setFontColor(graphicsNS::WHITE);
-			skillTooltip->print(tooltipText, (tooltip.getX() + 10), (tooltip.getY() + 10));
+			skillTooltip->print(tooltipText, (tooltip.getX() + 23), (tooltip.getY() + 20));
 		}
 		if (tooltipType == 2)
 		{
-			_snprintf(tooltipText, tooltipSize, "Increase Player's Speed.");
+			_snprintf(tooltipText, tooltipSize, "Increase Player's Speed");
 			skillTooltip->setFontColor(graphicsNS::WHITE);
-			skillTooltip->print(tooltipText, (tooltip.getX() + 10), (tooltip.getY() + 10));
+			skillTooltip->print(tooltipText, (tooltip.getX() + 32), (tooltip.getY() + 20));
 		}
 		if (tooltipType == 3)
 		{
-			_snprintf(tooltipText, tooltipSize, "Increase Arrow Range.");
+			_snprintf(tooltipText, tooltipSize, "Increase Arrow Range");
 			skillTooltip->setFontColor(graphicsNS::WHITE);
-			skillTooltip->print(tooltipText, (tooltip.getX() + 10), (tooltip.getY() + 10));
+			skillTooltip->print(tooltipText, (tooltip.getX() + 34), (tooltip.getY() + 20));
 		}
 		if (tooltipType == 4)
 		{
-			_snprintf(tooltipText, tooltipSize, "Increase Player's Defense.");
+			_snprintf(tooltipText, tooltipSize, "Increase Player's Defence");
 			skillTooltip->setFontColor(graphicsNS::WHITE);
-			skillTooltip->print(tooltipText, (tooltip.getX() + 10), (tooltip.getY() + 10));
+			skillTooltip->print(tooltipText, (tooltip.getX() + 25), (tooltip.getY() + 20));
 		}
 
 	}

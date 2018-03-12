@@ -16,7 +16,7 @@ bool LevelLoader::initializeStage(int i)
 {
 	string fileName = to_string(i);
 	string line = "";
-	ifstream stageFile("map.txt");
+	ifstream stageFile("map_s"+fileName+".txt");
 	int countX = 0;
 	int countY = 0;
 	if (stageFile.is_open()) 
@@ -73,6 +73,18 @@ string getType(string v)
 		return "PICKUPARROW";
 	case 'D':
 		return "PICKUPSTONE";
+	case 'X':
+		return "SPAWN";
+	case '`':
+		return "T1";
+	case '~':
+		return "T2";
+	case '!':
+		return "T3";
+	case '@':
+		return "T4";
+	case '#':
+		return "T5";
 	default:
 		return "";
 	}

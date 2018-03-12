@@ -18,6 +18,7 @@
 #include "pickupHP.h"
 #include "pickupArrow.h"
 #include "pickupStone.h"
+#include "helpText.h"
 #include <queue>
 #include <string>
 #include <vector>
@@ -30,6 +31,7 @@ typedef std::vector<Ladder *> LADDERS;
 typedef std::vector<PickupHP *> HPS;
 typedef std::vector<PickupArrow *> PICKUPARROWS;
 typedef std::vector<PickupStone *> PICKUPSTONES;
+typedef std::vector<HelpText *> HELP;
 
 class StageGenerator
 {
@@ -52,11 +54,11 @@ private:
 
 	PICKUPSTONES pickupStoneCollection;
 
-	LevelLoader level;
-
 	POSITION	trooperPos;
 	POSITION	gunnerPos;
 	POSITION	serpantPos;
+	VECTOR2		playerPos;
+	HELP		helpList;
 
 	int totalElements;
 	bool edge;
@@ -66,7 +68,7 @@ public:
 	~StageGenerator();
 
 	bool initialize(Game *gamePtr, TextureManager *textureM, int *stageNo, EnemyManager *ent, TextureManager *pickupTextures);
-	void render();
+	void render(int stage);
 	void update(float frametime, int direction, int leftrightupdown, bool moveOn);
 	void updateSpeed(VECTOR2 velocity);
 
@@ -78,6 +80,7 @@ public:
 	FILLS *getFills() { return &fillCollection; }
 	FILLS *getSides() { return &sideCollection; }
 	LADDERS *getLadders() { return &ladderCollection; }
+	VECTOR2 getSpawn() { return playerPos; }
 
 	HPS *getHP() { return &hpCollection; }
 	PICKUPARROWS *getPickupArrows() { return &pickupArrowCollection; }
