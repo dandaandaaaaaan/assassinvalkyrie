@@ -121,7 +121,7 @@ void EnemyBulletManager::update(float frameTime, Game *gamePtr, TextureManager *
 			t->update(frameTime);
 }
 
-void EnemyBulletManager::collisions(Entity *play, PLATFORM p)
+void EnemyBulletManager::collisions(Player *play, PLATFORM p)
 {
 	VECTOR2 collisionVector;
 	std::vector<Entity *> inRangeP;
@@ -138,7 +138,7 @@ void EnemyBulletManager::collisions(Entity *play, PLATFORM p)
 				if ((*bullet)->collidesWith(*play, collisionVector))
 				{
 					(*bullet)->setActive(false);
-					play->setHealth(play->getHealth() - 4);
+					play->setHealth(play->getHealth() - round((4 * play->calcNegativeMultipler(play->getArmorLevel() -1))));
 				}
 				else
 					for (Entity *t : inRangeP)
@@ -157,7 +157,7 @@ void EnemyBulletManager::collisions(Entity *play, PLATFORM p)
 				if ((*fireball)->collidesWith(*play, collisionVector))
 				{
 					(*fireball)->setActive(false);
-					play->setHealth(play->getHealth() - 6);
+					play->setHealth(play->getHealth() - round((6* play->calcNegativeMultipler(play->getArmorLevel() -1))));
 				}
 				else
 					for (Entity *t : inRangeP)
