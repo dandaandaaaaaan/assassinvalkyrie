@@ -70,7 +70,7 @@ public:
 	void handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a);
 	void ai(Entity &ship1, Entity &ship2);
 	//void collisions(EnemyManager *enemyList);
-	void collisions(EnemyManager *enemyList, StageGenerator *stageGen);
+	void collisions(EnemyManager *enemyList, StageGenerator *stageGen, Audio *a);
 	void draw();
 	bool getJumpRight()
 	{

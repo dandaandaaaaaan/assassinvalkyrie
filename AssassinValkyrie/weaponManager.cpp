@@ -38,6 +38,7 @@ bool WeaponManager::initializeArrow(Game *gamePtr, int width, int height, int nc
 
 	(arrow)->setX(X - arrowNS::WIDTH / 2);
 	(arrow)->setY(Y);
+	(arrow)->setStartX(X - arrowNS::WIDTH / 2);
 
 	if (!is_initialised_arrow)
 		return is_initialised_arrow;
@@ -106,7 +107,7 @@ void WeaponManager::update(float frameTime, Input *input, Game *gamePtr, int wid
 	}
 	for (std::vector<Arrow *>::iterator arrow = arrow_collection.begin(); arrow < arrow_collection.end(); ++arrow)
 	{
-		(*arrow)->update(frameTime);
+		(*arrow)->update(frameTime, player);
 	}
 
 	for (std::vector<Stone *>::iterator stone = stone_collection.begin(); stone < stone_collection.end(); ++stone)

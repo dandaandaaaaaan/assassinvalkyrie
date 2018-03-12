@@ -7,6 +7,7 @@
 #include "bullet.h"
 #include "fireBall.h"
 #include "enemyManager.h"
+#include "Player.h"
 #include <vector>
 
 typedef std::vector<Bullet*> BULLETLIST;
@@ -33,7 +34,8 @@ public:
 	bool initializeBullet(Game *gamePtr, TextureManager *textureM, Gunner *gunner);
 	bool initializeFire(Game *gamePtr, TextureManager *textureM, Serpant *serpant, Entity *play);
 	void update(float frameTime, Game *gamePtr, TextureManager *textureM, Entity *play, Audio *a);
-	void collisions(Entity *play, PLATFORM p);
+	void collisions(Player *play, PLATFORM p);
 	void render();
 	void camera(float frameTime, int direction);
+	void setCameraVelocity(VECTOR2 velocity);
 };

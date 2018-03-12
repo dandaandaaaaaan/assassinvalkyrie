@@ -70,6 +70,7 @@ public:
 	bool initialize(Game *gamePtr, TextureManager *textureM, int *stageNo, EnemyManager *ent, TextureManager *pickupTextures);
 	void render(int stage);
 	void update(float frametime, int direction, int leftrightupdown, bool moveOn);
+	void updateSpeed(VECTOR2 velocity);
 
 	PLATFORM getVisionPlatforms();
 	PLATFORM getSidePlatforms();
