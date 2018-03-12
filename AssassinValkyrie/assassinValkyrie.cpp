@@ -271,9 +271,9 @@ void AssassinValkyrie::ai()
 void AssassinValkyrie::collisions()
 {
     VECTOR2 collisionVector;
-	weaponManager.collisions(&emList, player, visionPlatforms);
-	player->collisions(&emList, stageGenerator, audio);
-	emList.collisions(player, floorPlatforms, sidePlatforms, audio);
+	weaponManager.collisions(emList, player, visionPlatforms);
+	player->collisions(emList, stageGenerator, audio);
+	emList->collisions(player, floorPlatforms, sidePlatforms, audio);
 	emBulletList.collisions(player, visionPlatforms);
 	background->collisions(player, stageGenerator);
 }
