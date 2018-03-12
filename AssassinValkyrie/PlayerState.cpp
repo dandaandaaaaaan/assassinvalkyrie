@@ -17,7 +17,11 @@
 #include "keyBinding.h"
 #include "ClimbReadyState.h"
 #include "ClimbingState.h"
+
+#include "DyingState.h"
+
 #include "alertState.h"
+
 
 
 PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a)
@@ -32,6 +36,15 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 
 	Player *playerpointer;
 	playerpointer = &player;
+
+	if (player.getHealth() <= 0)
+	{
+		player.initialize(gamePtr,DYING_STATE::WIDTH, DYING_STATE::HEIGHT, DYING_STATE::TEXTURE_COLS, textureM);
+		player.setFrames(DYING_STATE::START_FRAME, DYING_STATE::END_FRAME);
+		player.setCurrentFrame(DYING_STATE::START_FRAME);
+		player.setLoop(false);
+		return new DyingState();
+	}
 
 	for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
 	{
@@ -165,6 +178,15 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 
 	Player *playerpointer;
 	playerpointer = &player;
+
+	if (player.getHealth() <= 0)
+	{
+		player.initialize(gamePtr, DYING_STATE::WIDTH, DYING_STATE::HEIGHT, DYING_STATE::TEXTURE_COLS, textureM);
+		player.setFrames(DYING_STATE::START_FRAME, DYING_STATE::END_FRAME);
+		player.setCurrentFrame(DYING_STATE::START_FRAME);
+		player.setLoop(false);
+		return new DyingState();
+	}
 
 	for (GUNNERLIST::iterator gunner = (gunnerCollection->begin()); gunner != gunnerCollection->end(); gunner++)
 	{
@@ -381,10 +403,10 @@ PlayerState* CrouchWalkingState::handleInput(Player& player, Input* input, Game 
 	if (!input->isKeyDown(key.getRightKey()) && !input->isKeyDown(key.getLeftKey()) || !input->isKeyDown(key.getDownKey()))
 	{
 
-		player.initialize(gamePtr, STANDING_STATE::WIDTH, STANDING_STATE::HEIGHT, STANDING_STATE::TEXTURE_COLS, textureM);
-		player.setFrames(STANDING_STATE::START_FRAME, STANDING_STATE::END_FRAME);
-		player.setCurrentFrame(STANDING_STATE::START_FRAME);
-		return new StandState();
+		player.initialize(gamePtr, CROUCHING_STATE::WIDTH, CROUCHING_STATE::HEIGHT, CROUCHING_STATE::TEXTURE_COLS, textureM);
+		player.setFrames(CROUCHING_STATE::START_FRAME, CROUCHING_STATE::END_FRAME);
+		player.setCurrentFrame(CROUCHING_STATE::START_FRAME);
+		return new CrouchingState();
 
 	}
 	return NULL;
@@ -501,6 +523,12 @@ PlayerState* ClimbingState::handleInput(Player& player, Input* input, Game *game
 		player.setCurrentFrame(CLIMB_READY_STATE::START_FRAME);
 		return new ClimbReadyState();
 	}
+	
+	return NULL;
+}
+
+PlayerState* DyingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
+{
 	
 	return NULL;
 }

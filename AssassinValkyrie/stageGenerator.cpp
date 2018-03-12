@@ -452,6 +452,9 @@ void StageGenerator::updateSpeed(VECTOR2 velocity) {
 
 	for (PickupStone *t : pickupStoneCollection)
 		t->getMove()->setCameraVelocity(velocity);
+
+	for (HelpText *t : helpList)
+		t->getMove()->setCameraVelocity(velocity);
 }
 
 

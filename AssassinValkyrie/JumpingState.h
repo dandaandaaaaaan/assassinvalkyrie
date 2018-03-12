@@ -9,11 +9,15 @@
 
 namespace JUMPING_STATE
 {
-	const int	WIDTH = 64;
-	const int	HEIGHT = 95;
-	const int TEXTURE_COLS = 14;
-	const int   START_FRAME = 42;
-	const int   END_FRAME = 55;
+
+	const int	WIDTH = 81;
+	const int	HEIGHT = 96;
+	const int TEXTURE_COLS = 10;
+	const int   START_FRAME = 30;
+	const int   END_FRAME = 39;
+
+
+
 
 }
 

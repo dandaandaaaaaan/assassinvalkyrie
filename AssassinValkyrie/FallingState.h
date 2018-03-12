@@ -9,11 +9,11 @@
 
 namespace FALLING_STATE
 {
-	const int	WIDTH = 64;
-	const int	HEIGHT = 96;
-	const int TEXTURE_COLS = 11;
-	const int   START_FRAME = 43;
-	const int   END_FRAME = 43;
+	const int	WIDTH = 81;
+	const int	HEIGHT = 97;
+	const int TEXTURE_COLS = 10;
+	const int   START_FRAME = 36;
+	const int   END_FRAME = 36;
 	
 }
 

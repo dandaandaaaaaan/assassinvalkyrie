@@ -9,8 +9,11 @@
 
 namespace MELEE_ATTACK_STATE
 {
-	const int	WIDTH = 110;
-	const int	HEIGHT = 95;
+
+	const int	WIDTH = 116;
+	const int	HEIGHT = 97;
+
+
 	const int TEXTURE_COLS = 5;
 	const int   START_FRAME = 20;
 	const int   END_FRAME = 24;

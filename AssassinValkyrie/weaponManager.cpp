@@ -18,8 +18,8 @@ bool WeaponManager::initializeArrow(Game *gamePtr, int width, int height, int nc
 {
 	bool is_initialised_arrow = true;
 	Arrow *arrow = arrow_collection.back();
-	
-	is_initialised_arrow = (arrow)->initialize(gamePtr, width, height, ncols, textureM);	
+
+	is_initialised_arrow = (arrow)->initialize(gamePtr, width, height, ncols, textureM);
 	(arrow)->setFrames(arrowNS::ARROW_START_FRAME, arrowNS::ARROW_END_FRAME);
 	(arrow)->setCurrentFrame(arrowNS::ARROW_START_FRAME);
 
@@ -37,7 +37,7 @@ bool WeaponManager::initializeArrow(Game *gamePtr, int width, int height, int nc
 	}
 
 	(arrow)->setX(X - arrowNS::WIDTH / 2);
-	(arrow)->setY(Y);
+	(arrow)->setY(Y-3);
 	(arrow)->setStartX(X - arrowNS::WIDTH / 2);
 
 	if (!is_initialised_arrow)
@@ -49,12 +49,12 @@ bool WeaponManager::initializeArrow(Game *gamePtr, int width, int height, int nc
 bool WeaponManager::initializeStone(Game *gamePtr, int width, int height, int ncols,
 	TextureManager *textureM, float X, float Y, Entity &player)
 {
-	
+
 	bool is_initialised_stone = true;
 	Stone *stone = stone_collection.back();
-	
+
 	is_initialised_stone = (stone)->initialize(gamePtr, width, height, ncols, textureM);
-	
+
 	(stone)->setFrames(stoneNS::STONE_START_FRAME, stoneNS::STONE_END_FRAME);
 	(stone)->setCurrentFrame(stoneNS::STONE_START_FRAME);
 
@@ -121,12 +121,12 @@ void WeaponManager::ai() {}
 void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM plat)
 {
 	VECTOR2 collisionVector;
-	
+
 	std::vector<Entity *> inRangeP;
 	for (Entity *t : plat)
 		if (!t->outOfBounds())
 			inRangeP.emplace_back(t);
-	
+
 	GUNNERLIST *gunnerCollection = enemyList->getGunners();
 	TROOPERLIST *trooperCollection = enemyList->getTroopers();
 	SERPANTLIST *serpantCollection = enemyList->getSerpants();
