@@ -52,6 +52,7 @@ void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, St
 		totalXP = totalXP - getNextLevelXP();
 		currentTotalLevel++;
 		skillPointAvailable++;
+		a->playCue(LEVELUP);
 	}
 	if (health <= 0)
 		visible = false;

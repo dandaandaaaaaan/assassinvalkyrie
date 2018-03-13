@@ -16,8 +16,8 @@ Global Settings
     Header File = D:\1 - School\Year 3.2\GPP\Assignment 2\AssassinValkyrie\AssassinValkyrie\audio\AssValk.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 30645455;
-    Last Modified High = 1931125288;
+    Last Modified Low = 3572713829;
+    Last Modified High = 30653138;
 
     Category
     {
@@ -227,19 +227,17 @@ Wave Bank
     Compression Preset Name = <none>;
     Xbox Bank Last Modified Low = 0;
     Xbox Bank Last Modified High = 0;
-    PC Bank Last Modified Low = 1931325422;
-    PC Bank Last Modified High = 30645455;
-    Header Last Modified Low = 0;
-    Header Last Modified High = 0;
-    Bank Last Revised Low = 1815657090;
-    Bank Last Revised High = 30645455;
+    PC Bank Last Modified Low = 3573388915;
+    PC Bank Last Modified High = 30653138;
+    Bank Last Revised Low = 2964521599;
+    Bank Last Revised High = 30653138;
 
     Wave
     {
         Name = Stealth Music - Hunter;
-        File = C:\Users\Ooaw\Downloads\Stealth Music - Hunter.wav;
-        Build Settings Last Modified Low = 3613765855;
-        Build Settings Last Modified High = 30645124;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\Stealth Music - Hunter.wav;
+        Build Settings Last Modified Low = 1945399091;
+        Build Settings Last Modified High = 30653137;
 
         Cache
         {
@@ -252,17 +250,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3069681857;
-            Last Modified High = 30645124;
+            Last Modified Low = 674610688;
+            Last Modified High = 30645322;
         }
     }
 
     Wave
     {
         Name = Sacha_Rush_Csum_-_04_-_End_of_Statics;
-        File = C:\Users\Ooaw\Downloads\Sacha_Rush_Csum_-_04_-_End_of_Statics.wav;
-        Build Settings Last Modified Low = 3715362923;
-        Build Settings Last Modified High = 30645128;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\Sacha_Rush_Csum_-_04_-_End_of_Statics.wav;
+        Build Settings Last Modified Low = 2186084654;
+        Build Settings Last Modified High = 30653137;
 
         Cache
         {
@@ -275,17 +273,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3372732302;
-            Last Modified High = 30645128;
+            Last Modified Low = 714610688;
+            Last Modified High = 30645322;
         }
     }
 
     Wave
     {
         Name = Flashpoint001a;
-        File = C:\Users\Ooaw\Downloads\Flashpoint001a.wav;
-        Build Settings Last Modified Low = 2805972180;
-        Build Settings Last Modified High = 30645251;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\Flashpoint001a.wav;
+        Build Settings Last Modified Low = 2244742103;
+        Build Settings Last Modified High = 30653137;
 
         Cache
         {
@@ -298,17 +296,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 2620743824;
-            Last Modified High = 30645251;
+            Last Modified Low = 954610688;
+            Last Modified High = 30645322;
         }
     }
 
     Wave
     {
         Name = Menu_Choice;
-        File = C:\Users\Ooaw\Downloads\Menu_Choice.wav;
-        Build Settings Last Modified Low = 3862803292;
-        Build Settings Last Modified High = 30645251;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\Menu_Choice.wav;
+        Build Settings Last Modified Low = 2300049126;
+        Build Settings Last Modified High = 30653137;
 
         Cache
         {
@@ -321,17 +319,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3737721521;
-            Last Modified High = 30645251;
+            Last Modified Low = 754610688;
+            Last Modified High = 30645322;
         }
     }
 
     Wave
     {
         Name = tindeck_1;
-        File = C:\Users\Ooaw\Downloads\tindeck_1.wav;
-        Build Settings Last Modified Low = 1412730498;
-        Build Settings Last Modified High = 30645312;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\tindeck_1.wav;
+        Build Settings Last Modified Low = 1031181096;
+        Build Settings Last Modified High = 30653138;
 
         Cache
         {
@@ -344,17 +342,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 698314072;
-            Last Modified High = 30645312;
+            Last Modified Low = 594610688;
+            Last Modified High = 30645322;
         }
     }
 
     Wave
     {
         Name = Fireball+1;
-        File = C:\Users\Ooaw\Downloads\Fireball+1.wav;
-        Build Settings Last Modified Low = 4087224193;
-        Build Settings Last Modified High = 30645314;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\Fireball+1.wav;
+        Build Settings Last Modified Low = 1087703273;
+        Build Settings Last Modified High = 30653138;
 
         Cache
         {
@@ -367,17 +365,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3673933125;
-            Last Modified High = 30645314;
+            Last Modified Low = 834610688;
+            Last Modified High = 30645322;
         }
     }
 
     Wave
     {
         Name = Laser_Machine_Gun-Mike_Koenig-1194129298-[AudioTrimmer.com];
-        File = C:\Users\Ooaw\Downloads\Laser_Machine_Gun-Mike_Koenig-1194129298-[AudioTrimmer.com].wav;
-        Build Settings Last Modified Low = 3362575906;
-        Build Settings Last Modified High = 30645316;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\Laser_Machine_Gun-Mike_Koenig-1194129298-[AudioTrimmer.com].wav;
+        Build Settings Last Modified Low = 1143095307;
+        Build Settings Last Modified High = 30653138;
 
         Cache
         {
@@ -390,17 +388,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3182900825;
-            Last Modified High = 30645316;
+            Last Modified Low = 754610688;
+            Last Modified High = 30645322;
         }
     }
 
     Wave
     {
         Name = sword;
-        File = C:\Users\Ooaw\Downloads\sword.wav;
-        Build Settings Last Modified Low = 1042684826;
-        Build Settings Last Modified High = 30645317;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\sword.wav;
+        Build Settings Last Modified Low = 1175834464;
+        Build Settings Last Modified High = 30653138;
 
         Cache
         {
@@ -413,17 +411,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 909090750;
-            Last Modified High = 30645317;
+            Last Modified Low = 614610688;
+            Last Modified High = 30645322;
         }
     }
 
     Wave
     {
         Name = Dying_Sound_Effects_Mp3Converter_net_-_AudioTrimme;
-        File = C:\Users\Ooaw\Downloads\Dying_Sound_Effects_Mp3Converter_net_-_AudioTrimme.wav;
-        Build Settings Last Modified Low = 3433759411;
-        Build Settings Last Modified High = 30645453;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\Dying_Sound_Effects_Mp3Converter_net_-_AudioTrimme.wav;
+        Build Settings Last Modified Low = 1223490516;
+        Build Settings Last Modified High = 30653138;
 
         Cache
         {
@@ -436,17 +434,17 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3107262801;
-            Last Modified High = 30645453;
+            Last Modified Low = 814610688;
+            Last Modified High = 30645322;
         }
     }
 
     Wave
     {
         Name = Minecraft_-_Damage_Sound_Mp3Converter_net_;
-        File = C:\Users\Ooaw\Downloads\Minecraft_-_Damage_Sound_Mp3Converter_net_.wav;
-        Build Settings Last Modified Low = 1735753039;
-        Build Settings Last Modified High = 30645455;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\Minecraft_-_Damage_Sound_Mp3Converter_net_.wav;
+        Build Settings Last Modified Low = 1273816906;
+        Build Settings Last Modified High = 30653138;
 
         Cache
         {
@@ -459,8 +457,31 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 1576467875;
-            Last Modified High = 30645455;
+            Last Modified Low = 694610688;
+            Last Modified High = 30645322;
+        }
+    }
+
+    Wave
+    {
+        Name = Power_Up_Ray-Mike_Koenig-800933783;
+        File = ..\..\..\Downloads\drive-download-20180313T133951Z-001\Power_Up_Ray-Mike_Koenig-800933783.wav;
+        Build Settings Last Modified Low = 1630777235;
+        Build Settings Last Modified High = 30653138;
+
+        Cache
+        {
+            Format Tag = 0;
+            Channels = 2;
+            Sampling Rate = 96000;
+            Bits Per Sample = 1;
+            Play Region Offset = 44;
+            Play Region Length = 483840;
+            Loop Region Offset = 0;
+            Loop Region Length = 0;
+            File Type = 1;
+            Last Modified Low = 190987282;
+            Last Modified High = 30653134;
         }
     }
 }
@@ -472,6 +493,8 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
+    Bank Last Modified Low = 3579339671;
+    Bank Last Modified High = 30653138;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -945,6 +968,53 @@ Sound Bank
         }
     }
 
+    Sound
+    {
+        Name = Power_Up_Ray-Mike_Koenig-800933783;
+        Volume = -1200;
+        Pitch = 0;
+        Priority = 0;
+
+        Category Entry
+        {
+            Name = Default;
+        }
+
+        Track
+        {
+            Volume = 0;
+            Use Filter = 0;
+
+            Play Wave Event
+            {
+                Break Loop = 0;
+                Use Speaker Position = 0;
+                Use Center Speaker = 1;
+                New Speaker Position On Loop = 1;
+                Speaker Position Angle = 0.000000;
+                Speaker Position Arc = 0.000000;
+
+                Event Header
+                {
+                    Timestamp = 0;
+                    Relative = 0;
+                    Random Recurrence = 0;
+                    Random Offset = 0;
+                }
+
+                Wave Entry
+                {
+                    Bank Name = Wave Bank;
+                    Bank Index = 0;
+                    Entry Name = Power_Up_Ray-Mike_Koenig-800933783;
+                    Entry Index = 10;
+                    Weight = 255;
+                    Weight Min = 0;
+                }
+            }
+        }
+    }
+
     Cue
     {
         Name = stealth;
@@ -1140,6 +1210,26 @@ Sound Bank
         {
             Name = Minecraft_-_Damage_Sound_Mp3Converter_net_;
             Index = 9;
+            Weight Min = 0;
+            Weight Max = 255;
+        }
+    }
+
+    Cue
+    {
+        Name = levelup;
+
+        Variation
+        {
+            Variation Type = 3;
+            Variation Table Type = 1;
+            New Variation on Loop = 0;
+        }
+
+        Sound Entry
+        {
+            Name = Power_Up_Ray-Mike_Koenig-800933783;
+            Index = 10;
             Weight Min = 0;
             Weight Max = 255;
         }
