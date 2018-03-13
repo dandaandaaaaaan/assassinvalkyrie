@@ -36,6 +36,10 @@ namespace buttonNS
 	const int SPEED_FRAME = 1;
 	const int RANGE_FRAME = 2;
 	const int ARMOUR_FRAME = 3;
+	const int STEALTH_GLOW = 4;
+	const int SPEED_GLOW = 5;
+	const int RANGE_GLOW = 6;
+	const int ARMOUR_GLOW = 7;
 
 }
 
