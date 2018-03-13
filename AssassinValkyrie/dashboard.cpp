@@ -233,11 +233,14 @@ void Dashboard::update(float frameTime,Player *playerM, Input *input)
 	playerCurrentHealth = playerM->getHealth();
 	playerHealth.setHealthSize(playerM->getHealth());
 	playerCurrentXP = playerM->getTotalXP();
-	playerExp.setXPSize(playerM->getTotalXP());
+	playerExp.setXPSize(playerM->getTotalXP(), playerM->getNextLevelXP());
 	stealthPoints = playerM->getStealthLevel();
 	speedPoints = playerM->getSpeedLevel();
 	rangePoints = playerM->getRangeLevel();
 	armorPoints = playerM->getArmorLevel();
+
+
+	playerMaxXP = playerM->getNextLevelXP();
 
 	tooltipActive = false;
 	tooltipType = 0;

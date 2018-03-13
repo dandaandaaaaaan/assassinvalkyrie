@@ -29,7 +29,7 @@ private:
 public:
 	bool initialize(Graphics *graphics, TextureManager *textureM, int total_health);
 	void setHealthSize(int value);
-	void setXPSize(int value);
+	void setXPSize(int value, int fullXP);
 };
 
 #endif

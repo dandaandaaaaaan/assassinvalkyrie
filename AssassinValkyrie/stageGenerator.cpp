@@ -424,6 +424,20 @@ void StageGenerator::update(float frametime, int direction, int leftrightupdown,
 	}
 
 	for (HelpText *t : helpList) {
+		switch (leftrightupdown) {
+		case 1:
+			(t)->setX((t)->getStartX() - 2560);
+			break;
+		case 2:
+			(t)->setX((t)->getStartX());
+			break;
+		case 3:
+			(t)->setY((t)->getStartY() + 1264);
+			break;
+		case 4:
+			(t)->setY((t)->getStartY());
+			break;
+		}
 		if (moveOn)
 			(t)->update(frametime, direction);
 	}
