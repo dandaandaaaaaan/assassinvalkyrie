@@ -19,12 +19,12 @@ void PlayerBar::setHealthSize(int health)
 	spriteData.rect.right = spriteData.rect.left + (LONG)(spriteData.width * health / fullHealth);
 }
 
-void PlayerBar::setXPSize(int XP)
+void PlayerBar::setXPSize(int XP, int fullXP)
 {
 	if (XP < 0)
 		XP = 0;
-	else if (XP > fullHealth)
-		XP = fullHealth;
-	spriteData.rect.right = spriteData.rect.left + (LONG)(spriteData.width * XP / fullHealth);
+	else if (XP > fullXP)
+		XP = fullXP;
+	spriteData.rect.right = spriteData.rect.left + (LONG)(spriteData.width * XP / fullXP);
 }
 

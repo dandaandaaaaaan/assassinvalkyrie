@@ -49,9 +49,10 @@ int Player::getNextLevelXP() {
 void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	if (totalXP >= getNextLevelXP()) {
+		totalXP = totalXP - getNextLevelXP();
 		currentTotalLevel++;
 		skillPointAvailable++;
-		totalXP = 0;
+		a->playCue(LEVELUP);
 	}
 
 	if (visible)

@@ -233,11 +233,14 @@ void Dashboard::update(float frameTime,Player *playerM, Input *input)
 	playerCurrentHealth = playerM->getHealth();
 	playerHealth.setHealthSize(playerM->getHealth());
 	playerCurrentXP = playerM->getTotalXP();
-	playerExp.setXPSize(playerM->getTotalXP());
+	playerExp.setXPSize(playerM->getTotalXP(), playerM->getNextLevelXP());
 	stealthPoints = playerM->getStealthLevel();
 	speedPoints = playerM->getSpeedLevel();
 	rangePoints = playerM->getRangeLevel();
 	armorPoints = playerM->getArmorLevel();
+
+
+	playerMaxXP = playerM->getNextLevelXP();
 
 	tooltipActive = false;
 	tooltipType = 0;
@@ -273,24 +276,51 @@ void Dashboard::update(float frameTime,Player *playerM, Input *input)
 		playerM->setStealthLevel();
 		playerM->setStealthSet(true);
 		playerM->useSkillPoints();
+		stealthIcon.setCurrentFrame(buttonNS::STEALTH_FRAME);
 	}
 
 	if (speedIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton())
 	{
 		playerM->setSpeedLevel();
 		playerM->useSkillPoints();
+		speedIcon.setCurrentFrame(buttonNS::SPEED_FRAME);
 	}
 
 	if (rangeIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton())
 	{
 		playerM->setRangeLevel();
 		playerM->useSkillPoints();
+		rangeIcon.setCurrentFrame(buttonNS::RANGE_FRAME);
 	}
 
 	if (armorIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton())
 	{
 		playerM->setArmorLevel();
 		playerM->useSkillPoints();
+		armorIcon.setCurrentFrame(buttonNS::ARMOUR_FRAME);
+	}
+
+	if (playerM->getSkillPoints() >= 1)
+	{
+		if ((stealthIcon.getCurrentFrame() == buttonNS::STEALTH_FRAME) && (playerM->getStealthLevel() <= 3))
+			stealthIcon.setCurrentFrame(buttonNS::STEALTH_GLOW);
+		if ((speedIcon.getCurrentFrame() == buttonNS::SPEED_FRAME) && (playerM->getSpeedLevel() <= 3))
+			speedIcon.setCurrentFrame(buttonNS::SPEED_GLOW);
+		if ((rangeIcon.getCurrentFrame() == buttonNS::RANGE_FRAME) && (playerM->getRangeLevel() <= 3))
+			rangeIcon.setCurrentFrame(buttonNS::RANGE_GLOW);
+		if ((armorIcon.getCurrentFrame() == buttonNS::ARMOUR_FRAME) && (playerM->getArmorLevel() <= 3))
+			armorIcon.setCurrentFrame(buttonNS::ARMOUR_GLOW);
+	}
+	else
+	{
+		if ((stealthIcon.getCurrentFrame() == buttonNS::STEALTH_GLOW))
+			stealthIcon.setCurrentFrame(buttonNS::STEALTH_FRAME);
+		if ((speedIcon.getCurrentFrame() == buttonNS::SPEED_GLOW))
+			speedIcon.setCurrentFrame(buttonNS::SPEED_FRAME);
+		if ((rangeIcon.getCurrentFrame() == buttonNS::RANGE_GLOW))
+			rangeIcon.setCurrentFrame(buttonNS::RANGE_FRAME);
+		if ((armorIcon.getCurrentFrame() == buttonNS::ARMOUR_GLOW))
+			armorIcon.setCurrentFrame(buttonNS::ARMOUR_FRAME);
 	}
 
 }

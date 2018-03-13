@@ -88,6 +88,7 @@ const char DIE[] = "die";
 const char DIE2[] = "die2";
 const char PLAYERMELEE[] = "playermelee";
 const char PLAYERRANGE[] = "playerrange";
+const char LEVELUP[] = "levelup";
 
 // key mappings
 // In this game simple constants are used for key mappings. If variables were used
