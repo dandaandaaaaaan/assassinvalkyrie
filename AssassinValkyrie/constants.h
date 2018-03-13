@@ -44,7 +44,7 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 const float GRAVITY = 9.81f;
 
 const int	INIT_STAGE = 0;
-const int	FINAL_STAGE = 2;
+const int	FINAL_STAGE = 3;
 
 // graphic images
 const char MMBACKGROUND_IMAGE[] = "pictures\\mainMenuBackground.png";

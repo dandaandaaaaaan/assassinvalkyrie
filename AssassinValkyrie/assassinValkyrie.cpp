@@ -253,7 +253,7 @@ void AssassinValkyrie::update()
 		if (currentStage != FINAL_STAGE)
 		{
 			currentStage++;
-			player->setVisible(false);
+			player->getVisible();
 			emList->~EnemyManager();
 			stageGenerator->~StageGenerator();
 			re_initialize();
@@ -264,15 +264,15 @@ void AssassinValkyrie::update()
 // Artificial Intelligence
 void AssassinValkyrie::ai()
 {
-	emList->ai(player, visionPlatforms);
+	emList->ai(player, visionPlatforms, input);
 }
 
 // Handle collisions
 void AssassinValkyrie::collisions()
 {
     VECTOR2 collisionVector;
-	weaponManager.collisions(emList, player, visionPlatforms);
-	player->collisions(emList, stageGenerator, audio);
+	weaponManager.collisions(emList, player, visionPlatforms, input);
+	player->collisions(emList, stageGenerator, audio, input);
 	emList->collisions(player, floorPlatforms, sidePlatforms, audio);
 	emBulletList.collisions(player, visionPlatforms);
 	background->collisions(player, stageGenerator);

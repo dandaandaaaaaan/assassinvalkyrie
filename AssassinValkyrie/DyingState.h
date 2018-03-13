@@ -9,8 +9,8 @@
 
 namespace DYING_STATE
 {
-	const int	WIDTH = 97;
-	const int	HEIGHT = 97;
+	const int	WIDTH = 91;
+	const int	HEIGHT = 96;
 	const int TEXTURE_COLS = 10;
 	const int   START_FRAME = 100;
 	const int   END_FRAME = 109;

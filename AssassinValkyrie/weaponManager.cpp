@@ -102,7 +102,7 @@ void WeaponManager::update(float frameTime, Input *input, Game *gamePtr, int wid
 			Tick2 = GetTickCount();
 			stone_collection.push_back(new Stone());
 			player.setTotalStone(player.getTotalStone() - 1);
-			initializeStone(gamePtr, width, height,stonecols, textureM, X, Y, player);
+			initializeStone(gamePtr, width, stoneNS::HEIGHT,stonecols, textureM, X, Y, player);
 		}
 	}
 	for (std::vector<Arrow *>::iterator arrow = arrow_collection.begin(); arrow < arrow_collection.end(); ++arrow)
@@ -118,7 +118,7 @@ void WeaponManager::update(float frameTime, Input *input, Game *gamePtr, int wid
 
 void WeaponManager::ai() {}
 
-void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM plat)
+void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM plat, Input *i)
 {
 	VECTOR2 collisionVector;
 
@@ -139,7 +139,7 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 			if ((*gunner)->collidesWith(**it, collisionVector) && (*gunner)->isAlive() && !(*gunner)->outOfBounds() )
 			{
 				(*gunner)->getHealth()->damage(gunnerNS::HEALTH / 2);
-				(*gunner)->handleInput(new AlertedState());
+				(*gunner)->handleInput(new AlertedState(), i);
 				(*it)->setVisible(false);
 				(*it)->setActive(false);
 				if (!(*gunner)->isAlive() && (player->getCurrentTotalLevel() < player->getTotalLevels()))
@@ -153,7 +153,7 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 			if ((*trooper)->collidesWith(**it, collisionVector) && (*trooper)->isAlive() && !(*trooper)->outOfBounds())
 			{
 				(*trooper)->getHealth()->damage(trooperNS::HEALTH/2);
-				(*trooper)->handleInput(new AlertedState());
+				(*trooper)->handleInput(new AlertedState(), i);
 				(*it)->setVisible(false);
 				(*it)->setActive(false);
 				if (!(*trooper)->isAlive() && (player->getCurrentTotalLevel() < player->getTotalLevels()))
@@ -166,7 +166,7 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 			if ((*serpant)->collidesWith(**it, collisionVector) && (*serpant)->isAlive() && !(*serpant)->outOfBounds())
 			{
 				(*serpant)->getHealth()->damage(serpantNS::HEALTH / 3);
-				(*serpant)->handleInput(new AlertedState());
+				(*serpant)->handleInput(new AlertedState(), i);
 				(*it)->setVisible(false);
 				(*it)->setActive(false);
 				if (!(*serpant)->isAlive() && (player->getCurrentTotalLevel() < player->getTotalLevels()))
@@ -204,7 +204,7 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 			{
 				VECTOR2 unit = *e->getCenter() - *(*stone)->getCenter();
 				if (D3DXVec2Length(&unit) < stoneNS::RANGE)
-					e->handleInput(new DistractedState(*(*stone)->getCenter()));
+					e->handleInput(new DistractedState(*(*stone)->getCenter()), i);
 			}
 			stone = stone_collection.erase(stone);
 		}

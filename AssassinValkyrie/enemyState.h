@@ -21,7 +21,7 @@ protected:
 public:
 	EnemyState() { timer = GetTickCount(); }
 	virtual ~EnemyState() {}
-	virtual EnemyState* handleInput(Enemy *enemy, Entity *target, PLATFORM p) { return new EnemyState(); }
+	virtual EnemyState* handleInput(Enemy *enemy, Entity *target, PLATFORM p, Input *i) { return new EnemyState(); }
 	virtual void update(Enemy *enemy, Entity *target);
 };//end of EnemyState class
 #endif

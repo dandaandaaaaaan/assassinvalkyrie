@@ -89,21 +89,20 @@ void EnemyManager::update(float frameTime, PLATFORM p, Audio *a)
 			else
 				t->triggerAlert = false;
 		}
-
 	if (alertSound) {
 		a->playCue(ALERT);
 		alertSound = false;
 	}
 }
 
-void EnemyManager::ai(Entity *player, PLATFORM p)
+void EnemyManager::ai(Entity *player, PLATFORM p, Input *i)
 {
 	std::vector<VECTOR2*> posAlertList;
 	std::vector<Enemy*> posNotList;
 	for (Enemy *t : worldCollection)
 		if (!t->outOfBounds())
 		{
-			t->ai(p);
+			t->ai(p, i);
 			if (AlertedState *a = dynamic_cast<AlertedState*>(t->getState()))
 				posAlertList.emplace_back(&VECTOR2{ t->getCenterX(), t->getCenterY() });
 			else
@@ -116,7 +115,7 @@ void EnemyManager::ai(Entity *player, PLATFORM p)
 			{
 				VECTOR2 unit = *v1 - *v2->getCenter();
 				if (D3DXVec2Length(&unit) < alertRange && player->getVisible())
-					v2->handleInput(new AlertedState());
+					v2->handleInput(new AlertedState(), i);
 			}
 }
 
@@ -138,14 +137,6 @@ void EnemyManager::collisions(Entity *play, PLATFORM floor, PLATFORM fill, Audio
 			world++;
 	}
 
-	//for (Trooper *t : trooperCollection)
-	//	if (!t->outOfBounds())
-	//		if (t->getAttack()->getAnimation() && t->collidesWith(*play, collisionVector) && t->getAttack()->getAttack() && t->getVisible() && play->getVisible())
-	//		{
-	//			a->playCue(SWORD);
-	//			play->setHealth(play->getHealth() - 5);
-	//			t->getAttack()->offAttack();
-	//		}
 	for (Enemy *t : worldCollection)
 		if (!t->outOfBounds())
 			unCollide(t, floor, fill);

@@ -4,6 +4,7 @@
 // Student Number	: S10165581F
 
 #include "rayCasting.h"
+#include "Player.h"
 
 Ray::Ray()
 {
@@ -209,21 +210,33 @@ void Ray::render(Graphics *g)
 	}
 }
 
-bool Ray::inSight(VECTOR2 entity, const PLATFORM &walls)
+bool Ray::inSight(Entity e, const PLATFORM &walls, Input *i)
 {
+	VECTOR2 center = VECTOR2{ roundf(e.getCenterX()),roundf(e.getCenterY()) };
 	float range1Angle = direction + visibilityAngle;
 	float range2Angle = direction - visibilityAngle;
 
 	VECTOR2 range1 = VECTOR2{ cos(range1Angle), sin(range1Angle) } *rayMultiplier;
 	VECTOR2 range2 = VECTOR2{ cos(range2Angle), sin(range2Angle) } *rayMultiplier;
-	bool c1 = isRight(pos, range1, entity);
-	bool c2 = isLeft(pos, range2, entity);
+	bool c1 = isRight(pos, range1, center);
+	bool c2 = isLeft(pos, range2, center);
 
 	if ((c1 && c2))
 	{
-		VECTOR2 collision = castRayVector(entity, walls);
-		if (collision == entity)
+		VECTOR2 collision1 = castRayVector(center, walls);
+		VECTOR2 collision2 = castRayVector({center.x,center.y + (95 / 4) }, walls);
+		VECTOR2 collision3 = castRayVector({ center.x,center.y - (95 / 4) }, walls);
+
+		if (VECTOR2{ roundf(collision1.x),roundf(collision1.y) } == center)
 			return true;
+		else {
+			if (i->isKeyDown(DEFAULT_DOWN_KEY))
+				return false;
+			else if (collision2 == VECTOR2{ center.x, center.y + (playerNS::HEIGHT / 4) })
+				return true;
+			else if (collision3 == VECTOR2{ center.x, center.y - (playerNS::HEIGHT / 4) })
+				return true;
+		}
 	}
 	return false;
 }

@@ -9,16 +9,13 @@
 
 namespace JUMPING_STATE
 {
-
-	const int	WIDTH = 81;
-	const int	HEIGHT = 96;
+	//const int	WIDTH = 81;
+	//const int	HEIGHT = 96;
+	const int	WIDTH = 65;
+	const int	HEIGHT = 95;
 	const int TEXTURE_COLS = 10;
 	const int   START_FRAME = 30;
 	const int   END_FRAME = 39;
-
-
-
-
 }
 
 #include "PlayerState.h"
@@ -44,31 +41,27 @@ public:
 
 	void update(Player &player, float frameTime)
 	{
-		
 		velocityY += gravity*t*frameTime;
 		player.setVelocityY(velocityY);
 		if (player.getJumpRight())
 		{
-
-			player.setX(player.getX() + velocityX*frameTime);
+			if (!player.getCollideWall())
+				player.setX(player.getX() + velocityX*frameTime);
+			else
+				velocityX = 0;
 			player.setY(player.getY() + velocityY*frameTime);
 			t += TimeInterval;
-			
-
 		}
 
 		else if (player.getJumpLeft())
 		{
-			player.setX(player.getX() - velocityX*frameTime);
+			if (!player.getCollideWall())
+				player.setX(player.getX() - velocityX*frameTime);
+			else
+				velocityX = 0;
 			player.setY(player.getY() + velocityY*frameTime);
 			t += TimeInterval;
-
 		}
-
-
-
 	}
-
-
 };
 #endif

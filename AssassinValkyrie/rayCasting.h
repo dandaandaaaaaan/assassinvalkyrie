@@ -41,7 +41,7 @@ public:
 	VECTOR2 castRayVector(VECTOR2 target, const PLATFORM &walls);
 	void updateVision(const PLATFORM &walls);
 	void render(Graphics *g);
-	bool inSight(VECTOR2 entity, const PLATFORM &walls);
+	bool inSight(Entity entity, const PLATFORM &walls, Input *i);
 
 	void setDirection(int d)
 	{

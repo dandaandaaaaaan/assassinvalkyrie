@@ -54,15 +54,39 @@ void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, St
 		skillPointAvailable++;
 		a->playCue(LEVELUP);
 	}
-	if (health <= 0)
-		visible = false;
 
 	if (visible)
 	{
 		handleInput(input, gamePtr, textureM, stagegenerator, enemyList, p, a);
 		state_->update(*this, frameTime);
 	}
+	if (collideWall)
+		setVelocity({ 0 ,getVelocityY() });
+
 	Entity::update(frameTime);
+
+	if (collideWall)
+		setVelocity({ 0 ,getVelocityY() });
+
+	/*	for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
+	{
+		if (player->collidesWith(**fill, collisionVector))
+		{
+			if (!player->isFlipHorizontal())
+			{
+				player->setX((*fill)->getX() - 80);
+			}
+
+			else
+			{
+				player->setX((*fill)->getX() + 80);
+			}
+			moveOn = false;
+			break;
+		}
+		else
+			moveOn = true;
+	}*/
 }
 
 void Player::handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
@@ -75,7 +99,7 @@ void Player::handleInput(Input* input, Game *gamePtr, TextureManager *textureM, 
 	}
 }
 
-void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen, Audio *a)
+void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen, Audio *a, Input *i)
 {
 	VECTOR2 collisionVector;
 	SIDES fill = *stageGen->getSides();
@@ -84,9 +108,17 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen, Audio
 	for (Entity *e : fill)
 		if (collidesWith(*e, VECTOR2{})) 
 		{
-			setVelocity({ 0 ,getVelocityY()});
+			if (LeftFill *left = dynamic_cast<LeftFill*>(e))
+				if (i->isKeyDown(DEFAULT_RIGHT_KEY) || getVelocityX() > 0)
+					collideWall = true;
+			if (RightFill *right = dynamic_cast<RightFill*>(e))
+				if (i->isKeyDown(DEFAULT_LEFT_KEY) || getVelocityX() < 0)
+					collideWall = true;
 			break;
 		}
+		else
+			collideWall = false;
+
 
 	GUNNERLIST *gunnerCollection = enemyList->getGunners();
 	TROOPERLIST *trooperCollection = enemyList->getTroopers();

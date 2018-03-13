@@ -9,8 +9,10 @@
 
 namespace FALLING_STATE
 {
-	const int	WIDTH = 81;
-	const int	HEIGHT = 97;
+	//const int	WIDTH = 81;
+	//const int	HEIGHT = 97;
+	const int	WIDTH = 64;
+	const int	HEIGHT = 94;
 	const int TEXTURE_COLS = 10;
 	const int   START_FRAME = 36;
 	const int   END_FRAME = 36;

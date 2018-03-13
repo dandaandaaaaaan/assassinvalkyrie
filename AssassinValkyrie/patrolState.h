@@ -13,7 +13,7 @@ class PatrollingState : public EnemyState
 {
 public:
 	PatrollingState();
-	virtual EnemyState* handleInput(Enemy *enemy, Entity *target, PLATFORM p);
+	virtual EnemyState* handleInput(Enemy *enemy, Entity *target, PLATFORM p, Input *i);
 	virtual void update(Enemy *enemy, Entity *target);
 };//end of PatrollingState class
 #endif

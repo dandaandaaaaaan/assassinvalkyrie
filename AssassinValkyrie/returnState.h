@@ -13,6 +13,6 @@ class ReturningState : public EnemyState
 {
 public:
 	ReturningState();
-	virtual EnemyState* handleInput(Enemy *enemy, Entity *target, PLATFORM p);
+	virtual EnemyState* handleInput(Enemy *enemy, Entity *target, PLATFORM p, Input *i);
 };
 #endif

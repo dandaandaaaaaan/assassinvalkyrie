@@ -22,7 +22,7 @@
 
 #include "alertState.h"
 
-
+int assFlip = 60;
 
 PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
@@ -89,6 +89,8 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 			player.setFrameDelay(0.3);
 			player.setLoop(false);
 			player.IsAssassinating(true);
+			if (player.isFlipHorizontal())
+				player.setX(player.getX() - assFlip);
 			return new AssassinateState();
 		}
 	}
@@ -122,7 +124,6 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 		player.setFrames(CROUCHING_STATE::START_FRAME, CROUCHING_STATE::END_FRAME);
 		player.setCurrentFrame(CROUCHING_STATE::START_FRAME);
 		return new CrouchingState();
-		
 	}
 
 	else if (input->isKeyDown(key.getMeleeKey()))
@@ -135,7 +136,6 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 		player.IsMeleeAttacking(true);
 		a->playCue(PLAYERMELEE);
 		return new MeleeAttackState();
-
 	}
 
 	else if (input->isKeyDown(key.getRangeKey()))
@@ -146,7 +146,6 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 		player.setFrameDelay(0.1);
 		player.setLoop(false);
 		return new RangeAttackState();
-
 	}
 
 	else if (input->isKeyDown(key.getDistractKey()))
@@ -157,7 +156,6 @@ PlayerState* StandState::handleInput(Player& player, Input* input, Game *gamePtr
 		player.setFrameDelay(0.3);
 		player.setLoop(false);
 		return new ThrowingState();
-
 	}
 
 	return NULL;
@@ -213,7 +211,6 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 		if (player.collidesWith(**floor, collisionVector))
 		{
 			player.setOnGround(true);
-		
 		}
 	}
 
@@ -227,6 +224,8 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 			player.setFrameDelay(0.3);
 			player.setLoop(false);
 			player.IsAssassinating(true);
+			if (player.isFlipHorizontal())
+				player.setX(player.getX() - assFlip);
 			return new AssassinateState();
 		}
 	}
@@ -249,17 +248,15 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 
 	else if (input->isKeyDown(key.getJumpKey()) && input->isKeyDown(key.getRightKey()))
 	{
-		
-				player.initialize(gamePtr, JUMPING_STATE::WIDTH, JUMPING_STATE::HEIGHT, JUMPING_STATE::TEXTURE_COLS, textureM);
-				player.setFrames(JUMPING_STATE::START_FRAME, JUMPING_STATE::END_FRAME);
-				player.setCurrentFrame(JUMPING_STATE::START_FRAME);
-				player.setFrameDelay(0.2);
-				player.flipHorizontal(false);
-				player.setLoop(false);
-				player.setJumpRight(true);
-				return new JumpingState();
-
-		
+		player.initialize(gamePtr, JUMPING_STATE::WIDTH, JUMPING_STATE::HEIGHT, JUMPING_STATE::TEXTURE_COLS, textureM);
+		player.setFrames(JUMPING_STATE::START_FRAME, JUMPING_STATE::END_FRAME);
+		player.setCurrentFrame(JUMPING_STATE::START_FRAME);
+		player.setFrameDelay(0.2);
+		player.flipHorizontal(false);
+		player.setLoop(false);
+		player.setJumpRight(true);
+		//player.setVelocity({ float(250 * cos(45 * PI / 180)),float(250 * sin(45 * PI / 180)) });
+		return new JumpingState();
 	}
 
 	else if (input->isKeyDown(key.getJumpKey()) && input->isKeyDown(key.getLeftKey()))
@@ -271,9 +268,9 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 		player.flipHorizontal(true);
 		player.setLoop(false);
 		player.setJumpLeft(true);
+		//player.setVelocity({ float(250 * cos(45 * PI / 180)),float(250 * sin(45 * PI / 180)) });
 		return new JumpingState();
 	}
-
 	else if (input->isKeyDown(key.getMeleeKey()))
 	{
 		player.initialize(gamePtr, MELEE_ATTACK_STATE::WIDTH, MELEE_ATTACK_STATE::HEIGHT, MELEE_ATTACK_STATE::TEXTURE_COLS, textureM);
@@ -284,11 +281,7 @@ PlayerState* RunningState::handleInput(Player& player, Input* input, Game *gameP
 		player.IsMeleeAttacking(true);
 		a->playCue(PLAYERMELEE);
 		return new MeleeAttackState();
-
 	}
-
-
-
 	return NULL;
 }
 
@@ -302,7 +295,6 @@ PlayerState* CrouchingState::handleInput(Player& player, Input* input, Game *gam
 		player.setCurrentFrame(STANDING_STATE::START_FRAME);
 		return new StandState();
 	}
-
 	else if (input->isKeyDown(key.getRightKey()))
 	{
 		player.initialize(gamePtr, CROUCH_WALKING_STATE::WIDTH, CROUCH_WALKING_STATE::HEIGHT, CROUCH_WALKING_STATE::TEXTURE_COLS, textureM);
@@ -314,7 +306,6 @@ PlayerState* CrouchingState::handleInput(Player& player, Input* input, Game *gam
 		player.setVelocity(VECTOR2(CROUCH_WALKING_STATE::CROUCH_WALKING_SPEED*player.calcMultipler(player.getSpeedLevel()), CROUCH_WALKING_STATE::CROUCH_WALKING_SPEED*player.calcMultipler(player.getSpeedLevel())));
 		return new CrouchWalkingState();
 	}
-
 	else if (input->isKeyDown(key.getLeftKey()))
 	{
 		player.initialize(gamePtr, CROUCH_WALKING_STATE::WIDTH, CROUCH_WALKING_STATE::HEIGHT, CROUCH_WALKING_STATE::TEXTURE_COLS, textureM);
@@ -326,25 +317,21 @@ PlayerState* CrouchingState::handleInput(Player& player, Input* input, Game *gam
 		player.setVelocity(VECTOR2(-CROUCH_WALKING_STATE::CROUCH_WALKING_SPEED*player.calcMultipler(player.getSpeedLevel()), -CROUCH_WALKING_STATE::CROUCH_WALKING_SPEED*player.calcMultipler(player.getSpeedLevel())));
 		return new CrouchWalkingState();
 	}
-
-
 	return NULL;
 }
 
 PlayerState* AssassinateState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
-	
 	if (player.getAnimationComplete())
 	{
-
 		player.initialize(gamePtr, STANDING_STATE::WIDTH, STANDING_STATE::HEIGHT, STANDING_STATE::TEXTURE_COLS, textureM);
 		player.setFrames(STANDING_STATE::START_FRAME, STANDING_STATE::END_FRAME);
 		player.setCurrentFrame(STANDING_STATE::START_FRAME);
 		player.setLoop(true);
 		player.IsAssassinating(false);
-	
+		if (player.isFlipHorizontal())
+			player.setX(player.getX() + assFlip);
 		return new StandState();
-
 	}
 	return NULL;
 }
@@ -353,15 +340,13 @@ PlayerState* MeleeAttackState::handleInput(Player& player, Input* input, Game *g
 {
 	if (player.getAnimationComplete())
 	{
-		
-			player.initialize(gamePtr, STANDING_STATE::WIDTH, STANDING_STATE::HEIGHT, STANDING_STATE::TEXTURE_COLS, textureM);
-			player.setFrames(STANDING_STATE::START_FRAME, STANDING_STATE::END_FRAME);
-			player.setCurrentFrame(STANDING_STATE::START_FRAME);
-			player.IsMeleeAttacking(false);
-			player.setLoop(true);
-			player.IsMeleeAttacking(false);
-			return new StandState();
-		
+		player.initialize(gamePtr, STANDING_STATE::WIDTH, STANDING_STATE::HEIGHT, STANDING_STATE::TEXTURE_COLS, textureM);
+		player.setFrames(STANDING_STATE::START_FRAME, STANDING_STATE::END_FRAME);
+		player.setCurrentFrame(STANDING_STATE::START_FRAME);
+		player.IsMeleeAttacking(false);
+		player.setLoop(true);
+		player.IsMeleeAttacking(false);
+		return new StandState();
 	}
 	return NULL;
 }
@@ -370,13 +355,11 @@ PlayerState* RangeAttackState::handleInput(Player& player, Input* input, Game *g
 {
 	if (player.getAnimationComplete())
 	{
-
 		player.initialize(gamePtr, STANDING_STATE::WIDTH, STANDING_STATE::HEIGHT, STANDING_STATE::TEXTURE_COLS, textureM);
 		player.setFrames(STANDING_STATE::START_FRAME, STANDING_STATE::END_FRAME);
 		player.setCurrentFrame(STANDING_STATE::START_FRAME);
 		player.setLoop(true);
 		return new StandState();
-
 	}
 	return NULL;
 }
@@ -385,13 +368,11 @@ PlayerState* ThrowingState::handleInput(Player& player, Input* input, Game *game
 {
 	if (player.getAnimationComplete())
 	{
-
 		player.initialize(gamePtr, STANDING_STATE::WIDTH, STANDING_STATE::HEIGHT, STANDING_STATE::TEXTURE_COLS, textureM);
 		player.setFrames(STANDING_STATE::START_FRAME, STANDING_STATE::END_FRAME);
 		player.setCurrentFrame(STANDING_STATE::START_FRAME);
 		player.setLoop(true);
 		return new StandState();
-
 	}
 	return NULL;
 }
@@ -399,15 +380,12 @@ PlayerState* ThrowingState::handleInput(Player& player, Input* input, Game *game
 PlayerState* CrouchWalkingState::handleInput(Player& player, Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
 {
 	KeyBinding key;
-
 	if (!input->isKeyDown(key.getRightKey()) && !input->isKeyDown(key.getLeftKey()) || !input->isKeyDown(key.getDownKey()))
 	{
-
 		player.initialize(gamePtr, CROUCHING_STATE::WIDTH, CROUCHING_STATE::HEIGHT, CROUCHING_STATE::TEXTURE_COLS, textureM);
 		player.setFrames(CROUCHING_STATE::START_FRAME, CROUCHING_STATE::END_FRAME);
 		player.setCurrentFrame(CROUCHING_STATE::START_FRAME);
 		return new CrouchingState();
-
 	}
 	return NULL;
 }
@@ -432,7 +410,6 @@ PlayerState* JumpingState::handleInput(Player& player, Input* input, Game *gameP
 				player.setLoop(true);
 				return new StandState();
 			}
-
 			else if (player.getJumpLeft())
 			{
 				player.setJumpLeft(false);
@@ -457,15 +434,12 @@ PlayerState* FallingState::handleInput(Player& player, Input* input, Game *gameP
 	{
 		if (player.collidesWith(**floor, collisionVector))
 		{
-			
 			player.initialize(gamePtr, STANDING_STATE::WIDTH, STANDING_STATE::HEIGHT, STANDING_STATE::TEXTURE_COLS, textureM);
 			player.setFrames(STANDING_STATE::START_FRAME, STANDING_STATE::END_FRAME);
 			player.setCurrentFrame(STANDING_STATE::START_FRAME);
 			return new StandState();
-
 		}
 	}
-
 	return NULL;
 }
 
@@ -523,7 +497,6 @@ PlayerState* ClimbingState::handleInput(Player& player, Input* input, Game *game
 		player.setCurrentFrame(CLIMB_READY_STATE::START_FRAME);
 		return new ClimbReadyState();
 	}
-	
 	return NULL;
 }
 

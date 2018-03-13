@@ -182,26 +182,4 @@ void Background::draw()
 
 void Background::collisions(Player *player, StageGenerator *stageGen)
 {
-	VECTOR2 collisionVector;
-	FILLS *fillCollection = stageGen->getSides();
-
-	for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
-	{
-		if (player->collidesWith(**fill, collisionVector))
-		{
-			if (!player->isFlipHorizontal())
-			{
-				player->setX((*fill)->getX() - 80);
-			}
-
-			else
-			{
-				player->setX((*fill)->getX() + 80);
-			}
-			moveOn = false;
-			break;
-		}
-		else
-			moveOn = true;
-	}
 }
