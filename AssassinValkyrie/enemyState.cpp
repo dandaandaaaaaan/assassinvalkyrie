@@ -25,9 +25,9 @@ PatrollingState::PatrollingState() : EnemyState()
 	maxTime = 8000;
 }
 
-EnemyState* PatrollingState::handleInput(Enemy *enemy, Entity *target, PLATFORM p)
+EnemyState* PatrollingState::handleInput(Enemy *enemy, Entity *target, PLATFORM p, Input *i)
 {
-	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive() && target->getVisible())
+	if (enemy->getRay()->inSight(*target, p, i) && target->getActive() && target->getVisible())
 		return new AlertedState();
 	return NULL;
 }
@@ -48,10 +48,10 @@ AlertedState::AlertedState() : EnemyState()
 	maxTime = 8000;
 }
 
-EnemyState* AlertedState::handleInput(Enemy *enemy, Entity *target, PLATFORM p)
+EnemyState* AlertedState::handleInput(Enemy *enemy, Entity *target, PLATFORM p, Input *i)
 {
 	if (GetTickCount() - timer > maxTime)
-		if (!(enemy->getRay()->inSight(*target->getCenter(), p)))
+		if (!(enemy->getRay()->inSight(*target, p, i)))
 			return new StandingState();
 		else
 			timer = GetTickCount();
@@ -79,7 +79,7 @@ StandingState::StandingState() : EnemyState()
 	maxTime = 3000;
 }
 
-EnemyState* StandingState::handleInput(Enemy *enemy, Entity *target, PLATFORM p)
+EnemyState* StandingState::handleInput(Enemy *enemy, Entity *target, PLATFORM p, Input *i)
 {
 	enemy->getMove()->setVelocity(0);
 	if (GetTickCount() - timer > maxTime)
@@ -87,7 +87,7 @@ EnemyState* StandingState::handleInput(Enemy *enemy, Entity *target, PLATFORM p)
 		enemy->getMove()->setVelocity(enemy->getMove()->getInitialVelocity());
 		return new ReturningState();
 	}
-	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive() && target->getVisible())
+	if (enemy->getRay()->inSight(*target, p, i) && target->getActive() && target->getVisible())
 		return new AlertedState();
 	return NULL;
 }
@@ -97,14 +97,14 @@ ReturningState::ReturningState()
 {
 }
 
-EnemyState* ReturningState::handleInput(Enemy *enemy, Entity *target, PLATFORM p)
+EnemyState* ReturningState::handleInput(Enemy *enemy, Entity *target, PLATFORM p, Input *i)
 {
 	if (enemy->getMove()->returnOrigin())
 	{
 		enemy->getMove()->setVelocity(enemy->getMove()->getInitialVelocity());
 		return new PatrollingState();
 	}
-	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive() && target->getVisible())
+	if (enemy->getRay()->inSight(*target, p, i) && target->getActive() && target->getVisible())
 	{
 		enemy->getRay()->setColor(graphicsNS::YELLOW);
 		return new AlertedState();
@@ -126,9 +126,9 @@ DistractedState::DistractedState(VECTOR2 pos) : EnemyState()
 	maxTime = 8000;
 }
 
-EnemyState* DistractedState::handleInput(Enemy *enemy, Entity *target, PLATFORM p)
+EnemyState* DistractedState::handleInput(Enemy *enemy, Entity *target, PLATFORM p, Input *i)
 {
-	if (enemy->getRay()->inSight(*target->getCenter(), p) && target->getActive() && target->getVisible())
+	if (enemy->getRay()->inSight(*target, p, i) && target->getActive() && target->getVisible())
 	{
 		enemy->drawCaution(false);
 		return new AlertedState();

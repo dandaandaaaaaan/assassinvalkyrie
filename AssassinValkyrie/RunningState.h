@@ -9,8 +9,10 @@
 
 namespace RUNNING_STATE
 {
-	const int	WIDTH = 81;
-	const int	HEIGHT = 97;
+	//const int	WIDTH = 81;
+	//const int	HEIGHT = 97;
+	const int	WIDTH = 79.73;
+	const int	HEIGHT = 96;
 	const int TEXTURE_COLS = 6;
 	const int   START_FRAME = 6;
 	const int   END_FRAME = 11;

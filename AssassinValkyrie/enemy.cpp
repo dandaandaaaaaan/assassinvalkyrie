@@ -34,11 +34,11 @@ bool Enemy::initialize(Game *gamePtr, int width, int height, int ncols,
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
-void Enemy::handleInput(EnemyState* newState, PLATFORM *p)
+void Enemy::handleInput(EnemyState* newState, Input *i, PLATFORM *p)
 {	
 	EnemyState* state;
 	if (newState == NULL)
-		state = state_->handleInput(this, player, *p);
+		state = state_->handleInput(this, player, *p, i);
 	else
 		state = newState;
 
@@ -65,9 +65,9 @@ void Enemy::update(float frameTime, PLATFORM p, Audio *a)
 	Entity::update(frameTime);
 }
 
-void Enemy::ai(PLATFORM p)
+void Enemy::ai(PLATFORM p, Input *i)
 {
-	handleInput(NULL, &p);
+	handleInput(NULL, i, &p);
 }
 
 void Enemy::draw()

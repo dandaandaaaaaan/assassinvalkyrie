@@ -29,7 +29,7 @@ namespace playerNS
 	const int   TEXTURE_COLS = 1;
 	const int   START_FRAME =0;
 	const int   END_FRAME = 0;
-	const float ANIMATION_DELAY = 0.5f;
+	const float ANIMATION_DELAY = 0.8f;
 	const int	START_LEVEL = 1;
 	const int	TOTAL_LEVELS = 12;
 }
@@ -46,6 +46,7 @@ protected:
 	bool isMeleeAttacking = false;
 	bool isAssassinating = false;
 	bool onGround = false;
+	bool collideWall = false;
 	int total_arrow = 0;
 	int total_stone = 0;
 	int totalXP;
@@ -63,14 +64,12 @@ public:
 	// constructor
 	Player();
 
-
 	// inherited member functions
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void update(float frameTime, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p,Audio *a);
 	void handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator,EnemyManager *enemyList, PLATFORM p, Audio *a);
 	void ai(Entity &ship1, Entity &ship2);
-	//void collisions(EnemyManager *enemyList);
-	void collisions(EnemyManager *enemyList, StageGenerator *stageGen, Audio *a);
+	void collisions(EnemyManager *enemyList, StageGenerator *stageGen, Audio *a, Input *i);
 	void draw();
 	bool getJumpRight()
 	{
@@ -171,5 +170,8 @@ public:
 
 	bool getStealthSet() { return stealthSet; }
 	void setStealthSet(bool i) { stealthSet = i; }
+
+	bool getCollideWall() { return collideWall; }
+	PlayerState* getState() { return state_; }
 };
 #endif

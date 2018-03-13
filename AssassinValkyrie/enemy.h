@@ -164,9 +164,9 @@ public:
 	// inherited member functions
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
 		TextureManager *textureM, TextureManager *textureHealth);
-	virtual void handleInput(EnemyState* newState, PLATFORM *p = NULL);
+	virtual void handleInput(EnemyState* newState, Input *i, PLATFORM *p = NULL);
 	void update(float frameTime, PLATFORM p, Audio *a);
-	virtual void ai(PLATFORM p);
+	virtual void ai(PLATFORM p, Input *i);
 	void draw();
 	void drawRay(Graphics *g);
 

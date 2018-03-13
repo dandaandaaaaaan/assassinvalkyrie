@@ -12,8 +12,8 @@
 
 namespace stoneNS
 {
-	const float WIDTH = 84;                   // image width
-	const float HEIGHT = 97;                  // image height
+	const float WIDTH = 78;                   // image width
+	const float HEIGHT = 95;                  // image height
 	const float SCALE = 0.2f;
 	const float SPEED = 300;                // 200 pixels per second
 	const int   STONE_TEXTURE_COLS = 2;           // texture has 8 columns

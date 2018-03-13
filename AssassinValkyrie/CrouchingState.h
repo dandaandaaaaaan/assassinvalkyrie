@@ -9,8 +9,10 @@
 
 namespace CROUCHING_STATE
 {
-	const int	WIDTH = 81;
-	const int	HEIGHT = 97;
+	//const int	WIDTH = 81;
+	//const int	HEIGHT = 97;
+	const int	WIDTH = 59.5;
+	const int	HEIGHT = 95.99;
 	const int TEXTURE_COLS = 7;
 	const int   START_FRAME = 17;
 	const int   END_FRAME =17;

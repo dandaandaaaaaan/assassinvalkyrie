@@ -16,7 +16,7 @@ private:
 
 public:
 	AlertedState();
-	virtual EnemyState* handleInput(Enemy *enemy, Entity *target, PLATFORM p);
+	virtual EnemyState* handleInput(Enemy *enemy, Entity *target, PLATFORM p, Input *i);
 	virtual void update(Enemy *enemy, Entity *target);
 };//end of AlertedState class
 #endif

@@ -3,14 +3,16 @@
 // Student Number	: Zhuang yuteng
 // Student Number	: S10163964C
 
-#ifndef _ASSASSINATE_STATE_H                // Prevent multiple definitions if this 
+#ifndef _ASSASSINATE_STATE_H			       // Prevent multiple definitions if this 
 #define _ASSASSINATE_STATE_H                // file is included in more than one place
 #define WIN32_LEAN_AND_MEAN
 
 namespace ASSASSINATE_STATE
 {
-	const int	WIDTH =106;
-	const int	HEIGHT = 97;
+	//const int	WIDTH =106;
+	//const int	HEIGHT = 97;
+	const int	WIDTH = 120;
+	const int	HEIGHT = 95;
 	const int TEXTURE_COLS = 2;
 	const int   START_FRAME = 16;
 	const int   END_FRAME = 17;
@@ -21,9 +23,7 @@ namespace ASSASSINATE_STATE
 
 class AssassinateState : public PlayerState
 {
-
 private:
-
 
 public:
 
@@ -34,7 +34,6 @@ public:
 
 	void update(Player &player, float frameTime)
 	{
-
 	}
 };
 #endif

@@ -9,8 +9,10 @@
 
 namespace THROWING_STATE
 {
-	const int	WIDTH = 84;
-	const int	HEIGHT = 97;
+	//const int	WIDTH = 84;
+	//const int	HEIGHT = 97;
+	const int	WIDTH = 79;
+	const int	HEIGHT = 95;
 	const int TEXTURE_COLS = 3;
 	const int   START_FRAME = 21;
 	const int   END_FRAME = 23;
