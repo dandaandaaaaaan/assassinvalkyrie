@@ -11,11 +11,11 @@
 
 namespace HelpTextNS
 {
-	const auto MOVE = "Use 'A' & 'D' to move";
+	const auto MOVE = "Use 'A' & 'D' to move\nAnd 'SPACE' to jump";
 	const auto LADDER = "Hold 'W' to climb\nup ladder";
-	const auto HIDE_ASS = "Press 'W' to use hideout to avoid contact\n\nUse 'R' to assassin an enemy";
+	const auto HIDE_ASS = "Press 'W' to use hideout to avoid contact\n\n'G' for melee\n\n'F' for arrowshots";
 	const auto TOSS = "Press 'H' to toss a distraction\nto avoid direct contact";
-	const auto ATTACK = "'G' for melee\n\n'F' for arrowshots";
+	const auto ATTACK = "Use 'R' to assassin an enemy";
 }
 namespace HelpTextNS2
 {

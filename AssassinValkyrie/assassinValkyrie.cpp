@@ -58,10 +58,10 @@ void AssassinValkyrie::initialize(Game &gamePtr, HWND *hwndM, HRESULT *hrM, LARG
 	//				BG
 	/////////////////////////////////////////
 	//Background
-	if (!backgroundTexture.initialize(graphics, BACKGROUND_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
+	if (!tutorialTexture.initialize(graphics, TUTORIAL_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing tutorialTexture"));
 
-	if (!background->initialize(this, backgroundNS::WIDTH, backgroundNS::HEIGHT, backgroundNS::TEXTURE_COLS, &backgroundTexture))
+	if (!background->initialize(this, backgroundNS::WIDTH, backgroundNS::HEIGHT, backgroundNS::TEXTURE_COLS, &tutorialTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 
 	if (!loadingTexture.initialize(graphics, LOADING_IMAGE))
@@ -145,13 +145,9 @@ void AssassinValkyrie::re_initialize()
 	background = new Background();
 	stageGenerator = new StageGenerator();
 	displayTimer = new TextDX();
-
 	emList = new EnemyManager();
 	emBulletList = *new EnemyBulletManager();
 
-	mins = 0;
-	secs = 0;
-	milliSec = 0;
 	text = new TextDX();
 
 	// Mouse
@@ -162,12 +158,21 @@ void AssassinValkyrie::re_initialize()
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing enemy trooper"));
 
 	//Background
-	if (!backgroundTexture.initialize(graphics, BACKGROUND_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
+	if (currentStage <= 0)
+	{
+		if (!tutorialTexture.initialize(graphics, TUTORIAL_IMAGE))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing tutorialTexture"));
 
-	if (!background->initialize(this, backgroundNS::WIDTH, backgroundNS::HEIGHT, backgroundNS::TEXTURE_COLS, &backgroundTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-
+		if (!background->initialize(this, backgroundNS::WIDTH, backgroundNS::HEIGHT, backgroundNS::TEXTURE_COLS, &tutorialTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	}
+	else
+	{
+		if (!backgroundTexture.initialize(graphics, BACKGROUND_IMAGE))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
+		if (!background->initialize(this, backgroundNS::WIDTH, backgroundNS::HEIGHT, backgroundNS::TEXTURE_COLS, &backgroundTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	}
 	if (!floorTexture.initialize(graphics, FLOOR_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initalizing floor texture"));
 
@@ -253,8 +258,6 @@ void AssassinValkyrie::update()
 	auto t = player->outOfBounds();
 	if (t && player->getCenterX() > GAME_WIDTH)
 	{
-		totalTime += ((mins * 60) + secs);
-
 		if (currentStage != FINAL_STAGE)
 		{
 			currentStage++;
@@ -281,7 +284,7 @@ void AssassinValkyrie::update()
 // Artificial Intelligence
 void AssassinValkyrie::ai()
 {
-	emList->ai(player, visionPlatforms, input);
+	emList->ai(player, visionPlatforms, input, player->getStealthLevel());
 }
 
 // Handle collisions
@@ -321,7 +324,7 @@ void AssassinValkyrie::render()
 	displayTimer->setFontColor(graphicsNS::WHITE);
 	displayTimer->print(buffer, (GAME_WIDTH / 2) - 30, 0);
 
-	if (player->getCenterX() > GAME_WIDTH)
+	if ((player->getCenterX() - playerNS::WIDTH / 2) > GAME_WIDTH)
 		loading.draw();
 
 	dashboard->draw();

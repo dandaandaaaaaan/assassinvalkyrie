@@ -60,6 +60,7 @@ protected:
 	int skillPointAvailable;
 	int maxHealth;
 	bool stealthSet = false;
+
 public:
 	// constructor
 	Player();
@@ -168,10 +169,10 @@ public:
 	int getMaxHealth() { return maxHealth; }
 	int getNextLevelXP();
 
-	bool getStealthSet() { return stealthSet; }
-	void setStealthSet(bool i) { stealthSet = i; }
-
 	bool getCollideWall() { return collideWall; }
 	PlayerState* getState() { return state_; }
+	
+	bool damaged;
+	int damageTimer;
 };
 #endif

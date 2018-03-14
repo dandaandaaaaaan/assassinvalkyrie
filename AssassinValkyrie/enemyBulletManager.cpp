@@ -139,6 +139,8 @@ void EnemyBulletManager::collisions(Player *play, PLATFORM p)
 				{
 					(*bullet)->setActive(false);
 					play->setHealth(play->getHealth() - round((4 * play->calcNegativeMultipler(play->getArmorLevel() -1))));
+					play->damaged = true;
+					play->damageTimer = GetTickCount();
 				}
 				else
 					for (Entity *t : inRangeP)
@@ -158,6 +160,8 @@ void EnemyBulletManager::collisions(Player *play, PLATFORM p)
 				{
 					(*fireball)->setActive(false);
 					play->setHealth(play->getHealth() - round((6* play->calcNegativeMultipler(play->getArmorLevel() -1))));
+					play->damaged = true;
+					play->damageTimer = GetTickCount();
 				}
 				else
 					for (Entity *t : inRangeP)

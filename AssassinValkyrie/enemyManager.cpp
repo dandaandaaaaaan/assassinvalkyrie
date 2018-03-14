@@ -95,14 +95,14 @@ void EnemyManager::update(float frameTime, PLATFORM p, Audio *a)
 	}
 }
 
-void EnemyManager::ai(Entity *player, PLATFORM p, Input *i)
+void EnemyManager::ai(Entity *player, PLATFORM p, Input *i, float viewM)
 {
 	std::vector<VECTOR2*> posAlertList;
 	std::vector<Enemy*> posNotList;
 	for (Enemy *t : worldCollection)
 		if (!t->outOfBounds())
 		{
-			t->ai(p, i);
+			t->ai(p, i, viewM);
 			if (AlertedState *a = dynamic_cast<AlertedState*>(t->getState()))
 				posAlertList.emplace_back(&VECTOR2{ t->getCenterX(), t->getCenterY() });
 			else

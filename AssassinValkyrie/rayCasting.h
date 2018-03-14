@@ -24,6 +24,7 @@ private:
 	float visibilityAngle;
 	int viewDistance;
 	int viewHeight;		// from center
+	float viewM;
 	int rayMultiplier;
 	double distMultipler;
 	VECTOR2 pos;
@@ -58,7 +59,13 @@ public:
 	}
 	void setColor(COLOR_ARGB c) { color = c; }
 
-	//void setRayMultiplier(int i) { rayMultiplier = i; }
-	//int getRayMultipler() { return rayMultiplier; }
+	void setViewMultiplier(float i)
+	{
+		if (viewM != i)
+		{
+			viewDistance *= i;
+			viewM = i;
+		}
+	}
 };
 #endif

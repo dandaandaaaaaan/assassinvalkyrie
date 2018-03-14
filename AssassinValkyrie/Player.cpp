@@ -40,7 +40,7 @@ Player::Player() : Entity()
 
 bool Player::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
 {
-
+	damaged = false;
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 int Player::getNextLevelXP() {
@@ -67,26 +67,6 @@ void Player::update(float frameTime, Game *gamePtr, TextureManager *textureM, St
 
 	if (collideWall)
 		setVelocity({ 0 ,getVelocityY() });
-
-	/*	for (FILLS::iterator fill = (fillCollection->begin()); fill != fillCollection->end(); fill++)
-	{
-		if (player->collidesWith(**fill, collisionVector))
-		{
-			if (!player->isFlipHorizontal())
-			{
-				player->setX((*fill)->getX() - 80);
-			}
-
-			else
-			{
-				player->setX((*fill)->getX() + 80);
-			}
-			moveOn = false;
-			break;
-		}
-		else
-			moveOn = true;
-	}*/
 }
 
 void Player::handleInput(Input* input, Game *gamePtr, TextureManager *textureM, StageGenerator *stagegenerator, EnemyManager *enemyList, PLATFORM p, Audio *a)
@@ -118,7 +98,6 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen, Audio
 		}
 		else
 			collideWall = false;
-
 
 	GUNNERLIST *gunnerCollection = enemyList->getGunners();
 	TROOPERLIST *trooperCollection = enemyList->getTroopers();
@@ -173,7 +152,9 @@ void Player::collisions(EnemyManager *enemyList, StageGenerator *stageGen, Audio
 		if (!(*trooper)->outOfBounds())
 			if ((*trooper)->getAttack()->getAnimation() && collidesWith(**trooper, collisionVector) && (*trooper)->getAttack()->getAttack() && (*trooper)->getVisible() && visible)
 			{
-				a->playCue(SWORD);
+ 				a->playCue(SWORD);
+				damaged = true;
+				damageTimer = GetTickCount();
 				health = health - round((5 * calcNegativeMultipler(armorLevel - 1)));
 				(*trooper)->getAttack()->offAttack();
 			}
@@ -271,5 +252,12 @@ void Player::ai(Entity &ship1, Entity &ship2)
 
 void Player::draw()
 {
-	Image::draw();              // draw ship
+	if (damaged)
+	{
+		Image::draw(graphicsNS::ORANGE);
+		if (GetTickCount() - damageTimer > 800)
+			damaged = false;
+	}
+	else
+		Image::draw();              // draw ship
 }

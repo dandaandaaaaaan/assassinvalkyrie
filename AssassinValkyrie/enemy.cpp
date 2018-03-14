@@ -65,9 +65,17 @@ void Enemy::update(float frameTime, PLATFORM p, Audio *a)
 	Entity::update(frameTime);
 }
 
-void Enemy::ai(PLATFORM p, Input *i)
+void Enemy::ai(PLATFORM p, Input *i, float viewM)
 {
 	handleInput(NULL, i, &p);
+	float factor = 1;
+	if (viewM > 1)
+	{
+		viewM = viewM - 0.5;
+		factor = 10 - viewM;
+		factor /= 10;
+	}
+	vision->setViewMultiplier(factor);
 }
 
 void Enemy::draw()
