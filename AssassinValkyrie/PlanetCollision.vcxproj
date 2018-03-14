@@ -213,6 +213,7 @@
   <ItemGroup>
     <Text Include="1-horizontal.txt" />
     <Text Include="1-vertical.txt" />
+    <Text Include="leaderboard.txt" />
     <Text Include="map_s0.txt" />
     <Text Include="map_s1.txt" />
     <Text Include="map_s2.txt" />

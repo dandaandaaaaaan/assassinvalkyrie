@@ -17,6 +17,9 @@ AssassinValkyrie::AssassinValkyrie()
 	secs = 0;
 	milliSec = 0;
 	text = new TextDX();
+	gameOver = false;
+	overType = 0;
+	totalTime = 0;
 }
 
 // Destructor
@@ -250,14 +253,28 @@ void AssassinValkyrie::update()
 	auto t = player->outOfBounds();
 	if (t && player->getCenterX() > GAME_WIDTH)
 	{
+		totalTime += ((mins * 60) + secs);
+
 		if (currentStage != FINAL_STAGE)
 		{
 			currentStage++;
-			player->getVisible();
+			player->setVisible(false);
 			emList->~EnemyManager();
 			stageGenerator->~StageGenerator();
 			re_initialize();
 		}
+		else
+		{
+			gameOver = true;
+			overType = 1;
+		}
+	}
+
+	if (player->getHealth() <= 0)
+	{
+		totalTime += ((mins * 60) + secs);
+		gameOver = true;
+		overType = 2;
 	}
 }
 

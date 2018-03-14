@@ -4,6 +4,12 @@
 // Student Number	: S10164245H
 
 #include "MainMenu.h"
+#include <fstream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+using namespace std;
 
 MainMenu::MainMenu()
 {
@@ -11,6 +17,8 @@ MainMenu::MainMenu()
 	gameStart = false;
 	settings = false;
 	isEnterKey = false;
+	leaderboard = false;
+	credits = false;
 
 	key = new KeyBinding();
 	insertKey = ' ';
@@ -23,6 +31,8 @@ MainMenu::MainMenu()
 	distractKey = new TextDX();
 	assassinateKey = new TextDX();
 	pausedText = new TextDX();
+	leaderboardText = new TextDX();
+	gameOverText = new TextDX();
 }
 
 MainMenu::~MainMenu()
@@ -41,11 +51,26 @@ void MainMenu::initialize(HWND hwnd)
 	if (!cursor->initialize(this, cursorNS::WIDTH, cursorNS::HEIGHT, cursorNS::TEXTURE_COLS, &mouseTextures))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing enemy trooper"));
 
+	// Background
+
 	if (!mmBackgroundTexture.initialize(graphics, MMBACKGROUND_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Main Menu Background"));
 
 	if (!mmBackground.initialize(graphics, 1280, 720, 1, &mmBackgroundTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Main Menu Background"));
+
+	if (!backgroundTexture.initialize(graphics, MBACKGROUND_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+
+	if (!background.initialize(graphics, 1280, 720, 1, &backgroundTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+
+	// Credits Page
+	if (!creditsTexture.initialize(graphics, CREDITS_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Credits"));
+
+	if (!creditsImage.initialize(graphics, 1280, 720, 1, &creditsTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Credits"));
 
 	// Buttons Texture
 	if (!buttonsTexture.initialize(graphics, BUTTON_IMAGE))
@@ -55,8 +80,8 @@ void MainMenu::initialize(HWND hwnd)
 	if (!startButton.initialize(graphics, buttonNS::BUTTON_WIDTH, buttonNS::BUTTON_HEIGHT, buttonNS::BUTTON_NCOLS, &buttonsTexture, cursor))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Start button"));
 	startButton.setCurrentFrame(buttonNS::START_BUTTON_FRAME);
-	startButton.setX(GAME_WIDTH/4 - ((startButton.getWidth()/2)*startButton.getScale()));
-	startButton.setY(GAME_HEIGHT / 4);
+	startButton.setX(GAME_WIDTH / 4 - ((startButton.getWidth() / 2) * startButton.getScale()));
+	startButton.setY(GAME_HEIGHT / 5);
 
 	// Settings Button
 	if (!settingsButton.initialize(graphics, buttonNS::BUTTON_WIDTH, buttonNS::BUTTON_HEIGHT, buttonNS::BUTTON_NCOLS, &buttonsTexture, cursor))
@@ -72,12 +97,26 @@ void MainMenu::initialize(HWND hwnd)
 	creditsButton.setX(settingsButton.getX());
 	creditsButton.setY(settingsButton.getY() + settingsButton.getHeight() + (5 * settingsButton.getScale()));
 
+	// Leaderboard Button
+	if (!mainMenuButton.initialize(graphics, buttonNS::BUTTON_WIDTH, buttonNS::BUTTON_HEIGHT, buttonNS::BUTTON_NCOLS, &buttonsTexture, cursor))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Credits button"));
+	mainMenuButton.setCurrentFrame(buttonNS::MAIN_MENU_BUTTON_FRAME);
+	mainMenuButton.setX(GAME_WIDTH / 2 - (mainMenuButton.getWidth() / 2));
+	mainMenuButton.setY(4 * GAME_HEIGHT / 5);
+	
+	// Leaderboard Button
+	if (!leaderboardButton.initialize(graphics, buttonNS::BUTTON_WIDTH, buttonNS::BUTTON_HEIGHT, buttonNS::BUTTON_NCOLS, &buttonsTexture, cursor))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Credits button"));
+	leaderboardButton.setCurrentFrame(buttonNS::LEADERBOARD_BUTTON_FRAME);
+	leaderboardButton.setX(creditsButton.getX());
+	leaderboardButton.setY(creditsButton.getY() + creditsButton.getHeight() + (5 * creditsButton.getScale()));
+
 	// Exit Button
 	if (!exitButton.initialize(graphics, buttonNS::BUTTON_WIDTH, buttonNS::BUTTON_HEIGHT, buttonNS::BUTTON_NCOLS, &buttonsTexture, cursor))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Exit button"));
 	exitButton.setCurrentFrame(buttonNS::EXIT_BUTTON_FRAME);
-	exitButton.setX(creditsButton.getX());
-	exitButton.setY(creditsButton.getY() + creditsButton.getHeight() + (5 * creditsButton.getScale()));
+	exitButton.setX(leaderboardButton.getX());
+	exitButton.setY(leaderboardButton.getY() + leaderboardButton.getHeight() + (5 * leaderboardButton.getScale()));
 
 	// Pause Button
 	if (!pauseTexture.initialize(graphics, PAUSE_IMAGE))
@@ -201,6 +240,13 @@ void MainMenu::initialize(HWND hwnd)
 	if (!pausedText->initialize(graphics, 50, false, false, "Spectre 007"))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing text"));
 
+	// Leaderboard Text
+	if (!leaderboardText->initialize(graphics, 35, false, false, "Spectre 007"))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing text"));
+
+	// Game Over Text
+	if (!gameOverText->initialize(graphics, 50, false, false, "Spectre 007"))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing text"));
 
 	audio->playCue(RUSH);
 	return;
@@ -210,7 +256,7 @@ void MainMenu::update()
 {
 	cursor->update();
 
-	if (!gameStart && !settings)
+	if (!gameStart && !settings && !credits)
 	{
 		// Start Button
 		if(startButton.collideButton(*cursor) && input->getMouseLButton())
@@ -228,14 +274,25 @@ void MainMenu::update()
 			enterKey = false;
 		}
 
+		// Leaderboard
+		if (leaderboardButton.collideButton(*cursor) && input->getMouseLButton())
+		{
+			leaderboard = true;
+		}
+
+		// Credits
+		if (creditsButton.collideButton(*cursor) && input->getMouseLButton())
+			credits = true;
+
 		// Exit Button
 		if (input->isKeyDown(ESC_KEY) || (exitButton.collideButton(*cursor) && input->getMouseLButton()))
 		{
 			Game::exitGame();
 		}
+
 	}
 
-	if (!gameStart && settings && !enterKey)
+	if (!gameStart && settings && !enterKey && !credits)
 	{
 		if (rightButton.collideButton(*cursor) && input->getMouseLButton())
 		{
@@ -333,6 +390,18 @@ void MainMenu::update()
 			enterKey = false;
 	}
 
+	// Leaderboard & Credits back button
+	if (leaderboard || credits)
+	{
+		if (mainMenuButton.collideButton(*cursor) && input->getMouseLButton())
+		{
+			leaderboard = false;
+			credits = false;
+		}
+	}
+
+
+	// Main Game update
 	if (gameStart && !assValk->getPause())
 	{
 		if (pauseButton.collideButton(*cursor) && input->getMouseLButton())
@@ -356,8 +425,37 @@ void MainMenu::update()
 			assValk->resetAll();
 			gameStart = false;
 		}
-
 	}
+
+	if (gameStart && assValk->getGameOver())
+	{
+		// Victory
+		if (assValk->getOverType() == 1)
+		{
+			fstream leaderboardFile;
+			string line;
+			leaderboardFile.open("leaderboard.txt", fstream::in | fstream::out | fstream::app);
+			if (leaderboardFile.is_open())
+			{
+				leaderboardFile << assValk->getTotalTime() << '|' << input->getTextIn() << '\n';
+				leaderboardFile.close();
+			}
+		}
+
+		// Lose
+		if (assValk->getOverType() == 2)
+		{
+
+		}
+
+		if (mainMenuButton.collideButton(*cursor) && input->getMouseLButton())
+		{
+			audio->playCue(RUSH);
+			assValk->resetAll();
+			gameStart = false;
+		}
+	}
+
 }
 
 void MainMenu::ai()
@@ -369,12 +467,18 @@ void MainMenu::ai()
 void MainMenu::collisions()
 {
 	VECTOR2 collisionVector;
-	if (!gameStart && !settings)
+	if (!gameStart && !settings &!credits && !leaderboard)
 	{
 		startButton.collisions(*cursor, buttonNS::START_BUTTON_FRAME, buttonNS::START_HOVER_BUTTON_FRAME, audio);
 		settingsButton.collisions(*cursor, buttonNS::SETTINGS_BUTTON_FRAME, buttonNS::SETTINGS_HOVER_BUTTON_FRAME, audio);
 		creditsButton.collisions(*cursor, buttonNS::CREDITS_BUTTON_FRAME, buttonNS::CREDITS_HOVER_BUTTON_FRAME, audio);
+		leaderboardButton.collisions(*cursor, buttonNS::LEADERBOARD_BUTTON_FRAME, buttonNS::LEADERBOARD_HOVER_BUTTON_FRAME, audio);
 		exitButton.collisions(*cursor, buttonNS::EXIT_BUTTON_FRAME, buttonNS::EXIT_HOVER_BUTTON_FRAME, audio);
+	}
+
+	if (leaderboard || credits)
+	{
+		mainMenuButton.collisions(*cursor, buttonNS::MAIN_MENU_BUTTON_FRAME, buttonNS::MAIN_MENU_HOVER_BUTTON_FRAME, audio);
 	}
 
 	if (!gameStart && settings && !enterKey)
@@ -391,6 +495,7 @@ void MainMenu::collisions()
 		defaultButton.collisions(*cursor, settingsNS::DEFAULT_FRAME, settingsNS::DEFAULT_HOVER, audio);
 	}
 
+	// Main Game
 	if (gameStart && !assValk->getPause())
 	{
 		assValk->collisions();
@@ -401,9 +506,16 @@ void MainMenu::collisions()
 	{
 		resumeButton.collisions(*cursor, buttonNS::RESUME_BUTTON_FRAME, buttonNS::RESUME_HOVER_BUTTON_FRAME, audio);
 		pExitButton.collisions(*cursor, buttonNS::EXIT_BUTTON_FRAME, buttonNS::EXIT_HOVER_BUTTON_FRAME, audio);
+	}
+
+	if (gameStart && assValk->getGameOver())
+	{
+		mainMenuButton.collisions(*cursor, buttonNS::MAIN_MENU_BUTTON_FRAME, buttonNS::MAIN_MENU_HOVER_BUTTON_FRAME, audio);
 
 	}
 }
+
+bool wayToSort(int i, int j) { return i < j; }
 
 void MainMenu::render()
 {
@@ -433,18 +545,18 @@ void MainMenu::render()
 		mmBackground.draw();
 
 
-	if (!gameStart && !settings)
+	if (!gameStart && !settings && !credits && !leaderboard)
 	{
 		startButton.draw();
 		settingsButton.draw();
 		creditsButton.draw();
+		leaderboardButton.draw();
 		exitButton.draw();
-
-		
 	}
 
 	if (!gameStart && settings)
 	{
+		background.draw();
 		rightButton.draw();
 		leftButton.draw();
 		upButton.draw();
@@ -507,6 +619,87 @@ void MainMenu::render()
 		assassinateKey->setFontColor(graphicsNS::WHITE);
 		assassinateKey->print(assassinateKeyText, (assassinateButton.getX() + assassinateButton.getWidth()), assassinateButton.getY());
 
+	}
+
+	if (leaderboard)
+	{
+		background.draw();
+		string STRING;
+		string line;
+		const int lbBuffer_Size = 10000;
+		static char lbBuffer[lbBuffer_Size];
+		ifstream infile;
+		infile.open("leaderboard.txt");
+		vector<int> sorted;
+		vector<string>words;
+		int leaderboardCounter = 0;
+		while (getline(infile, line))
+		{
+			sorted.push_back(stoi(line));
+			words.push_back(line.substr(line.find('|') + 1, line.find('\n')));
+		}
+		infile.close();
+
+		// initialize original index locations
+		vector<size_t> idx(sorted.size());
+		iota(idx.begin(), idx.end(), 0);
+
+		sort(idx.begin(), idx.end(),
+			[&sorted](size_t i1, size_t i2) {return sorted[i1] > sorted[i2]; });
+		sort(sorted.begin(), sorted.end(), wayToSort);
+
+		reverse(idx.begin(), idx.end());
+		//sort(idx.begin(), idx.end(), wayToSort);
+		for (std::vector<int>::iterator it = sorted.begin(); it != sorted.end(); ++it)
+		{
+			leaderboardCounter++;
+			if (leaderboardCounter == 10)
+				break;
+			STRING += to_string(leaderboardCounter) + ".";
+			STRING += words[idx[leaderboardCounter - 1]] + "\t --- \t";
+			STRING += to_string((int)*it / 60);
+			STRING += "m ";
+			STRING += to_string(*it % 60);
+			STRING += "s";
+			STRING.push_back('\n');
+		}
+		char result[1024];
+		strncpy(result, STRING.c_str(), sizeof(result));
+		result[sizeof(result) - 1] = 0;
+		_snprintf_s(lbBuffer, lbBuffer_Size, "Leaderboard \n\n%s", result);
+
+		leaderboardText->setFontColor(graphicsNS::WHITE);
+
+		leaderboardText->print(lbBuffer, GAME_WIDTH / 3, GAME_HEIGHT / 5);
+
+		mainMenuButton.draw();
+	}
+
+	if (credits)
+	{
+		creditsImage.draw();
+		mainMenuButton.draw();
+	}
+
+	if (gameStart && assValk->getGameOver())
+	{
+		background.draw();
+		mainMenuButton.draw();
+		const int bufferSize = 30;
+		static char buffer[bufferSize];
+		// Victory
+		if (assValk->getOverType() == 1)
+		{
+			_snprintf(buffer, bufferSize, "Congratulations!");
+			gameOverText->setFontColor(graphicsNS::WHITE);
+			gameOverText->print(buffer, (GAME_WIDTH / 2) - 50, GAME_HEIGHT / 4);
+		}
+		if (assValk->getOverType() == 2)
+		{
+			_snprintf(buffer, bufferSize, "You Lost!");
+			gameOverText->setFontColor(graphicsNS::WHITE);
+			gameOverText->print(buffer, (GAME_WIDTH / 2) - 50, GAME_HEIGHT / 4);
+		}
 	}
 
 	cursor->draw();

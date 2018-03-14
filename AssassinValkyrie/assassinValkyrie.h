@@ -65,6 +65,10 @@ private:
 	TextDX			*displayTimer;
 	KeyBinding		*key;
 
+	int totalTime;
+	bool gameOver;
+	int overType;
+
 public:
     AssassinValkyrie();
     virtual ~AssassinValkyrie();
@@ -82,6 +86,10 @@ public:
 
 	void setPause(bool value) { paused = value; }
 	bool getPause() { return paused; }
+
+	bool getGameOver() { return gameOver; }
+	int getOverType() { return overType; }
+	int getTotalTime() { return totalTime; }
 
 	int mins;
 	int secs;
