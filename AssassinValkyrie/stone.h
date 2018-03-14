@@ -9,6 +9,7 @@
 
 #include "entity.h"
 #include "constants.h"
+#include "Player.h"
 
 namespace stoneNS
 {
@@ -38,6 +39,8 @@ private:
 	float t = 0;
 	bool throwingRight = true;
 
+	MovementComponent	*move;
+
 public:
 	// constructor
 	Stone();
@@ -53,6 +56,7 @@ public:
 		throwingRight = condition;
 	}
 
+	MovementComponent *getMove() { return move; }
 };
 #endif
 

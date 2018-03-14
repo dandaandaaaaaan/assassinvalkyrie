@@ -31,6 +31,8 @@ Stone::Stone() : Entity()
 bool Stone::initialize(Game *gamePtr, int width, int height, int ncols,
 	TextureManager *textureM)
 {
+	move = new MovementComponent(this);
+
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 

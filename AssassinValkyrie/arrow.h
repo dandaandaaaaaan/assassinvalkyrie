@@ -29,6 +29,9 @@ class Arrow : public Entity
 {
 private:
 	int startX;
+	int startY;
+	MovementComponent	*move;
+
 public:
 	// constructor
 	Arrow();
@@ -42,6 +45,11 @@ public:
 
 	int getStartX() { return startX; }
 	void setStartX(int x) { startX = x; }
+
+	void setStartY(int i) { startY = i; }
+	int getStartY() { return startY; }
+	MovementComponent *getMove() { return move; }
+
 };
 #endif
 

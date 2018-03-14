@@ -271,7 +271,7 @@ void Dashboard::update(float frameTime,Player *playerM, Input *input)
 		tooltipType = 4;
 	}
 
-	if (stealthIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton())
+	if (stealthIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton() && playerM->getStealthLevel() <= 3)
 	{
 		playerM->setStealthLevel();
 		playerM->setStealthSet(true);
@@ -279,21 +279,21 @@ void Dashboard::update(float frameTime,Player *playerM, Input *input)
 		stealthIcon.setCurrentFrame(buttonNS::STEALTH_FRAME);
 	}
 
-	if (speedIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton())
+	if (speedIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton() && playerM->getSpeedLevel() <= 3)
 	{
 		playerM->setSpeedLevel();
 		playerM->useSkillPoints();
 		speedIcon.setCurrentFrame(buttonNS::SPEED_FRAME);
 	}
 
-	if (rangeIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton())
+	if (rangeIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton() && playerM->getRangeLevel() <= 3)
 	{
 		playerM->setRangeLevel();
 		playerM->useSkillPoints();
 		rangeIcon.setCurrentFrame(buttonNS::RANGE_FRAME);
 	}
 
-	if (armorIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton())
+	if (armorIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton() && playerM->getArmorLevel() <=3)
 	{
 		playerM->setArmorLevel();
 		playerM->useSkillPoints();

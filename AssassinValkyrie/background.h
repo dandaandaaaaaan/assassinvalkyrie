@@ -13,6 +13,7 @@
 #include "enemyManager.h"
 #include "enemyBulletManager.h"
 #include "Player.h"
+#include "weaponManager.h"
 
 namespace backgroundNS
 {
@@ -44,7 +45,7 @@ public:
 
 	// inherited member functions
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
-	void update(float frameTime, Player *player, StageGenerator *stageGen, EnemyManager *emList, EnemyBulletManager *emBulletList, KeyBinding *key);
+	void update(float frameTime, Player *player, StageGenerator *stageGen, EnemyManager *emList, EnemyBulletManager *emBulletList, KeyBinding *key, WeaponManager *wepManager);
 	void draw();
 	void collisions(Player *player, StageGenerator *stageGen);
 };

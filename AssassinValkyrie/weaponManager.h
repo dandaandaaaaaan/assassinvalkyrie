@@ -19,8 +19,8 @@ class WeaponManager
 {
 
 private:
-	std::vector<Arrow *> arrow_collection;
-	std::vector<Stone *> stone_collection;
+	ARROWLIST arrow_collection;
+	STONELIST stone_collection;
 	DWORD Tick;
 	DWORD Tick2;
 
@@ -38,4 +38,6 @@ public:
 	void ai();
 	void render();
 
+	void setCameraVelocity(VECTOR2 velocity);
+	void camera(float frametime, int direction);
 };

@@ -30,7 +30,7 @@ bool Background::initialize(Game *gamePtr, int width, int height, int ncols, Tex
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
-void Background::update(float frameTime, Player *player, StageGenerator *stageGen, EnemyManager *emList, EnemyBulletManager *emBulletList, KeyBinding *key)
+void Background::update(float frameTime, Player *player, StageGenerator *stageGen, EnemyManager *emList, EnemyBulletManager *emBulletList, KeyBinding *key, WeaponManager *wepManager) 
 {
 	if (player->outOfBounds() || !player->getVisible())
 		return;
@@ -67,6 +67,8 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 			emList->camera(frameTime, 1);
 			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 1);
+			wepManager->setCameraVelocity(cameraVelocity);
+			wepManager->camera(frameTime, 1);
 		}
 		if (input->isKeyDown(key->getRightKey()) && moveOn) {
 			velocity.x = cameraVelocity.x;;
@@ -77,6 +79,8 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 			emList->camera(frameTime, 2);
 			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 2);
+			wepManager->setCameraVelocity(cameraVelocity);
+			wepManager->camera(frameTime, 2);
 		}
 		player->setX(centreX);
 	}
@@ -91,6 +95,8 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 			emList->camera(frameTime, 1);
 			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 1);
+			wepManager->setCameraVelocity(cameraVelocity);
+			wepManager->camera(frameTime, 1);
 		}
 		if (input->isKeyDown(key->getRightKey()) && moveOn) {
 			velocity.x = cameraVelocity.x;
@@ -101,6 +107,8 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 			emList->camera(frameTime, 2);
 			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 2);
+			wepManager->setCameraVelocity(cameraVelocity);
+			wepManager->camera(frameTime, 2);
 		}
 		player->setX(centreX);
 	}
@@ -130,6 +138,8 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 			emList->camera(frameTime, 4);
 			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 4);
+			wepManager->setCameraVelocity(cameraVelocity);
+			wepManager->camera(frameTime, 4);
 
 		}
 		if (player->getVelocityY() < 0 ) {
@@ -141,6 +151,8 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 			emList->camera(frameTime, 3);
 			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 3);
+			wepManager->setCameraVelocity(cameraVelocity);
+			wepManager->camera(frameTime, 3);
 
 		}
 		player->setY(centreY);
@@ -155,6 +167,8 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 			emList->camera(frameTime, 4);
 			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 4);
+			wepManager->setCameraVelocity(cameraVelocity);
+			wepManager->camera(frameTime, 4);
 
 		}
 		if (player->getVelocityY() < 0 ) {
@@ -166,6 +180,8 @@ void Background::update(float frameTime, Player *player, StageGenerator *stageGe
 			emList->camera(frameTime, 3);
 			emBulletList->setCameraVelocity(cameraVelocity);
 			emBulletList->camera(frameTime, 3);
+			wepManager->setCameraVelocity(cameraVelocity);
+			wepManager->camera(frameTime, 3);
 
 		}
 		player->setY(centreY);
