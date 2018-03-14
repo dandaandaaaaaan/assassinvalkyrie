@@ -251,7 +251,7 @@ void AssassinValkyrie::update()
 	mouse->update();
 	emBulletList.update(frameTime, this, &bulletTextures, player, audio);
 	player->update(frameTime, this, &playerTextures, stageGenerator, emList, visionPlatforms, audio);
-	background->update(frameTime, player, stageGenerator, emList, &emBulletList, key);
+	background->update(frameTime, player, stageGenerator, emList, &emBulletList, key, &weaponManager);
 	weaponManager.update(frameTime, input, this, arrowNS::WIDTH, arrowNS::HEIGHT, arrowNS::ARROW_TEXTURE_COLS, stoneNS::STONE_TEXTURE_COLS, &playerTextures, *player, key, audio);
 	emList->update(frameTime, visionPlatforms, audio);
 	

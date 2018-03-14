@@ -217,13 +217,36 @@ void WeaponManager::collisions(EnemyManager *enemyList, Player *player, PLATFORM
 
 void WeaponManager::render()
 {
-	for (std::vector<Arrow *>::iterator it = arrow_collection.begin(); it < arrow_collection.end(); ++it)
+	for (Arrow *a :arrow_collection)
 	{
-		(*it)->draw();
+		a->draw();
 	}
 
-	for (std::vector<Stone *>::iterator stone = stone_collection.begin(); stone <stone_collection.end(); ++stone)
+	for (Stone *s : stone_collection)
 	{
-		(*stone)->draw();
+		(s)->draw();
 	}
+}
+
+
+void WeaponManager::setCameraVelocity(VECTOR2 velocity)
+{
+	for (Arrow *a : arrow_collection)
+	{
+		(a)->getMove()->setCameraVelocity(velocity);
+	}
+
+	for (Stone *s : stone_collection)
+	{
+		(s)->getMove()->setCameraVelocity(velocity);
+	}
+}
+
+void WeaponManager::camera(float frameTime, int direction)
+{
+	for (Arrow *a : arrow_collection)
+		(a)->getMove()->movementWithDirection(frameTime, direction);
+
+	for (Stone *s : stone_collection)
+		(s)->getMove()->movementWithDirection(frameTime, direction);
 }
