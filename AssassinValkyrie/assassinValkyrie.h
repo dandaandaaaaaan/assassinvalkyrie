@@ -49,6 +49,7 @@ private:
 	Player			*player;
 	WeaponManager	weaponManager;
 	TextureManager	backgroundTexture;
+	TextureManager	tutorialTexture;
 
 	int				currentStage;
 	TextureManager	loadingTexture;

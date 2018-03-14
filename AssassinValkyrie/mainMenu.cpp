@@ -245,7 +245,7 @@ void MainMenu::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing text"));
 
 	// Game Over Text
-	if (!gameOverText->initialize(graphics, 50, false, false, "Spectre 007"))
+	if (!gameOverText->initialize(graphics, 100, false, false, "Spectre 007"))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing text"));
 
 	audio->playCue(RUSH);
@@ -529,7 +529,7 @@ void MainMenu::render()
 
 	if (gameStart && assValk->getPause())
 	{
-		mmBackground.draw();
+		background.draw();
 		resumeButton.draw();
 		pExitButton.draw();
 
@@ -690,15 +690,15 @@ void MainMenu::render()
 		// Victory
 		if (assValk->getOverType() == 1)
 		{
-			_snprintf(buffer, bufferSize, "Congratulations!");
+			_snprintf(buffer, bufferSize, "Congratulations");
 			gameOverText->setFontColor(graphicsNS::WHITE);
-			gameOverText->print(buffer, (GAME_WIDTH / 2) - 50, GAME_HEIGHT / 4);
+			gameOverText->print(buffer, (GAME_WIDTH / 5)+30, GAME_HEIGHT / 3 + 30);
 		}
 		if (assValk->getOverType() == 2)
 		{
-			_snprintf(buffer, bufferSize, "You Lost!");
+			_snprintf(buffer, bufferSize, "YOU DIED");
 			gameOverText->setFontColor(graphicsNS::WHITE);
-			gameOverText->print(buffer, (GAME_WIDTH / 2) - 50, GAME_HEIGHT / 4);
+			gameOverText->print(buffer, (GAME_WIDTH / 3) + 30, GAME_HEIGHT / 3 + 30);
 		}
 	}
 

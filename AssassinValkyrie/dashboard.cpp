@@ -18,7 +18,6 @@ Dashboard::Dashboard()
 
 	mins = 0;
 	secs = 0;
-	
 }
 
 Dashboard::~Dashboard()
@@ -274,7 +273,6 @@ void Dashboard::update(float frameTime,Player *playerM, Input *input)
 	if (stealthIcon.collidesWith(*mouse, collisionVector) && playerM->getSkillPoints() >= 1 && input->getMouseLButton())
 	{
 		playerM->setStealthLevel();
-		playerM->setStealthSet(true);
 		playerM->useSkillPoints();
 		stealthIcon.setCurrentFrame(buttonNS::STEALTH_FRAME);
 	}

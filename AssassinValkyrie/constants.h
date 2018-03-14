@@ -44,7 +44,7 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 const float GRAVITY = 9.81f;
 
 const int	INIT_STAGE = 0;
-const int	FINAL_STAGE = 3;
+const int	FINAL_STAGE = 0;
 
 // graphic images
 const char MMBACKGROUND_IMAGE[] = "pictures\\mainMenuBackground.png";
@@ -63,6 +63,7 @@ const char MBACKGROUND_IMAGE[] = "pictures\\background.png";
 const char PLAYER_IMAGE[] = "pictures\\Player.png";
 const char FLOOR_IMAGE[] = "pictures\\newElements.png";
 const char BACKGROUND_IMAGE[] = "pictures\\backgroundBIG.png";
+const char TUTORIAL_IMAGE[] = "pictures\\tutorial.png";
 const char PICKUP_IMAGE[] = "pictures\\pickupTextures.png";
 
 const char ENEMY_TROOPER_IMAGE[] = "pictures\\enemyTexture.png";
