@@ -28,6 +28,10 @@ namespace buttonNS
 	const int CREDITS_HOVER_BUTTON_FRAME = 7;
 	const int RESUME_BUTTON_FRAME = 8;
 	const int RESUME_HOVER_BUTTON_FRAME = 9;
+	const int LEADERBOARD_BUTTON_FRAME = 30;
+	const int LEADERBOARD_HOVER_BUTTON_FRAME = 31;
+	const int MAIN_MENU_BUTTON_FRAME = 32;
+	const int MAIN_MENU_HOVER_BUTTON_FRAME = 33;
 	const int BUTTON_NCOLS = 2;
 
 	const int SKILL_WIDTH = 50;

@@ -74,11 +74,7 @@ bool Dashboard::initialize(Graphics *g, Cursor *cursor, Player *playerM)
 
 	if (!tooltip.initialize(g, 201, 51, 0, &tooltipTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing tooltip"));
-	tooltip.setX(mouse->getX());
-	tooltip.setY(mouse->getY() - tooltip.getHeight());
-	tooltip.setCurrentFrame(0);
-
-
+	
 	if (!barTexture.initialize(g, BAR_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player bar"));
 	
@@ -198,7 +194,11 @@ void Dashboard::draw()
 		const int tooltipSize = 50;
 		static char tooltipText[tooltipSize];
 
+		tooltip.setX(mouse->getX());
+		tooltip.setY(mouse->getY() - tooltip.getHeight());
+		tooltip.setCurrentFrame(0);
 		tooltip.draw();
+
 		if (tooltipType == 1)
 		{
 			_snprintf(tooltipText, tooltipSize, "Increase Player's Stealth");
@@ -238,8 +238,8 @@ void Dashboard::update(float frameTime,Player *playerM, Input *input)
 	speedPoints = playerM->getSpeedLevel();
 	rangePoints = playerM->getRangeLevel();
 	armorPoints = playerM->getArmorLevel();
-
-
+	arrowCount = playerM->getTotalArrow();
+	stoneCount = playerM->getTotalStone();
 	playerMaxXP = playerM->getNextLevelXP();
 
 	tooltipActive = false;

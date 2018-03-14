@@ -429,5 +429,8 @@
     <Text Include="Credits.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="leaderboard.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -25,21 +25,31 @@ private:
 	bool settings;				// check if in settings screen
 	bool enterKey;
 	bool isEnterKey;
+	bool leaderboard;
+	bool credits;
 
 	// Textures & pictures
+	TextureManager backgroundTexture;
 	TextureManager mmBackgroundTexture;
 	TextureManager buttonsTexture;
 	TextureManager mouseTextures;
 	TextureManager pauseTexture;
+	TextureManager creditsTexture;
 
 	// Main Menu items
+	Image background;
 	Image mmBackground;
+	Image creditsImage;
 	Button startButton;
 	Button exitButton;
 	Button creditsButton;
 	Button settingsButton;
+	Button leaderboardButton;
+	Button mainMenuButton;
 	Button pauseButton;
 	Cursor *cursor;
+	TextDX *leaderboardText;
+	TextDX *gameOverText;
 
 	// Settings items
 	KeyBinding *key;
@@ -65,6 +75,8 @@ private:
 	TextDX *distractKey;
 	TextDX *assassinateKey;
 
+	// Leaderboard Items
+		
 	// Pause Items
 	Button pExitButton;
 	Button resumeButton;
